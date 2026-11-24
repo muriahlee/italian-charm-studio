@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/builder.css">
+  <link rel="icon" href="favicon.svg">
+</head>
+<body data-page="home" data-title="home" data-sticky="builder">
+  <div id="site-header"></div>
+  <main id="main">
+
+    <section class="hero split">
+      <div>
+        <p class="eyebrow">Italian modular links</p>
+        <h1 data-copy="brand.hero"></h1>
+        <hr class="gold-rule">
+        <p class="lede" data-copy="brand.lines.story"></p>
+        <p class="lede" data-copy="brand.lines.versions"></p>
+        <div class="cluster hero-actions">
+          <a class="btn" data-page-link="builder" href="./builder.html"></a>
+          <a class="btn secondary" data-page-link="gifts" href="./gifts.html"></a>
+        </div>
+        <p class="note" style="margin-top:0.9rem"><a data-page-link="club" href="./club.html"></a> · <span data-price="clubMonthly"></span> / month</p>
+        <p class="note" data-copy="priceNotes.metal"></p>
+      </div>
+      <div>
+        <div id="snap" class="snap"></div>
+        <p class="demo-label">Demo product, photo coming soon</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="how-title">
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-title" data-copy="brand.lines.rules"></h2>
+      <div class="steps">
+        <article class="step"><span>01</span><h3>Pick a metal</h3><p>Gold or silver. The finish changes. The price does not.</p></article>
+        <article class="step"><span>02</span><h3>Add a charm</h3><p>Drag it onto a link, or tap a charm and then a link. Leave one open if the story is not finished.</p></article>
+        <article class="step"><span>03</span><h3>Make it yours</h3><p>Wear it assembled by the studio, or close the links at home with the tool.</p></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="price-title">
+      <h2 id="price-title">Clear prices</h2>
+      <p class="lede" data-copy="priceNotes.metal"></p>
+      <div id="legend" class="legend price-strip"></div>
+    </section>
+
+    <section class="section" aria-labelledby="best-title">
+      <p class="eyebrow" data-copy="pages.best.label"></p>
+      <h2 id="best-title">Pieces the studio is putting forward</h2>
+      <p class="note">A curated edit. This prototype does not invent sales figures.</p>
+      <div id="best-grid" class="product-grid" style="margin-top:1.2rem"></div>
+      <p style="margin-top:1rem"><a data-page-link="best" href="./bestsellers.html"></a></p>
+    </section>
+
+    <section class="section" aria-labelledby="edits-title">
+      <h2 id="edits-title">Three ways in</h2>
+      <div class="edit-cards">
+        <a class="edit-card" data-page-link="gold" href="./gold.html"></a>
+        <a class="edit-card rose" data-page-link="silver" href="./silver.html"></a>
+        <a class="edit-card ink" data-page-link="teacher" href="./teacher.html"></a>
+      </div>
+    </section>
+
+    <section class="section split" aria-labelledby="gift-title">
+      <div>
+        <p class="eyebrow" data-copy="pages.gifts.label"></p>
+        <h2 id="gift-title">A bracelet, five charms, one price</h2>
+        <p id="bundle-savings" class="lede"></p>
+        <div class="cluster" style="margin-top:1rem">
+          <a class="btn" data-page-link="gifts" href="./gifts.html"></a>
+          <a class="btn secondary" data-page-link="builder" href="./builder.html"></a>
+        </div>
+      </div>
+      <div class="panel">
+        <p data-copy="brand.lines.charm"></p>
+        <p class="note">Write a gift message at the Mood Bar. Add the gift box if you want the ritual of a lid. Or give months of the Charm Club — three, six, or twelve — priced from the monthly figure.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="club-title">
+      <p class="eyebrow" data-copy="pages.club.label"></p>
+      <h2 id="club-title">Five charms, every month</h2>
+      <p class="lede">A standing story. Gold or silver, same membership price. Skip or cancel anytime.</p>
+      <p class="club-price"><span data-price="clubMonthly"></span> <span style="font-family:var(--sans);font-size:1rem">/ month</span></p>
+      <a class="btn" data-page-link="club" href="./club.html"></a>
+    </section>
+
+    <section class="section" aria-labelledby="reviews-heading">
+      <h2 id="reviews-heading">Reviews</h2>
+      <div id="reviews-root"></div>
+    </section>
+
+    <div id="trust-root" data-trust-slot></div>
+
+    <section class="section prose" aria-labelledby="story-title">
+      <h2 id="story-title" data-copy="brand.hero"></h2>
+      <p data-copy="brand.lines.story"></p>
+      <p>Each link is a small plate of polished metal. A heart, a pencil, an initial, a plane. Not a costume. A record of who you are this year, and who you might be next.</p>
+      <p><a data-page-link="about" href="./about.html"></a></p>
+    </section>
+
+  </main>
+  <div id="site-footer"></div>
+  <noscript><p class="note">This prototype needs JavaScript for the bracelet builder, the bag, and saved designs.</p></noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/sizing.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/charm-art.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/commerce/adapter.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/vault.js"></script>
+  <script src="js/codec.js"></script>
+  <script src="js/stylist/engine.js"></script>
+  <script src="js/stylist/provider.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/product-ui.js"></script>
+  <script src="js/builder.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/init.js"></script>
+</body>
+</html>
