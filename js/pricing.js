@@ -62,6 +62,15 @@
     return priceCents('clubMonthly') * months;
   }
 
+  /** Plain starter plus n standard charms. Gold tone and silver tone use the same math. */
+  function exampleCents(charmCount) {
+    return priceCents('starterBracelet') + priceCents('standard') * charmCount;
+  }
+
+  function standardPairCents() {
+    return priceCents('standard') * 2;
+  }
+
   root.Pricing = {
     cents: cents,
     priceCents: priceCents,
@@ -70,5 +79,7 @@
     charmCents: charmCents,
     bundleQuote: bundleQuote,
     clubPrepaidCents: clubPrepaidCents,
+    exampleCents: exampleCents,
+    standardPairCents: standardPairCents,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

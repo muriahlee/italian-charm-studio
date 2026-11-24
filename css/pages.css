@@ -8,6 +8,94 @@
 
 .hero-actions { margin-top: 1.5rem; }
 
+.menu-board {
+  background:
+    radial-gradient(420px 180px at 100% 0%, rgba(213, 178, 180, 0.35), transparent 70%),
+    linear-gradient(180deg, rgba(226, 209, 181, 0.45), rgba(248, 243, 233, 0.2));
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+.price-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.menu-card {
+  background: rgba(255, 252, 247, 0.82);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1rem 1rem 0.9rem;
+}
+
+.menu-card h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: 0.35rem 0;
+}
+
+.menu-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--gold);
+}
+
+.menu-price {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  line-height: 1;
+  margin: 0.2rem 0 0.45rem;
+  white-space: nowrap;
+}
+
+.menu-suffix {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.menu-sub {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 1.6rem 0 0.4rem;
+}
+
+.build-examples {
+  margin-top: 0.8rem;
+  background: rgba(255, 252, 247, 0.72);
+  border: 1px dashed var(--gold);
+  border-radius: 18px;
+  padding: 0.4rem 1rem;
+}
+
+.menu-line {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(51, 45, 37, 0.08);
+}
+
+.menu-line:last-child { border-bottom: 0; }
+
+.menu-dots {
+  border-bottom: 1px dotted var(--gold);
+  transform: translateY(-0.25rem);
+}
+
+.menu-sweet {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  background: rgba(213, 178, 180, 0.28);
+  border-radius: 18px;
+}
+
 .review-banner {
   background: var(--champagne);
   padding: 0.75rem 0.9rem;
@@ -123,6 +211,10 @@
   gap: 1rem;
   padding: 1rem 0;
   border-top: 1px solid var(--line);
+}
+
+@media (max-width: 800px) {
+  .price-menu { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {

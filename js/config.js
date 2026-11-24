@@ -74,26 +74,36 @@
      * starterBracelet is the empty 9mm bracelet in either gold or silver.
      */
     prices: {
-      starterBracelet: 19.99,
-      standard: 3.99,
-      premium: 5.99,
-      luxury: 7.99,
-      dangle: 8.99,
-      tool: 4.99,
+      starterBracelet: 24.99,
+      standard: 12.99,
+      /** Premium crystal links. Luxury links use this same price until a separate luxury price is set. */
+      premium: 15.99,
+      luxury: 15.99,
+      dangle: 17.99,
+      tool: 6.99,
       bundle: 34.99,
-      clubMonthly: 18.99,
+      clubMonthly: 24.99,
       /** Prototype default for the gift-box add-on. Change it here before launch. */
       giftBox: 6.99,
-      /**
-       * WORKING PRICE for one plain 9mm replacement link. Confirm before launch.
-       * It is not a permanent retail decision.
-       */
-      plainLink: 2.99,
+      plainLink: 5.99,
     },
+
+    /**
+     * Bracelet examples use the plain starter plus this many standard charms.
+     * Totals are calculated. Do not hardcode them in the pages.
+     */
+    priceExamples: [
+      { charms: 0, label: 'Plain bracelet' },
+      { charms: 2, label: 'Plus 2 charms' },
+      { charms: 3, label: 'Plus 3 charms' },
+      { charms: 6, label: 'Plus 6 charms' },
+      { charms: 9, label: 'Plus 9 charms' },
+      { charms: 18, label: 'Fully customized, 18 charms' },
+    ],
 
     priceNotes: {
       metal: 'Every design is offered at the same price in gold tone or silver tone.',
-      plainLink: 'Working price — confirm before launch.',
+      plainLink: 'One extra plain link. Same price in gold tone or silver tone.',
     },
 
     /**
@@ -207,7 +217,7 @@
       starter: {
         id: 'starter',
         sku: 'BR-START',
-        name: 'Starter bracelet',
+        name: 'Plain starter bracelet',
         priceKey: 'starterBracelet',
         type: 'bracelet',
         description: 'A full row of plain 9mm links, sized to the wrist. Decorative links replace the plain ones. The length stays the same.',
@@ -216,7 +226,7 @@
       plainLink: {
         id: 'plain-link',
         sku: 'LINK-PLAIN',
-        name: 'Plain replacement link',
+        name: 'Additional plain link',
         priceKey: 'plainLink',
         type: 'link',
         description: 'One plain 9mm link, for a repair or a resize. Same link in gold tone or silver tone.',
@@ -225,7 +235,7 @@
       tool: {
         id: 'tool',
         sku: 'TOOL-ASM',
-        name: 'Assembly tool',
+        name: 'Charm-changing tool',
         priceKey: 'tool',
         description: 'The small tool for opening a 9mm link so you can remove one and slide another into its place.',
       },

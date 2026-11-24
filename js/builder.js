@@ -220,12 +220,11 @@
     if (buy) buy.textContent = root.Pricing.formatCents(total);
     var finish = document.getElementById('finish-label');
     if (finish) finish.textContent = (state.metal === 'silver' ? 'Silver tone' : 'Gold tone') + ' · ' + state.links.length + ' links · ' + state.wrist + ' in';
-    var quote = root.Pricing.bundleQuote();
     var bundle = document.getElementById('bundle-note');
-    if (bundle && quote) {
-      bundle.innerHTML = 'The studio set — a bracelet and five charms — is <strong>' + root.Pricing.formatCents(quote.bundleCents) + '</strong>. Those pieces are <strong>' + root.Pricing.formatCents(quote.separateCents) + '</strong> separately' +
-        (quote.savingsCents > 0 ? ', a difference of ' + root.Pricing.formatCents(quote.savingsCents) + '.' : '.') +
-        ' <span>' + root.Util.esc(root.CS.priceNotes.metal) + '</span>';
+    if (bundle) {
+      bundle.innerHTML = 'Two standard charms on their own are ' + root.Pricing.formatCents(root.Pricing.standardPairCents()) +
+        '. Your Monthly Dose of Happy is ' + root.Pricing.formatKey('clubMonthly') +
+        ' a month, and it also includes the card, the sticker, and the pouch.';
     }
   }
 
@@ -560,7 +559,7 @@
               '<button type="button" class="btn secondary" id="share-design">Copy link</button>' +
             '</div>' +
             '<p id="share-status" class="note" role="status"></p>' +
-            '<div class="panel" style="margin-top:0.8rem"><p id="bundle-note"></p><button type="button" class="btn secondary" id="add-bundle" style="margin-top:0.6rem">Add the five-charm set</button></div>' +
+            '<div class="panel" style="margin-top:0.8rem"><p id="bundle-note"></p><a class="btn secondary" href="' + root.CS.pages.club.href + '" style="margin-top:0.6rem">See the month</a></div>' +
             '<div id="after-add" class="after-add" hidden></div>' +
           '</section>' +
         '</div>' +

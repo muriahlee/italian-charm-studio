@@ -6,6 +6,51 @@
 
   function money(cents) { return root.Pricing.formatCents(cents); }
 
+  function menuIcon(kind) {
+    var paths = {
+      bracelet: '<rect x="6" y="14" width="28" height="12" rx="6" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      charm: '<circle cx="20" cy="20" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M20 13 v14 M13 20 h14" stroke="currentColor" stroke-width="1.2"/>',
+      crystal: '<path d="M20 8 L30 20 L20 34 L10 20 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      dangle: '<rect x="14" y="8" width="12" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M20 18 v6 M16 30 a4 6 0 1 0 8 0 a4 5 0 1 0 -8 0" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      link: '<rect x="12" y="14" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      tool: '<path d="M14 26 L26 14 M22 14 h6 v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+      month: '<path d="M20 28 C20 28 12 22 12 16 a8 8 0 0 1 16 0 c0 6-8 12-8 12z" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+    };
+    return '<svg class="menu-icon" viewBox="0 0 40 40" aria-hidden="true">' + (paths[kind] || paths.charm) + '</svg>';
+  }
+
+  function renderPriceMenu(menu, examples) {
+    if (menu) {
+      var rows = [
+        ['bracelet', 'Plain starter bracelet', 'starterBracelet', 'The row of plain links, sized to the wrist.'],
+        ['charm', 'Standard charm', 'standard', 'A decorative link that replaces a plain one.'],
+        ['crystal', 'Premium crystal charm', 'premium', 'A crystal link. Same price in either tone.'],
+        ['dangle', 'Dangling charm', 'dangle', 'A link with a little drop.'],
+        ['link', 'Additional plain link', 'plainLink', 'One extra plain link, for a repair or a resize.'],
+        ['tool', 'Charm-changing tool', 'tool', 'Opens a link so you can slide another in.'],
+        ['month', 'Your Monthly Dose of Happy', 'clubMonthly', 'Two charms, the card, the sticker, and the pouch. Domestic shipping included.'],
+      ];
+      menu.innerHTML = rows.map(function (row) {
+        var suffix = row[2] === 'clubMonthly' ? '<span class="menu-suffix"> / month</span>' : '';
+        return '<article class="menu-card"><div>' + menuIcon(row[0]) + '</div><h3>' + row[1] + '</h3><p class="menu-price">' +
+          root.Pricing.formatKey(row[2]) + suffix + '</p><p class="note">' + row[3] + '</p></article>';
+      }).join('');
+    }
+    if (!examples) return;
+    examples.innerHTML = root.CS.priceExamples.map(function (item) {
+      return '<div class="menu-line"><span>' + root.Util.esc(item.label) + '</span><span class="menu-dots" aria-hidden="true"></span><strong>' +
+        money(root.Pricing.exampleCents(item.charms)) + '</strong></div>';
+    }).join('');
+  }
+
+  function renderSweetNote(el) {
+    if (!el) return;
+    el.innerHTML = 'Two standard charms on their own are <strong>' + money(root.Pricing.standardPairCents()) +
+      '</strong>. Your Monthly Dose of Happy is <strong>' + root.Pricing.formatKey('clubMonthly') +
+      '</strong> a month, and it also includes the card, the sticker, and the pouch. It is the sweetest way to collect. ' +
+      root.Util.esc(root.CS.priceNotes.metal);
+  }
+
   function home() {
     var snap = document.getElementById('snap');
     if (snap) {
@@ -17,19 +62,14 @@
             root.CharmArt.render(charm, 'gold') + '</span></div></div>';
         }).join('') + '</div>';
     }
-    root.ProductUI.legend(document.getElementById('legend'));
+    renderPriceMenu(document.getElementById('price-menu'), document.getElementById('build-examples'));
+    renderSweetNote(document.getElementById('monthly-sweet'));
     root.ProductUI.mountGrid(
       document.getElementById('best-grid'),
       root.Catalog.charms.filter(function (charm) { return charm.isBestSeller; }).slice(0, 4),
       { metal: 'gold' }
     );
-    var quote = root.Pricing.bundleQuote();
-    var savings = document.getElementById('bundle-savings');
-    if (savings && quote) {
-      savings.innerHTML = 'Separately, this bracelet and these five charms are <strong>' + money(quote.separateCents) + '</strong>. The set is <strong>' + money(quote.bundleCents) + '</strong>' +
-        (quote.savingsCents > 0 ? ' — ' + money(quote.savingsCents) + ' less.' : '.') +
-        ' <span>' + root.Util.esc(root.CS.priceNotes.metal) + '</span>';
-    }
+    renderSweetNote(document.getElementById('bundle-savings'));
     root.Shell.reviews(document.getElementById('reviews-root'));
     root.Shell.trust(document.getElementById('trust-root'));
   }
@@ -138,25 +178,10 @@
   }
 
   function gifts() {
-    var quote = root.Pricing.bundleQuote();
     var host = document.getElementById('gift-set');
-    if (host && quote) {
-      host.innerHTML =
-        '<p class="eyebrow">The studio set</p>' +
-        '<h2>' + root.Util.esc(root.CS.bundle.name) + '</h2>' +
-        '<p class="bundle-hero"><b>' + money(quote.bundleCents) + '</b></p>' +
-        '<p id="gift-math">Separately ' + money(quote.separateCents) + (quote.savingsCents > 0 ? '. The set is ' + money(quote.savingsCents) + ' less.' : '.') + '</p>' +
-        '<p class="note">' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
-        '<div class="product-grid" id="set-grid"></div>' +
-        '<div class="cluster" style="margin-top:1rem">' +
-          '<button type="button" class="btn" id="add-set-gold">Add in gold</button>' +
-          '<button type="button" class="btn secondary" id="add-set-silver">Add in silver</button>' +
-        '</div>';
-      root.ProductUI.mountGrid(document.getElementById('set-grid'), quote.charms, { metal: 'gold' });
-      host.addEventListener('click', function (e) {
-        if (e.target.id === 'add-set-gold') root.Cart.addBundle('gold');
-        if (e.target.id === 'add-set-silver') root.Cart.addBundle('silver');
-      });
+    if (host) {
+      host.innerHTML = '<div class="panel"><p class="eyebrow">A gentle way to give</p><p id="gift-sweet" class="lede"></p></div>';
+      renderSweetNote(document.getElementById('gift-sweet'));
     }
     var box = document.getElementById('gift-box-price');
     if (box) box.textContent = root.Pricing.formatKey('giftBox');
@@ -178,6 +203,7 @@
   function club() {
     var price = document.getElementById('club-price');
     if (price) price.textContent = root.Pricing.formatKey('clubMonthly');
+    renderSweetNote(document.getElementById('club-sweet'));
     var benefits = document.getElementById('club-benefits');
     if (benefits) {
       benefits.innerHTML = root.CS.club.benefits.map(function (item) {
@@ -399,8 +425,6 @@
       var ship = sub >= threshold
         ? 'This order meets the complimentary US shipping threshold. The final shipping cost is confirmed at checkout.'
         : 'Add ' + money(threshold - sub) + ' to reach complimentary US shipping. Shipping is confirmed at checkout. No delivery date is quoted here.';
-      var quote = root.Pricing.bundleQuote();
-      var hasBundle = cart.lines.some(function (line) { return line.type === 'bundle'; });
       var hasTool = cart.lines.some(function (line) { return line.type === 'tool'; });
       var hasClub = cart.lines.some(function (line) { return line.type === 'club'; });
       var hasBracelet = cart.lines.some(function (line) { return line.type === 'configured-bracelet' || line.type === 'bundle'; });
@@ -410,14 +434,14 @@
         '<p class="note">' + root.Util.esc(root.CS.shipping.policy) + '</p>' +
         '<div class="total-row"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +
         '<p class="note">' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
-        (quote && !hasBundle ? '<div class="panel"><p>Bracelet + five charms is ' + money(quote.bundleCents) + '. Separately those pieces are ' + money(quote.separateCents) + '.</p><button type="button" class="btn secondary" id="cart-bundle">Add the set</button></div>' : '') +
-        (hasBracelet && !hasTool ? '<div class="panel"><p>The assembly tool is ' + root.Pricing.formatKey('tool') + ' if you want to set a link at home.</p><button type="button" class="btn secondary" id="cart-tool">Add the tool</button></div>' : '') +
-        (!hasClub ? '<div class="panel"><p>Your Monthly Dose of Happy is ' + root.Pricing.formatKey('clubMonthly') + ' a month — two themed links, a numbered card, a sticker, a pouch, and domestic shipping.</p><a class="btn secondary" data-page-link="club" href="./club.html"></a></div>' : '') +
+        (hasBracelet && !hasTool ? '<div class="panel"><p>The charm-changing tool is ' + root.Pricing.formatKey('tool') + ' if you want to swap a link at home.</p><button type="button" class="btn secondary" id="cart-tool">Add the tool</button></div>' : '') +
+        (!hasClub ? '<div class="panel"><p id="cart-sweet"></p><a class="btn secondary" data-page-link="club" href="./club.html"></a></div>' : '') +
         '<div class="panel"><h3 class="serif" style="font-size:1.5rem">Complete the story</h3><div id="cart-recs" class="product-grid"></div></div>' +
         '<button type="button" class="btn full" id="checkout">Continue</button>' +
         '<p id="checkout-note" class="note" role="status"></p>' +
-        '<button type="button" class="text-btn" id="to-vault">Save these pieces to the Mood Vault (demo)</button>';
+        '<button type="button" class="text-btn" id="to-vault">Save these pieces to your collection (demo)</button>';
       root.Shell.fill(summary);
+      renderSweetNote(document.getElementById('cart-sweet'));
       var placed = [];
       cart.lines.forEach(function (line) {
         if (line.meta && line.meta.charmId) placed.push(line.meta.charmId);
