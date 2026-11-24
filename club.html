@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/builder.css">
+  <link rel="icon" href="favicon.svg">
+</head>
+<body data-page="club" data-title="club" data-sticky="club">
+  <div id="site-header"></div>
+  <main id="main">
+
+    <header class="page-head">
+      <p class="eyebrow">Membership</p>
+      <h1 data-copy="pages.club.label"></h1>
+      <p class="lede">Five curated charms each month. A gold or silver preference, at the same price. Subscriber edits, a monthly theme, complimentary US shipping on club shipments, and the right to skip or cancel.</p>
+      <p class="club-price" id="club-price"></p>
+      <p class="note">per month · <span data-copy="priceNotes.metal"></span></p>
+    </header>
+    <section class="section split">
+      <div>
+        <h2>What arrives</h2>
+        <ul id="club-benefits"></ul>
+        <p class="note" data-copy="brand.lines.versions"></p>
+      </div>
+      <div class="panel" id="membership"></div>
+    </section>
+    <section class="section" id="join">
+      <h2>A short style note</h2>
+      <p class="note">Demo only. Joining adds a membership line to the bag and saves a preference on this device. No payment is taken.</p>
+      <form id="quiz" class="panel">
+        <div class="quiz-step">
+          <p class="eyebrow">Who is it for?</p>
+          <div class="choice-grid">
+            <button type="button" data-quiz="who" data-value="self">Myself</button>
+            <button type="button" data-quiz="who" data-value="gift">A gift</button>
+            <button type="button" data-quiz="who" data-value="both">Both</button>
+          </div>
+          <button type="button" class="btn" data-next style="margin-top:0.8rem">Next</button>
+        </div>
+        <div class="quiz-step">
+          <p class="eyebrow">A mood</p>
+          <div class="choice-grid">
+            <button type="button" data-quiz="mood" data-value="quiet">Quiet</button>
+            <button type="button" data-quiz="mood" data-value="warm">Warm</button>
+            <button type="button" data-quiz="mood" data-value="playful">Playful</button>
+            <button type="button" data-quiz="mood" data-value="formal">Formal</button>
+          </div>
+          <div class="cluster" style="margin-top:0.8rem"><button type="button" class="btn secondary" data-prev>Back</button><button type="button" class="btn" data-next>Next</button></div>
+        </div>
+        <div class="quiz-step">
+          <p class="eyebrow">What should show up?</p>
+          <div class="choice-grid">
+            <button type="button" data-quiz="theme" data-value="stories">Stories and books</button>
+            <button type="button" data-quiz="theme" data-value="travel">Travel</button>
+            <button type="button" data-quiz="theme" data-value="classroom">A classroom</button>
+            <button type="button" data-quiz="theme" data-value="family">Family</button>
+            <button type="button" data-quiz="theme" data-value="color">Color</button>
+          </div>
+          <div class="cluster" style="margin-top:0.8rem"><button type="button" class="btn secondary" data-prev>Back</button><button type="button" class="btn" data-next>Next</button></div>
+        </div>
+        <div class="quiz-step">
+          <p class="eyebrow">Finish</p>
+          <p class="note" data-copy="priceNotes.metal"></p>
+          <div class="choice-grid">
+            <button type="button" data-quiz="metal" data-value="gold" aria-pressed="true">Gold</button>
+            <button type="button" data-quiz="metal" data-value="silver">Silver</button>
+          </div>
+          <div class="cluster" style="margin-top:0.8rem"><button type="button" class="btn secondary" data-prev>Back</button><button type="button" class="btn" id="join-demo">Join the demo</button></div>
+        </div>
+      </form>
+    </section>
+    <section class="section">
+      <h2>Give the membership</h2>
+      <div id="club-prepaid" class="edit-cards"></div>
+    </section>
+
+  </main>
+  <div id="site-footer"></div>
+  <noscript><p class="note">This prototype needs JavaScript for the bracelet builder, the bag, and saved designs.</p></noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/sizing.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/charm-art.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/commerce/adapter.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/vault.js"></script>
+  <script src="js/codec.js"></script>
+  <script src="js/stylist/engine.js"></script>
+  <script src="js/stylist/provider.js"></script>
+  <script src="js/recommendations.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/product-ui.js"></script>
+  <script src="js/builder.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/init.js"></script>
+</body>
+</html>
