@@ -1,6 +1,7 @@
 /**
- * The Mood Bar — 9mm Italian modular bracelet builder.
- * Click a charm, then a link, or drag it. Undo, share, save, and price stay in step.
+ * Wear Your Story — 9mm Italian link bracelet.
+ * Decorative links replace plain links. The count, and the size, stay put.
+ * Click a link design, then a position, or drag. Undo, share, and price stay in step.
  */
 (function (root) {
   'use strict';
@@ -71,7 +72,7 @@
     while (next.length < n) next.push(null);
     state.links = next;
     if (announceDrop && dropped.length) {
-      ui.note = 'This wrist holds ' + n + ' links. ' + dropped.length + ' charm' + (dropped.length > 1 ? 's were' : ' was') + ' taken off the end. Undo puts them back.';
+      ui.note = 'This wrist holds ' + n + ' links. ' + dropped.length + ' decorative link' + (dropped.length > 1 ? 's were' : ' was') + ' taken off the end. Undo puts them back.';
     }
   }
 
@@ -157,7 +158,7 @@
     state.links.forEach(function (id, i) {
       var charm = id ? root.Catalog.byId(id) : null;
       var art = charm ? root.CharmArt.render(charm, state.metal) : root.CharmArt.renderEmpty(state.metal);
-      var label = 'Link ' + (i + 1) + ' of ' + state.links.length + (charm ? ', ' + charm.name : ', empty');
+      var label = 'Link ' + (i + 1) + ' of ' + state.links.length + (charm ? ', ' + charm.name : ', plain link');
       html += '<button type="button" class="link' + (ui.selectedIndex === i ? ' is-selected' : '') + '" role="listitem" data-link-index="' + i + '"' +
         (id ? ' data-drag-charm="' + id + '"' : '') +
         ' aria-label="' + root.Util.esc(label) + '">' +
@@ -170,7 +171,7 @@
     var prompt = document.getElementById('story-prompt');
     var count = placedIds().length;
     if (prompt) {
-      prompt.textContent = count ? (state.links.some(function (id) { return !id; }) ? 'Leave a link open. Stories stay open.' : root.CS.brand.lines.charm) : 'Add a charm for someone you love.';
+      prompt.textContent = count ? (state.links.some(function (id) { return !id; }) ? 'Your size stays the same. Swap any plain link.' : root.CS.brand.lines.charm) : 'Replace a plain link with a reminder.';
     }
     renderInspector();
     renderRecs();
@@ -186,14 +187,14 @@
       return;
     }
     if (ui.selectedIndex == null) {
-      el.innerHTML = '<span class="note">Select a charm, then a link. Or drag a charm onto the bracelet.</span>';
+      el.innerHTML = '<span class="note">Choose a decorative link, then a plain one to replace. Or drag it into place.</span>';
       return;
     }
     var id = state.links[ui.selectedIndex];
     var charm = id ? root.Catalog.byId(id) : null;
     el.innerHTML =
-      '<span>Link ' + (ui.selectedIndex + 1) + (charm ? ' · ' + root.Util.esc(charm.name) + ' · ' + root.Pricing.formatCents(root.Pricing.charmCents(charm)) : ' · open') + '</span>' +
-      (charm ? '<button type="button" class="btn secondary" id="remove-link">Remove</button>' : '') +
+      '<span>Link ' + (ui.selectedIndex + 1) + (charm ? ' · ' + root.Util.esc(charm.name) + ' · ' + root.Pricing.formatCents(root.Pricing.charmCents(charm)) : ' · plain link, included') + '</span>' +
+      (charm ? '<button type="button" class="btn secondary" id="remove-link">Restore plain link</button>' : '') +
       '<button type="button" class="btn secondary" id="nudge-left">Move left</button>' +
       '<button type="button" class="btn secondary" id="nudge-right">Move right</button>';
   }
@@ -218,13 +219,12 @@
     var buy = document.getElementById('buybar-price');
     if (buy) buy.textContent = root.Pricing.formatCents(total);
     var finish = document.getElementById('finish-label');
-    if (finish) finish.textContent = (state.metal === 'silver' ? 'Silver' : 'Gold') + ' · ' + state.links.length + ' links · ' + state.wrist + ' in';
-    var quote = root.Pricing.bundleQuote();
+    if (finish) finish.textContent = (state.metal === 'silver' ? 'Silver tone' : 'Gold tone') + ' · ' + state.links.length + ' links · ' + state.wrist + ' in';
     var bundle = document.getElementById('bundle-note');
-    if (bundle && quote) {
-      bundle.innerHTML = 'The studio set — a bracelet and five charms — is <strong>' + root.Pricing.formatCents(quote.bundleCents) + '</strong>. Those pieces are <strong>' + root.Pricing.formatCents(quote.separateCents) + '</strong> separately' +
-        (quote.savingsCents > 0 ? ', a difference of ' + root.Pricing.formatCents(quote.savingsCents) + '.' : '.') +
-        ' <span>' + root.Util.esc(root.CS.priceNotes.metal) + '</span>';
+    if (bundle) {
+      bundle.innerHTML = 'Two standard charms on their own are ' + root.Pricing.formatCents(root.Pricing.standardPairCents()) +
+        '. Your Monthly Dose of Happy is ' + root.Pricing.formatKey('clubMonthly') +
+        ' a month, and it also includes the card, the sticker, and the pouch.';
     }
   }
 
@@ -233,7 +233,7 @@
     if (!el) return;
     var charms = visibleCharms();
     if (!charms.length) {
-      el.innerHTML = '<p class="empty-slot">' + (ui.ownedOnly ? 'The Mood Vault has no charms for this filter yet.' : 'No charms in this filter.') + '</p>';
+      el.innerHTML = '<p class="empty-slot">' + (ui.ownedOnly ? 'Your collection has no links for this filter yet.' : 'No links in this filter.') + '</p>';
       return;
     }
     el.innerHTML = charms.map(function (charm) {
@@ -489,8 +489,8 @@
         '<section class="stage-card" aria-label="Bracelet">' +
           '<div class="stage-toolbar">' +
             '<div class="metal-switch" role="group" aria-label="Metal finish">' +
-              '<button type="button" data-metal-choice="gold" aria-pressed="true">Gold</button>' +
-              '<button type="button" data-metal-choice="silver" aria-pressed="false">Silver</button>' +
+              '<button type="button" data-metal-choice="gold" aria-pressed="true">Gold tone</button>' +
+              '<button type="button" data-metal-choice="silver" aria-pressed="false">Silver tone</button>' +
             '</div>' +
             '<label class="field" style="margin:0"><span>Wrist</span><select id="wrist">' + wrists + '</select></label>' +
             '<div class="view-switch" role="group" aria-label="Arrangement">' +
@@ -506,7 +506,12 @@
           '<p class="demo-label">Demo product, photo coming soon</p>' +
           '<div id="inspector" class="inspector"></div>' +
           '<p id="builder-note" class="note" role="status"></p>' +
-          '<details><summary>How the link count is calculated</summary><p class="note">' + root.Util.esc(root.Sizing.formulaText()) + '</p></details>' +
+          '<details><summary>How the link count is calculated</summary><p class="note">' + root.Util.esc(root.Sizing.formulaText()) + ' Decorative links replace plain ones. They do not change the count.</p></details>' +
+          '<details><summary>Add, remove, or replace a link</summary><ol class="howto">' +
+            root.CS.howto.map(function (step, i) {
+              return '<li><strong>' + (i + 1) + '. ' + root.Util.esc(step.title) + '.</strong> ' + root.Util.esc(step.text) + '</li>';
+            }).join('') +
+          '</ol></details>' +
         '</section>' +
         '<div class="builder-side">' +
           '<section class="palette-card">' +
@@ -517,7 +522,7 @@
               '<button class="btn" type="submit">Compose a starting point</button>' +
               '<p id="stylist-explain" class="note" role="status"></p>' +
             '</form>' +
-            '<p class="note">Gold or silver is a finish. ' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
+            '<p class="note">Gold tone or silver tone is a finish. ' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
             '<input class="search" id="charm-search" type="search" placeholder="Search charms" aria-label="Search charms">' +
             '<div class="filters" id="cat-filters">' + cats + '</div>' +
             '<div class="filters" id="tier-filters">' +
@@ -527,7 +532,7 @@
               '<button type="button" class="chip" data-tier="luxury" aria-pressed="false">Luxury</button>' +
               '<button type="button" class="chip" data-tier="dangle" aria-pressed="false">Dangle</button>' +
             '</div>' +
-            '<label class="checks"><input type="checkbox" id="owned-only"> Only charms in the Mood Vault</label>' +
+            '<label class="checks"><input type="checkbox" id="owned-only"> Only links in your collection</label>' +
             '<div id="palette" class="palette-grid"></div>' +
             '<div id="complete"></div>' +
           '</section>' +
@@ -554,7 +559,7 @@
               '<button type="button" class="btn secondary" id="share-design">Copy link</button>' +
             '</div>' +
             '<p id="share-status" class="note" role="status"></p>' +
-            '<div class="panel" style="margin-top:0.8rem"><p id="bundle-note"></p><button type="button" class="btn secondary" id="add-bundle" style="margin-top:0.6rem">Add the five-charm set</button></div>' +
+            '<div class="panel" style="margin-top:0.8rem"><p id="bundle-note"></p><a class="btn secondary" href="' + root.CS.pages.club.href + '" style="margin-top:0.6rem">See the month</a></div>' +
             '<div id="after-add" class="after-add" hidden></div>' +
           '</section>' +
         '</div>' +
@@ -570,7 +575,7 @@
       panel.innerHTML =
         '<div class="panel" role="status">' +
           '<p class="serif" style="font-size:1.6rem">It is in the bag.</p>' +
-          '<p>Complete the story with the tool, a gift box, or a membership that sends five charms a month.</p>' +
+          '<p>The tool opens a link when you want to replace one at home. The month sends two themed links, a card, a sticker, and a pouch.</p>' +
           '<div class="cluster">' +
             '<a class="btn" href="' + root.CS.pages.cart.href + '">View bag</a>' +
             '<button type="button" class="btn secondary" id="upsell-tool">Add the tool</button>' +
@@ -664,7 +669,7 @@
           giftMessage: state.giftMessage,
         });
         var status = document.getElementById('share-status');
-        if (status) status.textContent = 'Saved to the Mood Vault as “' + record.name + '”.';
+        if (status) status.textContent = 'Saved to your collection as “' + record.name + '”. This demo stays on this device.';
         return;
       }
       if (e.target.closest('#upsell-tool')) { root.Cart.addTool(); return; }

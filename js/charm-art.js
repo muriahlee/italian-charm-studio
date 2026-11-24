@@ -355,6 +355,58 @@
       return '<circle cx="26" cy="28" r="8" fill="none" stroke="' + ink + '" stroke-width="2.4"/>' +
         '<path d="M32 34 L50 52 H44 V58 H38 V52 L34 48" fill="none" stroke="' + ink + '" stroke-width="2.4" stroke-linejoin="round"/>';
     }
+    if (m === 'clover') {
+      return '<circle cx="22" cy="32" r="8" fill="#1f6b4a"/><circle cx="42" cy="32" r="8" fill="#1f6b4a"/>' +
+        '<circle cx="32" cy="24" r="8" fill="#1f6b4a"/><circle cx="32" cy="42" r="8" fill="#1f6b4a"/>' +
+        '<rect x="30" y="42" width="4" height="16" rx="1" fill="#1e4d3a"/>';
+    }
+    if (m === 'horseshoe') {
+      return '<path d="M18 44 V30 C18 16 46 16 46 30 V44" fill="none" stroke="' + ink + '" stroke-width="5" stroke-linecap="round"/>' +
+        '<path d="M18 36 V44 M46 36 V44" stroke="' + ink + '" stroke-width="2"/>';
+    }
+    if (m === 'diamond') {
+      return fillPath('M32 14 L50 36 L32 66 L14 36 Z', '#f7f4ef') +
+        fillPath('M32 14 L40 36 L32 32 L24 36 Z', 'rgba(255,255,255,0.85)') +
+        inkPath('M14 36 H50 M24 36 L32 66 L40 36', '#8a6a3f', 1);
+    }
+    if (m === 'smiley') {
+      return '<circle cx="32" cy="40" r="16" fill="none" stroke="' + ink + '" stroke-width="1.6"/>' +
+        '<circle cx="26" cy="36" r="1.6" fill="' + ink + '"/><circle cx="38" cy="36" r="1.6" fill="' + ink + '"/>' +
+        '<path d="M24 44 Q32 52 40 44" fill="none" stroke="' + ink + '" stroke-width="1.6" stroke-linecap="round"/>';
+    }
+    if (m === 'lightning') {
+      return fillPath('M36 16 L22 40 H32 L26 62 L46 34 H34 Z', '#e2c27a');
+    }
+    if (m === 'flame') {
+      return fillPath('M32 16 C32 16 44 30 40 42 C48 36 46 28 46 28 C50 40 42 58 32 62 C22 58 14 40 18 28 C18 28 16 36 24 42 C20 30 32 16 32 16 Z', '#c4843c');
+    }
+    if (m === 'arrow') {
+      return fillPath('M14 40 H40 L32 30 M40 40 L32 50', ink) +
+        '<path d="M14 40 H38" fill="none" stroke="' + ink + '" stroke-width="2.4" stroke-linecap="round"/>' +
+        '<path d="M38 40 L28 30 M38 40 L28 50" fill="none" stroke="' + ink + '" stroke-width="2.4" stroke-linecap="round"/>';
+    }
+    if (m === 'leaf') {
+      return fillPath('M32 62 C32 62 16 46 20 30 C24 16 40 18 44 32 C48 48 32 62 32 62 Z', '#1e4d3a') +
+        inkPath('M32 58 C32 40 36 28 40 22', '#f6f1e6', 1.2);
+    }
+    if (m === 'sunflower') {
+      var seeds = '';
+      for (var p = 0; p < 8; p++) {
+        var pa = (Math.PI * 2 * p) / 8;
+        seeds += '<ellipse cx="' + (32 + Math.cos(pa) * 12).toFixed(1) + '" cy="' + (40 + Math.sin(pa) * 12).toFixed(1) + '" rx="5" ry="8" fill="#e2c27a" transform="rotate(' + (p * 45) + ' ' + (32 + Math.cos(pa) * 12).toFixed(1) + ' ' + (40 + Math.sin(pa) * 12).toFixed(1) + ')"/>';
+      }
+      return seeds + '<circle cx="32" cy="40" r="7" fill="#6e5434"/>';
+    }
+    if (m === 'shooting-star') {
+      return fillPath('M40 22 L44 32 H54 L46 38 L49 48 L40 42 L31 48 L34 38 L26 32 H36 Z', '#e2c27a') +
+        '<path d="M18 58 L34 40" stroke="#f6f1e6" stroke-width="2" stroke-linecap="round"/>' +
+        '<path d="M16 48 L28 44" stroke="#f6f1e6" stroke-width="1.4" stroke-linecap="round"/>';
+    }
+    if (m === 'wings') {
+      return fillPath('M32 28 C32 28 18 24 12 36 C8 48 20 52 32 46 Z', ink) +
+        fillPath('M32 28 C32 28 46 24 52 36 C56 48 44 52 32 46 Z', ink) +
+        '<circle cx="32" cy="40" r="3" fill="' + ink + '"/>';
+    }
     if (m === 'crown') {
       return fillPath('M12 46 L18 24 L32 38 L46 22 L52 46 Z', ink) +
         '<rect x="12" y="46" width="40" height="6" fill="' + ink + '"/>' +

@@ -22,9 +22,10 @@
     <header class="page-head">
       <p class="eyebrow">Membership</p>
       <h1 data-copy="pages.club.label"></h1>
-      <p class="lede">Five curated charms each month. A gold or silver preference, at the same price. Subscriber edits, a monthly theme, complimentary US shipping on club shipments, and the right to skip or cancel.</p>
+      <p class="lede">Each month: two themed Italian charm links, a numbered collectible positivity card, an affirmation sticker, and a reusable pouch. Domestic shipping is included. Gold tone and silver tone are the same price. Skip or cancel from your collection. This prototype does not promise a delivery date.</p>
       <p class="club-price" id="club-price"></p>
       <p class="note">per month · <span data-copy="priceNotes.metal"></span></p>
+      <p id="club-sweet" class="lede" style="margin-top:1rem"></p>
     </header>
     <section class="section split">
       <div>
@@ -33,6 +34,15 @@
         <p class="note" data-copy="brand.lines.versions"></p>
       </div>
       <div class="panel" id="membership"></div>
+    </section>
+    <section class="section" id="waitlist">
+      <h2>Waitlist</h2>
+      <p class="note">No payment. If a form endpoint is empty in config, the address stays on this device and nothing is sent.</p>
+      <form class="panel capture" data-waitlist data-source="monthly-dose" novalidate>
+        <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+        <button class="btn" type="submit">Join the waitlist</button>
+        <p class="form-status" role="status"></p>
+      </form>
     </section>
     <section class="section" id="join">
       <h2>A short style note</h2>
@@ -93,6 +103,7 @@
   <script src="js/pricing.js"></script>
   <script src="js/sizing.js"></script>
   <script src="js/catalog.js"></script>
+  <script src="data/monthly-themes.js"></script>
   <script src="js/charm-art.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/commerce/adapter.js"></script>

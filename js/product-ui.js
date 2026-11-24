@@ -83,11 +83,10 @@
     if (!el) return;
     var p = root.Pricing.formatKey;
     el.innerHTML =
-      '<span>Starter bracelet <strong>' + p('starterBracelet') + '</strong></span>' +
-      '<span>Standard <strong>' + p('standard') + '</strong></span>' +
-      '<span>Premium <strong>' + p('premium') + '</strong></span>' +
-      '<span>Luxury <strong>' + p('luxury') + '</strong></span>' +
-      '<span>Dangle <strong>' + p('dangle') + '</strong></span>' +
+      '<span>Plain starter <strong>' + p('starterBracelet') + '</strong></span>' +
+      '<span>Standard charm <strong>' + p('standard') + '</strong></span>' +
+      '<span>Premium crystal <strong>' + p('premium') + '</strong></span>' +
+      '<span>Dangling charm <strong>' + p('dangle') + '</strong></span>' +
       '<span>' + root.Util.esc(root.CS.priceNotes.metal) + '</span>';
   }
 

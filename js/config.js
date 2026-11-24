@@ -1,12 +1,15 @@
 /**
- * MOOD & CO. — the only place the brand name, lines, page labels, prices, and policies are defined.
+ * Placeholder brand — the only place the name, lines, page labels, prices, and policies are defined.
  *
- * Rename the house: edit brand.name (the wordmark) and brand.tagline.
- * Edit a price: edit prices (dollars). Every page, the builder, and the cart read from here.
- * Metal is a finish, not a price. There is one starterBracelet price for gold and for silver.
+ * The name is not final. Change brand.name (one line) when the owner chooses it.
+ * brand.tagline is a working line. brand.taglineStatus marks it as such in the UI.
+ * There is no logo file. The wordmark is the name, set in type.
+ *
+ * Edit a price here. Metal tone is not a price.
+ * One starterBracelet price covers gold tone and silver tone.
  * Charm prices depend only on tier: standard, premium, luxury, dangle.
  *
- * Palette and type live in css/tokens.css (ivory, champagne, gold, dusty rose, espresso).
+ * Palette and type live in css/tokens.css. Swap colors there.
  * Never put an API key, admin token, or Storefront secret in this file.
  */
 (function (root) {
@@ -14,69 +17,93 @@
 
   root.CS = {
     brand: {
-      /** Wide-tracked wordmark. */
-      name: 'MOOD & CO.',
-      /** Small line under the wordmark. */
-      tagline: 'EVERY MOOD. EVERY STORY.',
-      /** Primary slogan. */
-      hero: 'Wear who you are.',
+      /** Placeholder wordmark. One-line rename. */
+      name: 'Your Brand',
+      /** Working line under the wordmark. Not a final lockup. */
+      tagline: 'Little Things. Big Meaning.',
+      taglineStatus: 'working',
+      taglineNote: 'Working tagline',
+      /** What the house is actually selling. */
+      promise: 'We are not just selling charms. We are selling little reminders of happiness.',
+      hero: 'Little reminders you can wear.',
       lines: {
-        story: 'Your story, one link at a time.',
-        charm: 'A little charm for every mood.',
-        versions: 'Made for every version of you.',
-        rules: 'Your mood. Your rules.',
+        story: 'Replace a plain link. Keep the size. Change the meaning.',
+        charm: 'A little charm for a feeling you want close.',
+        versions: 'For teens, students, teachers, mothers, and women at work.',
+        rules: 'Happiness, encouragement, confidence, and room to grow.',
       },
       /** localStorage namespace. Change it if a renamed brand should start fresh. */
-      storagePrefix: 'moodco.v1',
+      storagePrefix: 'yourbrand.v1',
     },
 
     /**
      * Visible page names. Filenames stay short; labels come from here.
-     * The Mood Bar is the bracelet builder and the primary call to action.
+     * Wear Your Story is the bracelet builder and the primary call to action.
      */
     pages: {
       home: { href: './index.html', label: 'Home' },
-      builder: { href: './builder.html', label: 'The Mood Bar' },
-      shop: { href: './shop.html', label: 'Shop All' },
-      gold: { href: './gold.html', label: 'The Golden Edit' },
-      silver: { href: './silver.html', label: 'The Silver Edit' },
-      teacher: { href: './teacher.html', label: 'The Teacher Edit' },
+      builder: { href: './builder.html', label: 'Wear Your Story' },
+      shop: { href: './shop.html', label: 'Little Reminders' },
+      gold: { href: './gold.html', label: 'Gold tone' },
+      silver: { href: './silver.html', label: 'Silver tone' },
+      teacher: { href: './teacher.html', label: 'For teachers' },
       best: { href: './bestsellers.html', label: 'Best Sellers' },
       fresh: { href: './new.html', label: 'New Arrivals' },
-      gifts: { href: './gifts.html', label: 'The Gift Edit' },
-      club: { href: './club.html', label: 'The Charm Club' },
-      vault: { href: './vault.html', label: 'The Mood Vault' },
-      society: { href: './ambassador.html', label: 'The Mood Society' },
+      gifts: { href: './gifts.html', label: 'Spread the Happy' },
+      club: { href: './club.html', label: 'Your Monthly Dose of Happy' },
+      card: { href: './happy-card.html', label: 'The Happy Card' },
+      dashboard: { href: './dashboard.html', label: 'Your collection' },
+      vault: { href: './vault.html', label: 'Your collection' },
       about: { href: './about.html', label: 'About' },
       faq: { href: './faq.html', label: 'FAQ' },
       cart: { href: './cart.html', label: 'Cart' },
+      privacy: { href: './privacy.html', label: 'Privacy Policy' },
+      shipping: { href: './shipping.html', label: 'Shipping Policy' },
+      returns: { href: './returns.html', label: 'Returns Policy' },
+      terms: { href: './subscription-terms.html', label: 'Subscription Terms' },
     },
 
     /** Header links, in order. Edit labels above; this is only the order. */
-    nav: ['builder', 'shop', 'gifts', 'club', 'vault'],
-    /** Finishes and edits, grouped in the header and listed on the shop pages. */
+    nav: ['builder', 'shop', 'club', 'card', 'gifts'],
+    /** Finishes, still available from the shop and the footer. */
     edits: ['gold', 'silver', 'teacher', 'best', 'fresh'],
-    footerNav: ['builder', 'shop', 'gold', 'silver', 'teacher', 'best', 'fresh', 'gifts', 'club', 'vault', 'society', 'about', 'faq', 'cart'],
+    footerNav: ['builder', 'shop', 'club', 'card', 'gifts', 'dashboard', 'gold', 'silver', 'about', 'faq', 'privacy', 'shipping', 'returns', 'terms', 'cart'],
 
     /**
      * Retail prices in US dollars.
      * starterBracelet is the empty 9mm bracelet in either gold or silver.
      */
     prices: {
-      starterBracelet: 19.99,
-      standard: 3.99,
-      premium: 5.99,
-      luxury: 7.99,
-      dangle: 8.99,
-      tool: 4.99,
+      starterBracelet: 24.99,
+      standard: 12.99,
+      /** Premium crystal links. Luxury links use this same price until a separate luxury price is set. */
+      premium: 15.99,
+      luxury: 15.99,
+      dangle: 17.99,
+      tool: 6.99,
       bundle: 34.99,
       clubMonthly: 24.99,
       /** Prototype default for the gift-box add-on. Change it here before launch. */
       giftBox: 6.99,
+      plainLink: 5.99,
     },
 
+    /**
+     * Bracelet examples use the plain starter plus this many standard charms.
+     * Totals are calculated. Do not hardcode them in the pages.
+     */
+    priceExamples: [
+      { charms: 0, label: 'Plain bracelet' },
+      { charms: 2, label: 'Plus 2 charms' },
+      { charms: 3, label: 'Plus 3 charms' },
+      { charms: 6, label: 'Plus 6 charms' },
+      { charms: 9, label: 'Plus 9 charms' },
+      { charms: 18, label: 'Fully customized, 18 charms' },
+    ],
+
     priceNotes: {
-      metal: 'Every design is offered at the same price in gold or silver.',
+      metal: 'Every design is offered at the same price in gold tone or silver tone.',
+      plainLink: 'One extra plain link. Same price in gold tone or silver tone.',
     },
 
     /**
@@ -99,7 +126,7 @@
       /** Complimentary US shipping once the merchandise subtotal reaches this amount. */
       freeThreshold: 75,
       policy:
-        'Shipping is calculated at secure checkout. Complimentary US shipping applies once an order reaches the threshold configured for this shop. This prototype does not quote or promise a delivery date.',
+        'Shipping is calculated at secure checkout. Complimentary US shipping applies once an order reaches the threshold configured for this shop. The monthly membership includes domestic shipping. This prototype does not quote or promise a delivery date.',
     },
 
     /**
@@ -127,17 +154,56 @@
     trustBadges: [],
 
     club: {
-      charmsPerShipment: 5,
+      charmsPerShipment: 2,
       prepaidMonths: [3, 6, 12],
+      includes: [
+        'Two themed Italian charm links',
+        'A numbered collectible positivity card',
+        'An affirmation sticker',
+        'A reusable pouch',
+        'Domestic shipping included',
+      ],
       benefits: [
-        'Five curated charms each month',
-        'Complimentary US shipping on club shipments',
-        'A gold or silver preference, at the same price',
-        'Subscriber-only charms',
-        'A monthly theme',
-        'Skip or cancel anytime',
+        'Two themed Italian charm links each month',
+        'A numbered collectible positivity card',
+        'An affirmation sticker',
+        'A reusable pouch',
+        'Domestic shipping included',
+        'Gold tone or silver tone, at the same price',
+        'Skip or cancel from your collection page',
       ],
     },
+
+    /**
+     * Happy Card. digitalCollectionUrl is what a future QR code should open.
+     * Leave it empty until the live collection address exists. This prototype
+     * does not invent a scannable code.
+     */
+    card: {
+      digitalCollectionUrl: '',
+      sections: [
+        { id: 'motivation', title: 'Your Motivation' },
+        { id: 'encouragement', title: 'Your Encouragement' },
+        { id: 'reminder', title: 'Your Happy Reminder' },
+        { id: 'charms', title: 'Your Charms' },
+      ],
+    },
+
+    /**
+     * Waitlist and other forms. Leave waitlistEndpoint empty to store addresses
+     * on this device only. When you have a list provider, set a URL that accepts
+     * POST JSON { email, source }. Do not put a secret in this file.
+     */
+    forms: {
+      waitlistEndpoint: '',
+    },
+
+    /** How a link is opened, removed, and replaced with the assembly tool. */
+    howto: [
+      { title: 'Open', text: 'Use the assembly tool to release the link beside the one you want to change. The bracelet stays the length you measured.' },
+      { title: 'Remove', text: 'Slide the plain link, or the decorative link you are retiring, out of the row.' },
+      { title: 'Replace', text: 'Slide the new link in, the same 9mm width, and close the connection with the tool. Gold tone and silver tone are a finish, not a different size or price.' },
+    ],
 
     /** The fixed studio set. Savings are computed from these charm ids plus the starter. */
     bundle: {
@@ -148,12 +214,30 @@
     },
 
     products: {
+      starter: {
+        id: 'starter',
+        sku: 'BR-START',
+        name: 'Plain starter bracelet',
+        priceKey: 'starterBracelet',
+        type: 'bracelet',
+        description: 'A full row of plain 9mm links, sized to the wrist. Decorative links replace the plain ones. The length stays the same.',
+        inventory: { gold: null, silver: null },
+      },
+      plainLink: {
+        id: 'plain-link',
+        sku: 'LINK-PLAIN',
+        name: 'Additional plain link',
+        priceKey: 'plainLink',
+        type: 'link',
+        description: 'One plain 9mm link, for a repair or a resize. Same link in gold tone or silver tone.',
+        inventory: { gold: null, silver: null },
+      },
       tool: {
         id: 'tool',
         sku: 'TOOL-ASM',
-        name: 'Assembly tool',
+        name: 'Charm-changing tool',
         priceKey: 'tool',
-        description: 'The small tool for opening a 9mm link at home, if you would rather set the charms yourself.',
+        description: 'The small tool for opening a 9mm link so you can remove one and slide another into its place.',
       },
       giftBox: {
         id: 'gift-box',
@@ -187,12 +271,9 @@
       endpoint: '',
     },
 
-    ambassador: {
-      exampleRates: {
-        label: 'Example only — not a live offer',
-        orderPercent: 15,
-        clubPercent: 10,
-      },
+    referral: {
+      status: 'coming-soon',
+      note: 'A referral program is planned. It is not open. There is no code to share and no commission to claim.',
     },
 
     features: {

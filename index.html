@@ -21,11 +21,13 @@
 
     <section class="hero split">
       <div>
-        <p class="eyebrow">Italian modular links</p>
+        <p class="eyebrow">Italian charm links</p>
         <h1 data-copy="brand.hero"></h1>
+        <p class="wordmark-tag" data-copy="brand.tagline"></p>
+        <p class="working-flag" data-copy="brand.taglineNote"></p>
         <hr class="gold-rule">
+        <p class="lede" data-copy="brand.promise"></p>
         <p class="lede" data-copy="brand.lines.story"></p>
-        <p class="lede" data-copy="brand.lines.versions"></p>
         <div class="cluster hero-actions">
           <a class="btn" data-page-link="builder" href="./builder.html"></a>
           <a class="btn secondary" data-page-link="gifts" href="./gifts.html"></a>
@@ -43,16 +45,21 @@
       <p class="eyebrow">How it works</p>
       <h2 id="how-title" data-copy="brand.lines.rules"></h2>
       <div class="steps">
-        <article class="step"><span>01</span><h3>Pick a metal</h3><p>Gold or silver. The finish changes. The price does not.</p></article>
-        <article class="step"><span>02</span><h3>Add a charm</h3><p>Drag it onto a link, or tap a charm and then a link. Leave one open if the story is not finished.</p></article>
-        <article class="step"><span>03</span><h3>Make it yours</h3><p>Wear it assembled by the studio, or close the links at home with the tool.</p></article>
+        <article class="step"><span>01</span><h3>Measure</h3><p>Choose a wrist size. The page counts 9mm links, including about a centimeter of comfort.</p></article>
+        <article class="step"><span>02</span><h3>Replace</h3><p>Swap plain links for decorative ones. Drag or reorder. The bracelet length stays the size you chose.</p></article>
+        <article class="step"><span>03</span><h3>Wear it</h3><p>Gold tone or silver tone, same price. Use the tool later to change a single link.</p></article>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="price-title">
-      <h2 id="price-title">Clear prices</h2>
+    <section class="section menu-board" aria-labelledby="price-title">
+      <p class="eyebrow">A little menu</p>
+      <h2 id="price-title">The Happy Price List</h2>
       <p class="lede" data-copy="priceNotes.metal"></p>
-      <div id="legend" class="legend price-strip"></div>
+      <div id="price-menu" class="price-menu"></div>
+      <h3 class="menu-sub">Build a bracelet</h3>
+      <p class="note">Each example starts with the plain bracelet and adds standard charms. Gold tone or silver tone, the total does not change.</p>
+      <div id="build-examples" class="build-examples"></div>
+      <p id="monthly-sweet" class="menu-sweet"></p>
     </section>
 
     <section class="section" aria-labelledby="best-title">
@@ -75,7 +82,7 @@
     <section class="section split" aria-labelledby="gift-title">
       <div>
         <p class="eyebrow" data-copy="pages.gifts.label"></p>
-        <h2 id="gift-title">A bracelet, five charms, one price</h2>
+        <h2 id="gift-title">Give a month, or a year of them</h2>
         <p id="bundle-savings" class="lede"></p>
         <div class="cluster" style="margin-top:1rem">
           <a class="btn" data-page-link="gifts" href="./gifts.html"></a>
@@ -84,14 +91,14 @@
       </div>
       <div class="panel">
         <p data-copy="brand.lines.charm"></p>
-        <p class="note">Write a gift message at the Mood Bar. Add the gift box if you want the ritual of a lid. Or give months of the Charm Club — three, six, or twelve — priced from the monthly figure.</p>
+        <p class="note">Birthdays, holidays, teachers, friends, mothers and daughters. Gift months are the monthly price times the number of months. A referral program is coming soon. It is not open.</p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="club-title">
       <p class="eyebrow" data-copy="pages.club.label"></p>
-      <h2 id="club-title">Five charms, every month</h2>
-      <p class="lede">A standing story. Gold or silver, same membership price. Skip or cancel anytime.</p>
+      <h2 id="club-title">Two links, a card, a sticker, a pouch</h2>
+      <p class="lede">A monthly reminder. Gold tone or silver tone, same price. Domestic shipping included. Skip or cancel from your collection.</p>
       <p class="club-price"><span data-price="clubMonthly"></span> <span style="font-family:var(--sans);font-size:1rem">/ month</span></p>
       <a class="btn" data-page-link="club" href="./club.html"></a>
     </section>
@@ -106,7 +113,7 @@
     <section class="section prose" aria-labelledby="story-title">
       <h2 id="story-title" data-copy="brand.hero"></h2>
       <p data-copy="brand.lines.story"></p>
-      <p>Each link is a small plate of polished metal. A heart, a pencil, an initial, a plane. Not a costume. A record of who you are this year, and who you might be next.</p>
+      <p>Each decorative link replaces a plain one in the row. A sun, a heart, a compass, a small crown. A reminder of happiness you can wear, and change later with the tool.</p>
       <p><a data-page-link="about" href="./about.html"></a></p>
     </section>
 
@@ -119,6 +126,7 @@
   <script src="js/pricing.js"></script>
   <script src="js/sizing.js"></script>
   <script src="js/catalog.js"></script>
+  <script src="data/monthly-themes.js"></script>
   <script src="js/charm-art.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/commerce/adapter.js"></script>

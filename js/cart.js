@@ -18,12 +18,12 @@
   }
 
   function metalLabel(metal) {
-    return metal === 'silver' ? 'Silver' : 'Gold';
+    return metal === 'silver' ? 'Silver tone' : 'Gold tone';
   }
 
   function braceletBreakdown(design) {
     var lines = [{
-      label: 'Starter bracelet, ' + metalLabel(design.metal).toLowerCase() + ' finish',
+      label: 'Starter bracelet, ' + metalLabel(design.metal).toLowerCase() + ', plain links included',
       cents: root.Pricing.priceCents('starterBracelet'),
     }];
     (design.links || []).forEach(function (id) {
@@ -106,8 +106,8 @@
       var months = opts.months || 1;
       var cents = root.Pricing.clubPrepaidCents(months);
       var name = months > 1
-        ? 'Charm Club gift, ' + months + ' months'
-        : 'Charm Club, monthly';
+        ? 'Monthly Dose gift, ' + months + ' months'
+        : 'Your Monthly Dose of Happy';
       return root.Commerce.current().addLine({
         type: 'club',
         sku: months > 1 ? 'CLUB-' + months + 'MO' : 'CLUB-MO',
