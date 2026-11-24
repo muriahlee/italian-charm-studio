@@ -19,7 +19,6 @@
     var n = root.Sizing.linksForWrist(wrist);
     var links = [];
     for (var i = 0; i < n; i++) links.push(null);
-    var narrow = root.matchMedia && root.matchMedia('(max-width: 720px)').matches;
     return {
       metal: 'gold',
       wrist: wrist,
@@ -29,7 +28,7 @@
       includeGiftBox: false,
       giftMessage: '',
       story: '',
-      view: narrow ? 'straight' : 'circle',
+      view: 'straight',
     };
   }
 
@@ -124,6 +123,10 @@
       if (ui.category && charm.category !== ui.category) return false;
       if (ui.tier && charm.tier !== ui.tier) return false;
       if ((charm.metals || []).indexOf(state.metal) === -1) return false;
+      if (ui.moodTags && ui.moodTags.length) {
+        var moodHit = ui.moodTags.some(function (tag) { return (charm.tags || []).indexOf(tag) !== -1; });
+        if (!moodHit) return false;
+      }
       if (q) {
         var blob = (charm.name + ' ' + charm.tags.join(' ') + ' ' + charm.description).toLowerCase();
         if (blob.indexOf(q) === -1) return false;
@@ -194,7 +197,7 @@
     var charm = id ? root.Catalog.byId(id) : null;
     el.innerHTML =
       '<span>Link ' + (ui.selectedIndex + 1) + (charm ? ' · ' + root.Util.esc(charm.name) + ' · ' + root.Pricing.formatCents(root.Pricing.charmCents(charm)) : ' · plain link, included') + '</span>' +
-      (charm ? '<button type="button" class="btn secondary" id="remove-link">Restore plain link</button>' : '') +
+      (charm ? '<button type="button" class="btn secondary" id="zoom-link">Look closer</button><button type="button" class="btn secondary" id="remove-link">Restore plain link</button>' : '<button type="button" class="btn secondary" id="zoom-link">Look closer</button>') +
       '<button type="button" class="btn secondary" id="nudge-left">Move left</button>' +
       '<button type="button" class="btn secondary" id="nudge-right">Move right</button>';
   }
@@ -454,12 +457,30 @@
 
   function runStylist(text) {
     var explain = document.getElementById('stylist-explain');
+    var colorEl = document.getElementById('mood-color');
+    var budgetEl = document.getElementById('mood-budget');
+    var color = colorEl ? colorEl.value : '';
+    var budget = budgetEl ? Number(budgetEl.value) : 0;
+    if (color) text = (text ? text + ' ' : '') + color;
     root.Stylist.recommend(text, {
       metal: state.metal,
       linkCount: state.links.length,
       wrist: state.wrist,
       ownedIds: root.Vault.ownedIds(),
     }).then(function (result) {
+      if (budget > 0) {
+        var cap = Math.round(budget * 100);
+        var spent = root.Pricing.priceCents('starterBracelet');
+        result.links = (result.links || []).map(function (id) {
+          if (!id) return null;
+          var charm = root.Catalog.byId(id);
+          var cents = charm ? root.Pricing.charmCents(charm) : 0;
+          if (spent + cents > cap) return null;
+          spent += cents;
+          return id;
+        });
+        result.explanation = (result.explanation || '') + ' Held to ' + root.Pricing.formatCents(cap) + ', including the starter.';
+      }
       update(function () {
         state.metal = result.metal === 'silver' ? 'silver' : 'gold';
         if (result.links && result.links.length === state.links.length) state.links = result.links.slice();
@@ -503,7 +524,7 @@
           '<p class="note" id="finish-label"></p>' +
           '<p class="prompt-line" id="story-prompt"></p>' +
           '<div id="stage"></div>' +
-          '<p class="demo-label">Demo product, photo coming soon</p>' +
+          '<p class="concept-label">Concept illustration of 9mm links. Not a product photograph. Sizing is an estimate, not a supplier certificate.</p>' +
           '<div id="inspector" class="inspector"></div>' +
           '<p id="builder-note" class="note" role="status"></p>' +
           '<details><summary>How the link count is calculated</summary><p class="note">' + root.Util.esc(root.Sizing.formulaText()) + ' Decorative links replace plain ones. They do not change the count.</p></details>' +
@@ -516,13 +537,32 @@
         '<div class="builder-side">' +
           '<section class="palette-card">' +
             '<form id="stylist-form">' +
-              '<label class="field"><span>Describe a person, a mood, a color</span>' +
+              '<p class="eyebrow">Find Your Mood</p>' +
+              '<p class="note">Optional. Shop without it. Recommendations use the catalog on this device. No paid model is called.</p>' +
+              '<div class="two">' +
+                '<label class="field"><span>A color</span><select id="mood-color"><option value="">Any</option><option>pink</option><option>blue</option><option>green</option><option>gold</option><option>black</option></select></label>' +
+                '<label class="field"><span>Maximum budget</span><input id="mood-budget" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Optional"></label>' +
+              '</div>' +
+              '<label class="field"><span>Interests, work, or a memory</span>' +
                 '<textarea id="stylist-text" maxlength="280" placeholder="A gold bracelet for a teacher who loves coffee, books, traveling, and pink"></textarea>' +
               '</label>' +
-              '<button class="btn" type="submit">Compose a starting point</button>' +
+              '<button class="btn" type="submit">Find a starting point</button>' +
               '<p id="stylist-explain" class="note" role="status"></p>' +
             '</form>' +
-            '<p class="note">Gold tone or silver tone is a finish. ' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
+            '<label class="field"><span>Browse by</span><select id="mood-filter" aria-label="Browse charms by">' +
+              '<option value="">Everything</option>' +
+              '<option value="pink blush rose">Color · blush</option>' +
+              '<option value="blue navy">Color · blue</option>' +
+              '<option value="green">Color · green</option>' +
+              '<option value="teacher school">Profession</option>' +
+              '<option value="family mother baby">Family</option>' +
+              '<option value="love heart">Love</option>' +
+              '<option value="travel plane">Travel</option>' +
+              '<option value="book music coffee">Hobbies</option>' +
+              '<option value="reminder happiness">Motivation</option>' +
+              '<option value="birthstone">Birth month</option>' +
+              '<option value="christmas gift holiday">Special occasions</option>' +
+            '</select></label>' +
             '<input class="search" id="charm-search" type="search" placeholder="Search charms" aria-label="Search charms">' +
             '<div class="filters" id="cat-filters">' + cats + '</div>' +
             '<div class="filters" id="tier-filters">' +
@@ -565,6 +605,27 @@
         '</div>' +
       '</div>' +
       '<div class="buybar-fixed" id="buybar"><div><div class="note">Bracelet</div><strong id="buybar-price"></strong></div><button type="button" class="btn" id="add-bracelet-bar">Add to bag</button></div>';
+  }
+
+  function zoomLink(index) {
+    var id = state.links[index];
+    var charm = id ? root.Catalog.byId(id) : null;
+    var dlg = document.getElementById('zoom-dialog');
+    if (!dlg) {
+      dlg = document.createElement('dialog');
+      dlg.id = 'zoom-dialog';
+      document.body.appendChild(dlg);
+    }
+    var art = charm ? root.CharmArt.render(charm, state.metal) : root.CharmArt.renderEmpty(state.metal);
+    dlg.innerHTML = '<div class="dialog-body" style="padding:1.2rem"><button type="button" class="icon-btn" id="zoom-close">Close</button>' +
+      '<p class="concept-label">Concept illustration. Not a product photograph.</p>' +
+      '<div class="charm-frame" style="width:min(220px,70vw);margin:0.6rem auto">' + art + '</div>' +
+      '<h2>' + root.Util.esc(charm ? charm.name : 'Plain link') + '</h2>' +
+      '<p>' + root.Util.esc(charm ? charm.description : 'A plain 9mm link, included in the starter.') + '</p>' +
+      (charm ? '<p class="menu-price">' + root.Pricing.formatCents(root.Pricing.charmCents(charm)) + '</p>' : '<p class="note">Included with the starter.</p>') +
+      '</div>';
+    dlg.querySelector('#zoom-close').addEventListener('click', function () { dlg.close(); });
+    if (dlg.showModal) dlg.showModal();
   }
 
   function addBracelet() {
@@ -651,6 +712,7 @@
         renderInspector();
         return;
       }
+      if (e.target.closest('#zoom-link') && ui.selectedIndex != null) { zoomLink(ui.selectedIndex); return; }
       if (e.target.closest('#remove-link') && ui.selectedIndex != null) { clearLink(ui.selectedIndex); return; }
       if (e.target.closest('#nudge-left')) { nudge(-1); return; }
       if (e.target.closest('#nudge-right')) { nudge(1); return; }
@@ -714,6 +776,10 @@
       if (e.target.id === 'story') { state.story = e.target.value.slice(0, 180); persist(); }
       if (e.target.id === 'gift-message') { state.giftMessage = e.target.value.slice(0, 140); persist(); }
       if (e.target.id === 'charm-search') { ui.query = e.target.value; renderPalette(); }
+      if (e.target.id === 'mood-filter') {
+        ui.moodTags = e.target.value ? e.target.value.split(' ') : [];
+        renderPalette();
+      }
     });
 
     rootEl.addEventListener('submit', function (e) {
@@ -816,6 +882,7 @@
       query: '',
       ownedOnly: new URLSearchParams(root.location.search).get('palette') === 'owned',
       note: '',
+      moodTags: [],
     };
     rootEl.innerHTML = template();
     if (ui.ownedOnly) document.getElementById('owned-only').checked = true;

@@ -73,10 +73,10 @@ function assert(cond, msg) {
   }
 }
 
-assert(CS.brand.name === 'Your Brand', 'brand name');
-assert(CS.brand.tagline === 'Little Things. Big Meaning.', 'tagline');
-assert(CS.brand.taglineStatus === 'working', 'tagline working');
-assert(CS.brand.hero === 'Little reminders you can wear.', 'hero');
+assert(CS.brand.name === 'MOOD & CO.', 'brand name');
+assert(CS.brand.tagline === '', 'tagline not finalized');
+assert(CS.brand.taglineStatus === 'unfinalized', 'tagline status');
+assert(CS.brand.hero === 'Wear who you are.', 'hero');
 assert(CS.prices.starterBracelet === 24.99, 'starter price');
 assert(CS.prices.standard === 12.99, 'standard');
 assert(CS.prices.premium === 15.99, 'premium crystal');
@@ -84,11 +84,12 @@ assert(CS.prices.dangle === 17.99, 'dangle');
 assert(CS.prices.plainLink === 5.99, 'plain link');
 assert(CS.prices.tool === 6.99, 'tool');
 assert(!CS.prices.gold && !CS.prices.silver, 'no metal prices');
-assert(CS.pages.builder.label === 'Wear Your Story', 'builder label');
-assert(CS.pages.shop.label === 'Little Reminders', 'shop label');
-assert(CS.pages.club.label === 'Your Monthly Dose of Happy', 'club label');
+assert(CS.pages.builder.label === 'Build Your Bracelet', 'builder label');
+assert(CS.pages.shop.label === 'Shop Charms', 'shop label');
+assert(CS.pages.club.label === 'The Charm Club', 'club label');
 assert(CS.pages.card.label === 'The Happy Card', 'card label');
-assert(CS.pages.gifts.label === 'Spread the Happy', 'gift label');
+assert(CS.pages.gifts.label === 'Gifts', 'gift label');
+assert(CS.shipping.thresholdApproved === false, 'shipping offer not approved');
 assert(CS.prices.clubMonthly === 24.99, 'monthly price');
 assert(CS.referral.status === 'coming-soon', 'referral closed');
 assert(Array.isArray(CS.trustBadges) && CS.trustBadges.length === 0, 'trust empty');

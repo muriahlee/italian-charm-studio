@@ -1,6 +1,8 @@
-# Your Brand
+# MOOD & CO.
 
-A static storefront prototype for a positivity jewelry house of Italian 9mm modular links. The name is a placeholder. Change `brand.name` in `js/config.js` when it is final. The working tagline is `Little Things. Big Meaning.`
+Provisional name. The official tagline is not finalized. This site is a preview and is not open for orders.
+
+A static storefront for Italian 9mm modular links. Decorative links replace plain links. Prices live in `js/config.js`. The Charm Club figure, $24.99 a month, is provisional and would be plus applicable sales tax.
 
 HTML, CSS, and vanilla JavaScript. No build step. GitHub Pages can serve it from the repository root, including a project site such as `/italian-charm-studio/`.
 

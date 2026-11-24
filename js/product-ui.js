@@ -57,7 +57,7 @@
       '<article class="card">' +
         '<button type="button" class="card-media" data-open-charm="' + charm.id + '" data-metal="' + metal + '">' +
           frame(charm, metal, opts.lazy !== false) +
-          '<span class="demo-label">Demo product, photo coming soon</span>' +
+          '<span class="demo-label">Concept illustration. Not a product photograph.</span>' +
         '</button>' +
         '<h3>' + root.Util.esc(charm.name) + club + '</h3>' +
         '<p class="card-meta">' + tierLabel(charm.tier) + ' · ' + price + '</p>' +
@@ -112,7 +112,7 @@
   function renderDialog(charm) {
     var art = document.getElementById('dialog-art');
     var body = document.getElementById('dialog-body');
-    art.innerHTML = frame(charm, dialogMetal, false) + '<p class="demo-label">Demo product, photo coming soon</p>';
+    art.innerHTML = frame(charm, dialogMetal, false) + '<p class="concept-label">Concept illustration. Not a product photograph.</p>';
     var price = root.Pricing.formatCents(root.Pricing.charmCents(charm));
     var recs = root.Recs.charms({ placedIds: [charm.id], ownedIds: root.Vault.ownedIds(), limit: 3 });
     body.innerHTML =
