@@ -8,6 +8,15 @@
 
 .hero-actions { margin-top: 1.5rem; }
 
+.review-banner {
+  background: var(--champagne);
+  padding: 0.75rem 0.9rem;
+  margin: 1rem 0;
+}
+
+.howto { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.howto li { margin: 0.35rem 0; }
+
 .snap {
   background: linear-gradient(180deg, rgba(226, 209, 181, 0.45), rgba(213, 178, 180, 0.2));
   border: 1px solid var(--line);

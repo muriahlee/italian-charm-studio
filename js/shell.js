@@ -36,7 +36,8 @@
       count = root.Cart ? root.Cart.count(cart) : 0;
     } catch (e) { count = 0; }
     var edits = root.CS.edits.map(link).join('');
-    var primary = root.CS.nav.map(function (key) {
+    var primary = '<a class="nav-account" href="' + page('dashboard').href + '">' + root.Util.esc(page('dashboard').label) + '</a>' +
+      root.CS.nav.map(function (key) {
       if (key === 'shop') {
         return link('shop') +
           '<div class="nav-drop"><button type="button" aria-expanded="false" aria-controls="edit-menu">Edits</button>' +
@@ -59,8 +60,12 @@
           '<a class="wordmark" href="' + page('home').href + '">' +
             '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
             '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' +
+            (brand.taglineStatus === 'working' ? '<span class="working-flag">' + root.Util.esc(brand.taglineNote) + '</span>' : '') +
           '</a>' +
-          '<a class="bag" href="' + page('cart').href + '">Bag <span class="cart-count" data-cart-count>' + count + '</span></a>' +
+          '<span class="mast-tools">' +
+            '<a class="account-link" href="' + page('dashboard').href + '">' + root.Util.esc(page('dashboard').label) + '</a>' +
+            '<a class="bag" href="' + page('cart').href + '">Bag <span class="cart-count" data-cart-count>' + count + '</span></a>' +
+          '</span>' +
         '</div>' +
         '<nav id="site-nav" class="site-nav" aria-label="Primary" data-open="false">' + primary + '</nav>' +
       '</header>' +
@@ -79,7 +84,8 @@
           '<div class="footer-brand">' +
             '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
             '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' +
-            '<p class="fine">' + root.Util.esc(brand.hero) + ' ' + root.Util.esc(brand.lines.story) + '</p>' +
+            (brand.taglineStatus === 'working' ? '<span class="working-flag">' + root.Util.esc(brand.taglineNote) + '</span>' : '') +
+            '<p class="fine">' + root.Util.esc(brand.promise) + '</p>' +
             '<p class="fine">' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
           '</div>' +
           '<nav class="footer-links" aria-label="Footer">' + links + '</nav>' +
@@ -172,6 +178,12 @@
       }
     });
     document.addEventListener('submit', function (e) {
+      var wait = e.target.closest('[data-waitlist]');
+      if (wait) {
+        e.preventDefault();
+        submitWaitlist(wait);
+        return;
+      }
       var form = e.target.closest('[data-capture]');
       if (!form) return;
       e.preventDefault();
@@ -205,6 +217,35 @@
     bar.innerHTML = '<a class="btn" href="' + href + '">' + root.Util.esc(label) + '</a>';
     document.body.appendChild(bar);
     document.body.classList.add('has-sticky');
+  }
+
+  function submitWaitlist(form) {
+    var email = (form.email.value || '').trim();
+    var status = form.querySelector('.form-status');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (status) status.textContent = 'Enter an email address.';
+      return;
+    }
+    var endpoint = root.CS.forms && root.CS.forms.waitlistEndpoint;
+    if (!endpoint) {
+      var leads = root.Store.read('waitlist', []);
+      leads.push({ email: email, source: form.getAttribute('data-source') || 'waitlist', at: new Date().toISOString() });
+      root.Store.write('waitlist', leads);
+      form.reset();
+      if (status) status.textContent = 'Saved on this device only. Nothing is sent until a form endpoint is set in config.';
+      return;
+    }
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: email, source: form.getAttribute('data-source') || 'waitlist' }),
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Request failed');
+      form.reset();
+      if (status) status.textContent = 'You are on the list.';
+    }).catch(function () {
+      if (status) status.textContent = 'The list did not accept that address. Nothing else was stored.';
+    });
   }
 
   function mount() {

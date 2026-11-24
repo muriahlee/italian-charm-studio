@@ -1,6 +1,10 @@
-# MOOD & CO.
+# Your Brand
 
-A static storefront prototype for a house of Italian 9mm modular charm bracelets. It is HTML, CSS, and vanilla JavaScript, with no build step, so GitHub Pages can serve it from the repository root (including a project site such as `/italian-charm-studio/`).
+A static storefront prototype for a positivity jewelry house of Italian 9mm modular links. The name is a placeholder. Change `brand.name` in `js/config.js` when it is final. The working tagline is `Little Things. Big Meaning.`
+
+HTML, CSS, and vanilla JavaScript. No build step. GitHub Pages can serve it from the repository root, including a project site such as `/italian-charm-studio/`.
+
+Decorative links replace plain links. They do not hang from a chain, and they do not change the measured size.
 
 Illustrated charms stand in for photography. The bag, the Mood Vault, and the club join flow stay on this device. Checkout is deliberately not wired to a card form.
 
@@ -10,8 +14,8 @@ Edit `js/config.js`.
 
 | What | Where |
 | --- | --- |
-| Wordmark | `brand.name` |
-| Line under the wordmark | `brand.tagline` |
+| Wordmark (placeholder) | `brand.name` — currently `Your Brand` |
+| Working tagline | `brand.tagline` — `Little Things. Big Meaning.` |
 | Hero line | `brand.hero` |
 | Supporting lines | `brand.lines` |
 | Page names | `pages.*.label` |
@@ -30,7 +34,8 @@ Every retail number lives in `CS.prices` inside `js/config.js`. Do not put price
 | `standard` / `premium` / `luxury` / `dangle` | $3.99 / $5.99 / $7.99 / $8.99 |
 | `tool` | $4.99 assembly tool |
 | `bundle` | $34.99 bracelet + five charms |
-| `clubMonthly` | $24.99 |
+| `clubMonthly` | $18.99, domestic shipping included |
+| `plainLink` | $2.99 working price for one plain link — confirm before launch |
 | `giftBox` | $6.99 prototype add-on |
 
 Metal is a finish. There is no separate gold or silver price. Charm `priceKey` matches `tier`, and the builder, bag, edits, club, and FAQ all read the config. The five-charm comparison (set price versus the same pieces bought separately) is calculated from `CS.bundle.charmIds`.
@@ -43,24 +48,29 @@ Metal is a finish. There is no separate gold or silver price. Charm `priceKey` m
 links = round((wristInches × 25.4 + comfortMm) / linkPitchMm)
 ```
 
-Defaults in `CS.sizing`: pitch `9.5` mm (inside a 9–9.5 mm link), comfort `10` mm. A 6.5 inch wrist is `(165.1 + 10) / 9.5 = 18.43`, which rounds to **18 links**. The Mood Bar shows this note.
+Defaults in `CS.sizing`: pitch `9.5` mm, comfort `10` mm. A 6.5 inch wrist is `(165.1 + 10) / 9.5 = 18.43`, which rounds to **18 links**. Replacing a plain link does not change that count. Wear Your Story shows the note.
 
 ## Pages
 
 | File | Label in `js/config.js` |
 | --- | --- |
 | `index.html` | Home |
-| `builder.html` | The Mood Bar |
-| `shop.html` | Shop All |
-| `gold.html` | The Golden Edit |
-| `silver.html` | The Silver Edit |
-| `teacher.html` | The Teacher Edit |
+| `builder.html` | Wear Your Story |
+| `shop.html` | Little Reminders |
+| `gold.html` | Gold tone |
+| `silver.html` | Silver tone |
+| `teacher.html` | For teachers |
 | `bestsellers.html` | Best Sellers |
 | `new.html` | New Arrivals |
-| `gifts.html` | The Gift Edit |
-| `club.html` | The Charm Club |
-| `vault.html` | The Mood Vault |
-| `ambassador.html` | The Mood Society |
+| `club.html` | Your Monthly Dose of Happy |
+| `happy-card.html` | The Happy Card |
+| `gifts.html` | Spread the Happy |
+| `dashboard.html` | Your collection (demo dashboard) |
+| `privacy.html` | Privacy Policy (template) |
+| `shipping.html` | Shipping Policy (template) |
+| `returns.html` | Returns Policy (template) |
+| `subscription-terms.html` | Subscription Terms (template) |
+| `data/monthly-themes.js` | Twelve editions, January through December |
 | `about.html` | About |
 | `faq.html` | FAQ |
 | `cart.html` | Cart |
@@ -141,7 +151,11 @@ Leave `rating` null unless you have a real score you are willing to show. Do not
 
 ## Stylist
 
-The Mood Bar scores the catalog in the browser (`js/stylist/engine.js`): synonyms, tags, metal words, and a short explanation. Nothing is sent to a model.
+Wear Your Story scores the catalog in the browser (`js/stylist/engine.js`): synonyms, tags, metal words, and a short explanation. Nothing is sent to a model.
+
+The monthly waitlist posts to `forms.waitlistEndpoint` when that string is a URL. While it is empty, the address is saved in this browser and nothing is sent.
+
+Inventory on each charm is `{ gold, silver }`. `null` means the finish is not tracked. Do not invent a low-stock message.
 
 `js/stylist/provider.js` documents a later `POST` to `CS.stylist.endpoint`. The server should call the model and return `{ metal, links, explanation }`. Keep the API key on that server. To switch, set the endpoint and `Stylist.active = 'remote'`.
 
@@ -171,7 +185,7 @@ When you launch, prefer a small backend that holds the Storefront token, creates
 | Shipping copy | Threshold and “calculated at checkout” | Your real policy, still without fake dates |
 | Returns | “Terms will be published” | The policy you will honor |
 | Materials | 316L and nickel-release testing are described as the plan, not a finished certificate | Publish the actual test |
-| Charm Club | Demo join, prepaid totals = monthly × months | Shopify selling plan |
+| Monthly Dose | Demo join at $18.99, prepaid totals = monthly × months, domestic shipping included, no delivery date | Shopify selling plan |
 | Mood Vault | This browser | Accounts |
 | Stylist | On-device catalog scoring | Optional server endpoint, key stays server-side |
 | Mood Society rates | Example percentages, marked as such | A real agreement |

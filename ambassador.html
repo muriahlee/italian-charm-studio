@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <title>Loading</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
@@ -15,66 +12,23 @@
   <link rel="stylesheet" href="css/builder.css">
   <link rel="icon" href="favicon.svg">
 </head>
-<body data-page="society" data-title="society" data-sticky="builder">
+<body data-page="policy" data-title="gifts" data-sticky="builder">
   <div id="site-header"></div>
   <main id="main">
-
     <header class="page-head">
-      <p class="eyebrow">Share the work</p>
-      <h1 data-copy="pages.society.label"></h1>
-      <p class="lede" data-copy="brand.lines.versions"></p>
-      <p class="lede">Teachers are very welcome here. So is anyone with a circle — a studio, a team, a family, a class. The house is not only a school brand.</p>
+      <p class="eyebrow">Coming soon</p>
+      <h1>Referral program</h1>
+      <p class="lede" data-copy="referral.note"></p>
+      <p><a data-page-link="gifts" href="./gifts.html"></a></p>
     </header>
-    <section class="section prose">
-      <h2>How a referral works, in this prototype</h2>
-      <p>You share a design link from the Mood Bar. A demo code can sit in the note you send with it. There is no tracking pixel and no payout in this prototype.</p>
-      <div id="rates"></div>
-    </section>
-    <section class="section two">
-      <form id="code-form" class="panel">
-        <h2>Demo code</h2>
-        <label class="field"><span>Name or initials</span><input id="code-name" name="name" maxlength="40" autocomplete="name"></label>
-        <button class="btn" type="submit">Generate a demo code</button>
-        <p id="code-out" class="form-status" role="status"></p>
-      </form>
-      <div class="panel">
-        <h2>Share a design</h2>
-        <p>Build it, name it, copy the link. The story you wrote travels with the URL.</p>
-        <a class="btn" data-page-link="builder" href="./builder.html"></a>
-      </div>
-    </section>
-    <section class="section two">
-      <form id="group-form" class="panel">
-        <h2>Group orders</h2>
-        <p class="note">A note for teams ordering several of the same bracelet. Saved on this device only.</p>
-        <label class="field"><span>Organizer</span><input name="organizer" required></label>
-        <label class="field"><span>Group</span><input name="group" required></label>
-        <label class="field"><span>About how many</span><input name="quantity" inputmode="numeric"></label>
-        <label class="field"><span>Email</span><input name="email" type="email" required></label>
-        <button class="btn" type="submit">Save inquiry</button>
-        <p class="form-status" role="status"></p>
-      </form>
-      <form id="fund-form" class="panel">
-        <h2>School fundraising</h2>
-        <p class="note">For a class or a school that wants to raise money with a charm edit. Example commission rates above are not a live offer.</p>
-        <label class="field"><span>School or class</span><input name="school" required></label>
-        <label class="field"><span>Contact</span><input name="contact" required></label>
-        <label class="field"><span>Email</span><input name="email" type="email" required></label>
-        <label class="field"><span>What you have in mind</span><textarea name="note"></textarea></label>
-        <button class="btn" type="submit">Save inquiry</button>
-        <p class="form-status" role="status"></p>
-      </form>
-    </section>
-
   </main>
   <div id="site-footer"></div>
-  <noscript><p class="note">This prototype needs JavaScript for the bracelet builder, the bag, and saved designs.</p></noscript>
-
   <script src="js/config.js"></script>
   <script src="js/util.js"></script>
   <script src="js/pricing.js"></script>
   <script src="js/sizing.js"></script>
   <script src="js/catalog.js"></script>
+  <script src="data/monthly-themes.js"></script>
   <script src="js/charm-art.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/commerce/adapter.js"></script>

@@ -22,26 +22,31 @@
     <header class="page-head">
       <p class="eyebrow">Gifts</p>
       <h1 data-copy="pages.gifts.label"></h1>
-      <p class="lede" data-copy="brand.lines.charm"></p>
-      <p class="lede">A message, a box, a set of five, or a year of the club. The metal is a preference. The price is not.</p>
+      <p class="lede" data-copy="brand.promise"></p>
+      <p class="lede">Give the month to someone else. Birthdays, holidays, teachers, friends, mothers and daughters. Gold tone or silver tone, same price.</p>
     </header>
     <section id="gift-set" class="section"></section>
     <section class="section two">
       <article class="panel">
         <h2>A note in the box</h2>
-        <p>Write the gift message on the Mood Bar. It stays with the bracelet in the bag. We do not print it in this prototype.</p>
+        <p>Write the gift message in Wear Your Story. It stays with the bracelet in the bag. We do not print it in this prototype.</p>
         <a class="btn" data-page-link="builder" href="./builder.html"></a>
       </article>
       <article class="panel">
         <h2>Gift box</h2>
-        <p>A rigid box and a card. <strong id="gift-box-price"></strong>. Add it from the Mood Bar or ask for it with the set.</p>
+        <p>A rigid box and a card. <strong id="gift-box-price"></strong>. Add it from Wear Your Story.</p>
         <button type="button" class="btn secondary" id="add-box">Add the gift box</button>
       </article>
     </section>
     <section class="section">
-      <h2>Charm Club, given as months</h2>
-      <p class="note">Prepaid length times the monthly price. No extra discount is invented here.</p>
+      <h2>Your Monthly Dose of Happy, given as months</h2>
+      <p class="note">Prepaid length times the monthly price. No extra discount is invented here. Domestic shipping is included. No delivery date is promised.</p>
       <div id="prepaid" class="edit-cards"></div>
+    </section>
+    <section class="section panel">
+      <p class="eyebrow">Coming soon</p>
+      <h2>Referral program</h2>
+      <p data-copy="referral.note"></p>
     </section>
     <script>
       document.addEventListener('click', function (e) {
@@ -58,6 +63,7 @@
   <script src="js/pricing.js"></script>
   <script src="js/sizing.js"></script>
   <script src="js/catalog.js"></script>
+  <script src="data/monthly-themes.js"></script>
   <script src="js/charm-art.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/commerce/adapter.js"></script>

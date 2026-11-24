@@ -12,6 +12,14 @@
 
   var TIERS = { standard: 1, premium: 1, luxury: 1, dangle: 1 };
 
+  function finishInventory(value) {
+    var source = value && typeof value === 'object' ? value : {};
+    return {
+      gold: source.gold == null ? null : source.gold,
+      silver: source.silver == null ? null : source.silver,
+    };
+  }
+
   function charm(o) {
     var tier = o.tier;
     if (!TIERS[tier]) throw new Error('Bad tier on ' + o.id);
@@ -26,7 +34,11 @@
       priceKey: o.priceKey || tier,
       description: o.description,
       image: o.image == null ? null : o.image,
-      inventory: o.inventory == null ? null : o.inventory,
+      /**
+       * Stock by finish. null means not tracked. Never invent a low-stock claim.
+       * Shape: { gold: number|null, silver: number|null }
+       */
+      inventory: finishInventory(o.inventory),
       isDemo: o.isDemo !== false,
       isNew: !!o.isNew,
       isBestSeller: !!o.isBestSeller,
@@ -52,6 +64,7 @@
     { id: 'celestial', label: 'Celestial' },
     { id: 'seasonal', label: 'Seasonal' },
     { id: 'luxury-vintage', label: 'Luxury & vintage' },
+    { id: 'reminders', label: 'Monthly reminders' },
   ];
 
   var rows = [
@@ -262,6 +275,45 @@
     }));
   });
 
+  [
+    ['begin-sun', 'CH-TH-01A', 'Beginning Sun', 'sun', '#f4efe6', 'A sun for a start you chose on purpose.'],
+    ['begin-star', 'CH-TH-01B', 'Beginning Star', 'star', '#1a1714', 'A star that stays while the beginning unfolds.'],
+    ['choose-heart', 'CH-TH-02A', 'Choose Yourself Heart', 'heart', '#c47c8a', 'A heart for the choice to come first.'],
+    ['choose-bow', 'CH-TH-02B', 'Choose Yourself Bow', 'bow', '#d4a0a8', 'A bow for care you give yourself.'],
+    ['luck-clover', 'CH-TH-03A', 'Clover', 'clover', '#f4efe6', 'A clover for luck you practice.'],
+    ['luck-horseshoe', 'CH-TH-03B', 'Horseshoe', 'horseshoe', '#f4efe6', 'A horseshoe for an opening you make.'],
+    ['bloom-flower', 'CH-TH-04A', 'Bloom Flower', 'flower', '#f3ead7', 'A flower that opens on its own clock.'],
+    ['bloom-butterfly', 'CH-TH-04B', 'Bloom Butterfly', 'butterfly', '#e7c1c8', 'A butterfly for growth that is not a race.'],
+    ['worth-crown', 'CH-TH-05A', 'Worth Crown', 'crown', '#6e5434', 'A small crown for a worth you already hold.'],
+    ['worth-diamond', 'CH-TH-05B', 'Worth Diamond', 'diamond', '#f4f7f8', 'A diamond cut, for value that is not up for debate.'],
+    ['shine-sun', 'CH-TH-06A', 'Sunshine', 'sun', '#f4efe6', 'A sun you can stand in.'],
+    ['shine-smile', 'CH-TH-06B', 'Quiet Smile', 'smiley', '#f4efe6', 'A small smile. Joy can be modest and still count.'],
+    ['brave-bolt', 'CH-TH-07A', 'Fearless Bolt', 'lightning', '#f4efe6', 'A bolt for taking up your own space.'],
+    ['brave-flame', 'CH-TH-07B', 'Fearless Flame', 'flame', '#f4efe6', 'A flame you keep, even when it is small.'],
+    ['little-cherry', 'CH-TH-08A', 'Little Cherry', 'cherry', '#f4efe6', 'A cherry, one of the little things.'],
+    ['little-daisy', 'CH-TH-08B', 'Little Daisy', 'flower', '#f3ead7', 'A daisy for an ordinary good.'],
+    ['journey-compass', 'CH-TH-09A', 'Journey Compass', 'compass', '#f4efe6', 'A compass for a direction you trust.'],
+    ['journey-arrow', 'CH-TH-09B', 'Journey Arrow', 'arrow', '#f4efe6', 'An arrow for the next step, not the whole map.'],
+    ['change-moon', 'CH-TH-10A', 'Change Moon', 'moon', '#1a1714', 'A moon for a season that is allowed to turn.'],
+    ['change-leaf', 'CH-TH-10B', 'Change Leaf', 'leaf', '#f4efe6', 'A leaf for what you can set down.'],
+    ['thanks-heart', 'CH-TH-11A', 'Gratitude Heart', 'heart', '#b76e79', 'A heart for one named good thing.'],
+    ['thanks-sunflower', 'CH-TH-11B', 'Sunflower', 'sunflower', '#f4efe6', 'A sunflower that turns toward the light.'],
+    ['believe-star', 'CH-TH-12A', 'Shooting Star', 'shooting-star', '#1a1714', 'A shooting star for a future you are building.'],
+    ['believe-wings', 'CH-TH-12B', 'Angel Wings', 'wings', '#f4efe6', 'Wings for trusting yourself with the next step.'],
+  ].forEach(function (row) {
+    charms.push(charm({
+      id: row[0],
+      sku: row[1],
+      name: row[2],
+      category: 'reminders',
+      tier: 'standard',
+      tags: ['reminder', 'happiness', 'monthly', row[3], row[0].split('-')[0]],
+      description: row[5],
+      isNew: true,
+      art: { motif: row[3], enamel: row[4], ground: row[3] === 'star' || row[3] === 'moon' || row[3] === 'shooting-star' ? '#1a1714' : null, letter: '' },
+    }));
+  });
+
   var byId = {};
   charms.forEach(function (item) {
     if (byId[item.id]) throw new Error('Duplicate charm id ' + item.id);
@@ -311,6 +363,19 @@
       col.charmIds.forEach(function (id) {
         if (!byId[id]) errors.push('Collection ' + col.id + ' missing ' + id);
       });
+    });
+    if (root.MonthlyThemes) {
+      root.MonthlyThemes.forEach(function (theme) {
+        if (!theme.charmIds || theme.charmIds.length !== 2) errors.push('Theme ' + theme.id + ' needs two charms');
+        (theme.charmIds || []).forEach(function (id) {
+          if (!byId[id]) errors.push('Theme ' + theme.id + ' missing ' + id);
+        });
+      });
+    }
+    charms.forEach(function (item) {
+      if (!item.inventory || !('gold' in item.inventory) || !('silver' in item.inventory)) {
+        errors.push('Inventory by finish missing on ' + item.id);
+      }
     });
     return errors;
   }

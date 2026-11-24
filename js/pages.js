@@ -41,8 +41,8 @@
     if (lead) {
       var lines = {
         all: root.CS.brand.lines.charm + ' ' + root.CS.priceNotes.metal,
-        gold: 'The same charms, the same prices, in a gold finish.',
-        silver: 'The same charms, the same prices, in a silver finish.',
+        gold: 'The same links, the same prices, in a gold tone. They replace a plain link. They do not change the size.',
+        silver: 'The same links, the same prices, in a silver tone. They replace a plain link. They do not change the size.',
         teacher: 'Charms for classrooms and the people who keep them. The house is not only for teachers — this edit is.',
         best: 'A studio edit of pieces we are putting forward. No invented sales counts.',
         fresh: 'The newest illustrations in the prototype catalog.',
@@ -110,6 +110,31 @@
       });
     }
     draw();
+    var basics = document.getElementById('basics');
+    if (basics && mode === 'all') renderBasics(basics, metal);
+  }
+
+  function renderBasics(el, metal) {
+    var finish = metal === 'silver' ? 'silver' : 'gold';
+    var starter = root.CS.products.starter;
+    var plain = root.CS.products.plainLink;
+    var tool = root.CS.products.tool;
+    el.innerHTML =
+      '<article class="panel"><h2>' + root.Util.esc(starter.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(starter.priceKey) + '</p><p>' + root.Util.esc(starter.description) + '</p><p class="note">' + root.Util.esc(root.CS.priceNotes.metal) + '</p><button type="button" class="btn" data-add-product="starter" data-metal="' + finish + '">Add a starter</button></article>' +
+      '<article class="panel"><h2>' + root.Util.esc(plain.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(plain.priceKey) + '</p><p>' + root.Util.esc(plain.description) + '</p><p class="note">' + root.Util.esc(root.CS.priceNotes.plainLink) + '</p><button type="button" class="btn secondary" data-add-product="plainLink" data-metal="' + finish + '">Add a plain link</button></article>' +
+      '<article class="panel"><h2>' + root.Util.esc(tool.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(tool.priceKey) + '</p><p>' + root.Util.esc(tool.description) + '</p><button type="button" class="btn secondary" data-add-product="tool">Add the tool</button></article>';
+    if (!el.dataset.bound) {
+      el.dataset.bound = '1';
+      el.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-add-product]');
+        if (!btn) return;
+        var key = btn.getAttribute('data-add-product');
+        var product = root.CS.products[key];
+        if (!product) return;
+        if (key === 'tool') root.Cart.addTool();
+        else root.Cart.addSkuProduct(product, { metal: btn.getAttribute('data-metal') || 'gold' });
+      });
+    }
   }
 
   function gifts() {
@@ -273,7 +298,7 @@
             (record.design.story ? ' · “' + root.Util.esc(record.design.story) + '”' : '') + '</p>' +
             (missing.length ? '<p>Still to add: ' + missing.map(function (charm) { return root.Util.esc(charm.name); }).join(', ') + '.</p>' +
               '<button type="button" class="btn" data-missing="' + record.id + '">Add missing charms</button>' : '<p class="note">Every charm in this design is in the vault.</p>') +
-            '<div class="cluster" style="margin-top:0.5rem"><a class="btn secondary" href="./builder.html?design=' + encodeURIComponent(record.id) + '">Open in the Mood Bar</a>' +
+            '<div class="cluster" style="margin-top:0.5rem"><a class="btn secondary" href="./builder.html?design=' + encodeURIComponent(record.id) + '">Open in Wear Your Story</a>' +
             '<button type="button" class="text-btn" data-delete-design="' + record.id + '">Remove</button></div></div></article>';
         }).join('');
       }
@@ -302,7 +327,9 @@
   }
 
   function society() {
-    var rates = root.CS.ambassador.exampleRates;
+    if (!document.getElementById('code-form')) return;
+    var rates = root.CS.ambassador && root.CS.ambassador.exampleRates;
+    if (!rates) return;
     var table = document.getElementById('rates');
     if (table) {
       table.innerHTML = '<p><span class="example-flag">' + root.Util.esc(rates.label) + '</span></p>' +
@@ -347,7 +374,7 @@
     function draw(cart) {
       cart = cart || { lines: [] };
       if (!cart.lines.length) {
-        el.innerHTML = '<p class="empty-slot">The bag is empty. The Mood Bar is the shortest way to fill it.</p>' +
+        el.innerHTML = '<p class="empty-slot">The bag is empty. Wear Your Story is the shortest way to begin.</p>' +
           '<a class="btn" data-page-link="builder" href="./builder.html"></a>';
         root.Shell.fill(el);
       } else {
@@ -385,7 +412,7 @@
         '<p class="note">' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
         (quote && !hasBundle ? '<div class="panel"><p>Bracelet + five charms is ' + money(quote.bundleCents) + '. Separately those pieces are ' + money(quote.separateCents) + '.</p><button type="button" class="btn secondary" id="cart-bundle">Add the set</button></div>' : '') +
         (hasBracelet && !hasTool ? '<div class="panel"><p>The assembly tool is ' + root.Pricing.formatKey('tool') + ' if you want to set a link at home.</p><button type="button" class="btn secondary" id="cart-tool">Add the tool</button></div>' : '') +
-        (!hasClub ? '<div class="panel"><p>The Charm Club is ' + root.Pricing.formatKey('clubMonthly') + ' a month — five charms, a mood, a standing story.</p><a class="btn secondary" data-page-link="club" href="./club.html"></a></div>' : '') +
+        (!hasClub ? '<div class="panel"><p>Your Monthly Dose of Happy is ' + root.Pricing.formatKey('clubMonthly') + ' a month — two themed links, a numbered card, a sticker, a pouch, and domestic shipping.</p><a class="btn secondary" data-page-link="club" href="./club.html"></a></div>' : '') +
         '<div class="panel"><h3 class="serif" style="font-size:1.5rem">Complete the story</h3><div id="cart-recs" class="product-grid"></div></div>' +
         '<button type="button" class="btn full" id="checkout">Continue</button>' +
         '<p id="checkout-note" class="note" role="status"></p>' +
@@ -425,10 +452,122 @@
         root.Cart.get().then(function (cart) {
           root.Vault.recordCart(cart);
           var note = document.getElementById('checkout-note');
-          if (note) note.textContent = 'Saved to the Mood Vault on this device. This is not a purchase.';
+          if (note) note.textContent = 'Saved to your collection on this device. This is not a purchase.';
         });
       }
     });
+  }
+
+  function editionLabel(theme) {
+    var n = String(theme.edition);
+    return 'Edition ' + (n.length < 2 ? '0' + n : n);
+  }
+
+  function card() {
+    var host = document.getElementById('card-preview');
+    var picker = document.getElementById('card-picker');
+    if (!host || !root.MonthlyThemes) return;
+    var current = 0;
+    function draw() {
+      var theme = root.MonthlyThemes[current];
+      var charms = theme.charmIds.map(function (id) { return root.Catalog.byId(id); }).filter(Boolean);
+      var sections = root.CS.card.sections.map(function (section) {
+        var copy = section.id === 'motivation' ? theme.motivation
+          : section.id === 'encouragement' ? theme.encouragement
+          : section.id === 'reminder' ? theme.reminder
+          : theme.charms;
+        return '<section class="panel"><h3>' + root.Util.esc(section.title) + '</h3><p>' + root.Util.esc(copy) + '</p></section>';
+      }).join('');
+      var qr = root.CS.card.digitalCollectionUrl
+        ? '<p>The QR code on the printed card will open <a href="' + root.Util.esc(root.CS.card.digitalCollectionUrl) + '">' + root.Util.esc(root.CS.card.digitalCollectionUrl) + '</a>.</p>'
+        : '<p class="empty-slot">QR code placeholder. Set card.digitalCollectionUrl in config when the digital collection has an address. This sample is not a scannable code.</p>';
+      host.innerHTML =
+        '<p class="eyebrow">' + root.Util.esc(theme.month) + ' · ' + editionLabel(theme) + '</p>' +
+        '<h2>' + root.Util.esc(theme.title) + '</h2>' +
+        '<div class="product-grid" id="card-charms"></div>' +
+        '<div class="two" style="margin-top:1rem">' + sections + '</div>' +
+        '<div class="panel" style="margin-top:1rem"><h3>Digital collection</h3>' + qr + '<p class="note">The same edition number is on the card and in your collection.</p></div>';
+      root.ProductUI.mountGrid(document.getElementById('card-charms'), charms, { metal: 'gold' });
+    }
+    picker.innerHTML = root.MonthlyThemes.map(function (theme, index) {
+      return '<button type="button" class="chip" data-edition="' + index + '" aria-pressed="' + (index === 0 ? 'true' : 'false') + '">' + root.Util.esc(theme.month) + '</button>';
+    }).join('');
+    picker.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-edition]');
+      if (!btn) return;
+      current = Number(btn.getAttribute('data-edition'));
+      picker.querySelectorAll('[data-edition]').forEach(function (chip) {
+        chip.setAttribute('aria-pressed', chip === btn ? 'true' : 'false');
+      });
+      draw();
+    });
+    draw();
+  }
+
+  function dashboard() {
+    var rootEl = document.getElementById('dashboard');
+    if (!rootEl) return;
+    function draw() {
+      var data = root.Vault.all();
+      var owned = data.owned.map(function (item) { return root.Catalog.byId(item.charmId); }).filter(Boolean);
+      var sub = data.subscription;
+      var ownedHtml = owned.length
+        ? '<div id="dash-owned" class="product-grid"></div>'
+        : '<p class="empty-slot">No links saved yet. This demo collection starts empty.</p><button type="button" class="btn" id="dash-sample">Add sample links (demo)</button>';
+      var subHtml = sub
+        ? '<p><strong>Demo membership.</strong> ' + (sub.metal === 'silver' ? 'Silver tone' : 'Gold tone') + ' · ' + root.Util.esc(sub.status) + ' · ' + root.Pricing.formatKey('clubMonthly') + ' / month.</p>' +
+          '<p class="note">Domestic shipping is included. This prototype does not promise a delivery date, and it does not bill anyone.</p>' +
+          '<div class="cluster"><button type="button" class="btn secondary" id="dash-tone">' + (sub.metal === 'silver' ? 'Switch to gold tone' : 'Switch to silver tone') + '</button>' +
+          (sub.status === 'demo' ? '<button type="button" class="btn secondary" id="dash-skip">Skip this demo month</button><button type="button" class="btn" id="dash-cancel">Cancel demo membership</button>' : '<p class="note">Cancelled on this device.</p>') +
+          '</div>'
+        : '<p class="empty-slot">No demo membership on this device.</p><a class="btn" data-page-link="club" href="./club.html"></a>';
+      var themes = (root.MonthlyThemes || []).map(function (theme) {
+        return '<article class="panel"><p class="eyebrow">' + editionLabel(theme) + ' · ' + root.Util.esc(theme.month) + '</p><h3>' + root.Util.esc(theme.title) + '</h3><p class="note">Sample edition. Not a shipment record.</p></article>';
+      }).join('');
+      var designsHtml = !data.designs.length
+        ? '<p class="empty-slot">Saved bracelets will appear here.</p>'
+        : data.designs.map(function (record) {
+          return '<article class="panel"><h3>' + root.Util.esc(record.name) + '</h3><p class="note">' +
+            (record.design.metal === 'silver' ? 'Silver tone' : 'Gold tone') +
+            (record.design.story ? ' · ' + root.Util.esc(record.design.story) : '') +
+            '</p><a class="btn secondary" href="./builder.html?design=' + encodeURIComponent(record.id) + '">Open</a></article>';
+        }).join('');
+      rootEl.innerHTML =
+        '<section class="section"><p class="prototype-pill">Demo</p><h2>Links you keep</h2>' + ownedHtml +
+        '<p style="margin-top:0.8rem"><a class="btn secondary" href="./builder.html?palette=owned">Design with links you keep</a></p></section>' +
+        '<section class="section"><h2>Saved bracelets</h2><div class="two">' + designsHtml + '</div></section>' +
+        '<section class="section"><h2>Monthly editions</h2><p class="note">Twelve sample themes. Joining does not mean these were mailed.</p><div class="two">' + themes + '</div></section>' +
+        '<section class="section" id="manage"><h2>Membership</h2>' + subHtml + '</section>';
+      root.Shell.fill(rootEl);
+      if (owned.length) root.ProductUI.mountGrid(document.getElementById('dash-owned'), owned, { metal: (sub && sub.metal) || 'gold' });
+    }
+    rootEl.addEventListener('click', function (e) {
+      if (e.target.id === 'dash-sample') { root.Vault.addSampleOwned(); draw(); }
+      if (e.target.id === 'dash-cancel') {
+        var sub = root.Vault.subscription();
+        if (!sub) return;
+        if (!window.confirm('Cancel the demo membership on this device? Nothing is billed.')) return;
+        sub.status = 'cancelled';
+        root.Vault.setSubscription(sub);
+        draw();
+      }
+      if (e.target.id === 'dash-skip') {
+        var current = root.Vault.subscription();
+        if (!current) return;
+        current.skipped = true;
+        root.Vault.setSubscription(current);
+        root.Util.announce('Demo month skipped on this device. No shipment was stopped, because none is scheduled.');
+        draw();
+      }
+      if (e.target.id === 'dash-tone') {
+        var membership = root.Vault.subscription();
+        if (!membership) return;
+        membership.metal = membership.metal === 'silver' ? 'gold' : 'silver';
+        root.Vault.setSubscription(membership);
+        draw();
+      }
+    });
+    draw();
   }
 
   root.Pages = {
@@ -437,10 +576,13 @@
     shop: shop,
     gifts: gifts,
     club: club,
+    card: card,
+    dashboard: dashboard,
     vault: vault,
     society: society,
     cart: cart,
     about: function () {},
     faq: function () {},
+    policy: function () {},
   };
 })(typeof window !== 'undefined' ? window : globalThis);
