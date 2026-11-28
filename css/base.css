@@ -44,7 +44,17 @@ h1, h2, h3, .serif {
   line-height: 1.02;
 }
 
-a { color: inherit; }
+a { color: var(--rose-ink); }
+
+.wordmark,
+.wordmark-name,
+.site-nav a,
+.nav-drop > button,
+.account-link,
+.bag,
+.btn {
+  color: var(--espresso);
+}
 
 :focus { outline: none; }
 
@@ -89,7 +99,7 @@ main {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--espresso);
+  color: var(--rose-ink);
 }
 
 .lede {
@@ -103,7 +113,7 @@ main {
 .gold-rule {
   width: 3.5rem;
   height: 1px;
-  background: var(--gold);
+  background: var(--rose);
   border: 0;
   margin: 1.1rem 0 1.25rem;
 }

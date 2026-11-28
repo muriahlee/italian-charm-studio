@@ -1,4 +1,7 @@
-.hero { padding: 1.4rem 0 0.4rem; }
+.hero {
+  padding: 1.4rem 0 0.4rem;
+  background: linear-gradient(180deg, rgba(232, 169, 160, 0.55), rgba(248, 243, 233, 0) 70%);
+}
 
 .hero h1 {
   font-size: clamp(2.6rem, 5.5vw, 4.4rem);
@@ -41,7 +44,7 @@
 .menu-icon {
   width: 36px;
   height: 36px;
-  color: var(--gold);
+  color: var(--rose-ink);
 }
 
 .menu-price {
@@ -68,7 +71,7 @@
 .build-examples {
   margin-top: 0.8rem;
   background: rgba(255, 252, 247, 0.72);
-  border: 1px dashed var(--gold);
+  border: 1px dashed var(--rose);
   border-radius: 18px;
   padding: 0.4rem 1rem;
 }
@@ -85,7 +88,7 @@
 .menu-line:last-child { border-bottom: 0; }
 
 .menu-dots {
-  border-bottom: 1px dotted var(--gold);
+  border-bottom: 1px dotted var(--rose);
   transform: translateY(-0.25rem);
 }
 
