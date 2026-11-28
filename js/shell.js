@@ -250,11 +250,27 @@
     if (foot) foot.innerHTML = footer();
     var key = document.body.getAttribute('data-title') || document.body.getAttribute('data-page');
     var label = page(key) && page(key).label;
-    document.title = !label || key === 'home' ? root.CS.brand.name : root.CS.brand.name + ' — ' + label;
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta && !meta.getAttribute('content')) {
-      meta.setAttribute('content', root.CS.brand.hero + ' ' + root.CS.brand.lines.story);
+    var title = !label || key === 'home' ? root.CS.brand.name : root.CS.brand.name + ' — ' + label;
+    document.title = title;
+    var description = root.CS.brand.name + ' preview. Italian modular charm bracelets. Not open for orders. ' + root.CS.brand.lines.story;
+    setMeta('name', 'description', description);
+    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:description', description);
+    setMeta('property', 'og:type', 'website');
+    setMeta('name', 'twitter:card', 'summary');
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', description);
+  }
+
+  function setMeta(attr, key, content) {
+    var selector = 'meta[' + attr + '="' + key + '"]';
+    var meta = document.querySelector(selector);
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute(attr, key);
+      document.head.appendChild(meta);
     }
+    meta.setAttribute('content', content);
   }
 
   function reviews(el) {

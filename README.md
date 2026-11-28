@@ -1,8 +1,8 @@
-# MOOD & CO.
+# Fiorvelle
 
-Provisional name. The official tagline is not finalized. This site is a preview and is not open for orders.
+Approved name. The official tagline is not finalized, and the homepage headline is a placeholder, not a slogan. This site is a preview and is not open for orders.
 
-A static storefront for Italian 9mm modular links. Decorative links replace plain links. Prices live in `js/config.js`. The Charm Club figure, $24.99 a month, is provisional and would be plus applicable sales tax.
+A static storefront for Italian 9mm modular links. Decorative links replace plain links. Prices live in `js/config.js`. Monthly Dose of Happy is $24.99 a month, provisional, plus applicable sales tax.
 
 HTML, CSS, and vanilla JavaScript. No build step. GitHub Pages can serve it from the repository root, including a project site such as `/italian-charm-studio/`.
 

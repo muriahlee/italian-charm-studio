@@ -17,13 +17,15 @@
 
   root.CS = {
     brand: {
-      /** Provisional wordmark. Not a final brand approval. */
-      name: 'MOOD & CO.',
-      /** Official tagline is not finalized. Leave this empty so the site does not invent one. */
+      /** Approved wordmark. Fiorvelle replaces the provisional MOOD & CO. name. */
+      name: 'Fiorvelle',
+      /** Official tagline is not finalized. Leave this empty. */
       tagline: '',
       taglineStatus: 'unfinalized',
       promise: 'Jewelry for individuality, memories, personal growth, and everyday happiness.',
-      hero: 'Wear who you are.',
+      /** Neutral placeholder headline. Not a slogan and not a final tagline. */
+      hero: 'Italian charm bracelets.',
+      heroNote: 'Placeholder headline. Not a final tagline.',
       heroSupport: 'Create a bracelet that tells your story. From little things that make you smile to moments you’ll never forget, make every link mean something.',
       lines: {
         story: 'Italian charms are interchangeable links. They form the bracelet itself.',
@@ -31,7 +33,7 @@
         versions: 'For teens, students, teachers, mothers, and women at work.',
         rules: 'Choose a bracelet. Choose the links. Keep adding to the story.',
       },
-      storagePrefix: 'moodco.preview',
+      storagePrefix: 'fiorvelle.preview',
     },
 
     /**
@@ -51,7 +53,7 @@
       fresh: { href: './new.html', label: 'New Arrivals' },
       gifts: { href: './gifts.html', label: 'Gifts' },
       giftedit: { href: './gifts.html', label: 'The Gift Edit' },
-      club: { href: './club.html', label: 'The Charm Club' },
+      club: { href: './club.html', label: 'Monthly Dose of Happy' },
       card: { href: './happy-card.html', label: 'The Happy Card' },
       dashboard: { href: './dashboard.html', label: 'Account' },
       vault: { href: './vault.html', label: 'Account' },
