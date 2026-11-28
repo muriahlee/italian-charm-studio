@@ -17,23 +17,23 @@
 
   root.CS = {
     brand: {
-      /** Placeholder wordmark. One-line rename. */
-      name: 'Your Brand',
-      /** Working line under the wordmark. Not a final lockup. */
-      tagline: 'Little Things. Big Meaning.',
-      taglineStatus: 'working',
-      taglineNote: 'Working tagline',
-      /** What the house is actually selling. */
-      promise: 'We are not just selling charms. We are selling little reminders of happiness.',
-      hero: 'Little reminders you can wear.',
+      /** Approved wordmark. Fiorvelle replaces the provisional MOOD & CO. name. */
+      name: 'Fiorvelle',
+      /** Approved tagline. */
+      tagline: 'Collect your happy.',
+      taglineStatus: 'approved',
+      promise: 'Jewelry for individuality, memories, personal growth, and everyday happiness.',
+      /** Homepage headline. The approved tagline, not a placeholder. */
+      hero: 'Collect your happy.',
+      heroNote: '',
+      heroSupport: 'Create a bracelet that tells your story. From little things that make you smile to moments you’ll never forget, make every link mean something.',
       lines: {
-        story: 'Replace a plain link. Keep the size. Change the meaning.',
+        story: 'Italian charms are interchangeable links. They form the bracelet itself.',
         charm: 'A little charm for a feeling you want close.',
         versions: 'For teens, students, teachers, mothers, and women at work.',
-        rules: 'Happiness, encouragement, confidence, and room to grow.',
+        rules: 'Choose a bracelet. Choose the links. Keep adding to the story.',
       },
-      /** localStorage namespace. Change it if a renamed brand should start fresh. */
-      storagePrefix: 'yourbrand.v1',
+      storagePrefix: 'fiorvelle.preview',
     },
 
     /**
@@ -42,21 +42,24 @@
      */
     pages: {
       home: { href: './index.html', label: 'Home' },
-      builder: { href: './builder.html', label: 'Wear Your Story' },
-      shop: { href: './shop.html', label: 'Little Reminders' },
-      gold: { href: './gold.html', label: 'Gold tone' },
-      silver: { href: './silver.html', label: 'Silver tone' },
-      teacher: { href: './teacher.html', label: 'For teachers' },
-      best: { href: './bestsellers.html', label: 'Best Sellers' },
+      builder: { href: './builder.html', label: 'Build Your Bracelet' },
+      shop: { href: './shop.html', label: 'Shop Charms' },
+      gold: { href: './gold.html', label: 'The Golden Edit' },
+      silver: { href: './silver.html', label: 'The Silver Edit' },
+      teacher: { href: './teacher.html', label: 'The Teacher Edit' },
+      selflove: { href: './shop.html?mood=love', label: 'The Self-Love Edit' },
+      little: { href: './shop.html?mood=little', label: 'The Little Things Edit' },
+      best: { href: './bestsellers.html', label: 'The Studio Edit' },
       fresh: { href: './new.html', label: 'New Arrivals' },
-      gifts: { href: './gifts.html', label: 'Spread the Happy' },
-      club: { href: './club.html', label: 'Your Monthly Dose of Happy' },
+      gifts: { href: './gifts.html', label: 'Gifts' },
+      giftedit: { href: './gifts.html', label: 'The Gift Edit' },
+      club: { href: './club.html', label: 'Fiorvelle Monthly Collection' },
       card: { href: './happy-card.html', label: 'The Happy Card' },
-      dashboard: { href: './dashboard.html', label: 'Your collection' },
-      vault: { href: './vault.html', label: 'Your collection' },
+      dashboard: { href: './dashboard.html', label: 'Account' },
+      vault: { href: './vault.html', label: 'Account' },
       about: { href: './about.html', label: 'About' },
       faq: { href: './faq.html', label: 'FAQ' },
-      cart: { href: './cart.html', label: 'Cart' },
+      cart: { href: './cart.html', label: 'Shopping Bag' },
       privacy: { href: './privacy.html', label: 'Privacy Policy' },
       shipping: { href: './shipping.html', label: 'Shipping Policy' },
       returns: { href: './returns.html', label: 'Returns Policy' },
@@ -64,9 +67,9 @@
     },
 
     /** Header links, in order. Edit labels above; this is only the order. */
-    nav: ['builder', 'shop', 'club', 'card', 'gifts'],
-    /** Finishes, still available from the shop and the footer. */
-    edits: ['gold', 'silver', 'teacher', 'best', 'fresh'],
+    nav: ['builder', 'shop', 'collections', 'club', 'gifts'],
+    /** Collection menu. Not a sales ranking. */
+    edits: ['gold', 'silver', 'teacher', 'selflove', 'little', 'giftedit'],
     footerNav: ['builder', 'shop', 'club', 'card', 'gifts', 'dashboard', 'gold', 'silver', 'about', 'faq', 'privacy', 'shipping', 'returns', 'terms', 'cart'],
 
     /**
@@ -102,7 +105,9 @@
     ],
 
     priceNotes: {
-      metal: 'Every design is offered at the same price in gold tone or silver tone.',
+      metal: 'Gold tone and silver tone of the same design are the same price.',
+      club: 'Provisional price, plus applicable sales tax. Not finally approved.',
+      preview: 'Preview. Not open for orders.',
       plainLink: 'One extra plain link. Same price in gold tone or silver tone.',
     },
 
@@ -123,7 +128,12 @@
     },
 
     shipping: {
-      /** Complimentary US shipping once the merchandise subtotal reaches this amount. */
+      /**
+       * Do not show a free-shipping progress bar until this is explicitly approved.
+       * The number below is only a placeholder for that future decision.
+       */
+      thresholdApproved: false,
+      /** Placeholder amount. Not an approved offer. */
       freeThreshold: 75,
       policy:
         'Shipping is calculated at secure checkout. Complimentary US shipping applies once an order reaches the threshold configured for this shop. The monthly membership includes domestic shipping. This prototype does not quote or promise a delivery date.',

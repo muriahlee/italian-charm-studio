@@ -28,7 +28,7 @@
         ['dangle', 'Dangling charm', 'dangle', 'A link with a little drop.'],
         ['link', 'Additional plain link', 'plainLink', 'One extra plain link, for a repair or a resize.'],
         ['tool', 'Charm-changing tool', 'tool', 'Opens a link so you can slide another in.'],
-        ['month', 'Your Monthly Dose of Happy', 'clubMonthly', 'Two charms, the card, the sticker, and the pouch. Domestic shipping included.'],
+        ['month', 'Fiorvelle Monthly Collection', 'clubMonthly', 'Two charms, a numbered positivity card, and a sticker. Domestic shipping included.'],
       ];
       menu.innerHTML = rows.map(function (row) {
         var suffix = row[2] === 'clubMonthly' ? '<span class="menu-suffix"> / month</span>' : '';
@@ -43,10 +43,42 @@
     }).join('');
   }
 
+  var HOME_COLLECTIONS = [
+    { key: 'gold', ids: ['worth-crown', 'north-star', 'coffee-cup'] },
+    { key: 'silver', ids: ['pearl-button', 'crescent-moon', 'daisy'] },
+    { key: 'teacher', ids: ['pencil', 'apple-red', 'closed-book'] },
+    { key: 'selflove', ids: ['choose-heart', 'choose-bow', 'worth-crown'] },
+    { key: 'little', ids: ['little-daisy', 'little-cherry', 'daisy'] },
+    { key: 'giftedit', ids: ['bow-silk', 'wrapped-gift', 'heart-little'] },
+  ];
+
+  function renderCollections(el) {
+    if (!el) return;
+    el.innerHTML = HOME_COLLECTIONS.map(function (item) {
+      var page = root.CS.pages[item.key];
+      var arts = item.ids.map(function (id) {
+        var charm = root.Catalog.byId(id);
+        return charm ? '<span class="charm-frame">' + root.CharmArt.render(charm, item.key === 'silver' ? 'silver' : 'gold') + '</span>' : '';
+      }).join('');
+      return '<a class="collection-card" href="' + page.href + '"><div class="collection-art">' + arts + '</div><h3>' +
+        root.Util.esc(page.label) + '</h3><p class="concept-label">Concept. Not a product photograph.</p></a>';
+    }).join('');
+  }
+
+  function renderMonthPreview(el) {
+    if (!el || !root.MonthlyThemes) return;
+    var monthIndex = new Date().getMonth();
+    var theme = root.MonthlyThemes[monthIndex] || root.MonthlyThemes[0];
+    var charms = theme.charmIds.map(function (id) { return root.Catalog.byId(id); }).filter(Boolean);
+    el.innerHTML = '<article class="panel"><p class="eyebrow">Upcoming theme in this prototype · ' + root.Util.esc(theme.month) + '</p><h3>' +
+      root.Util.esc(theme.title) + '</h3><p>' + root.Util.esc(theme.reminder) + '</p><div class="product-grid" id="month-charms"></div><p class="concept-label">Concept illustrations. Not the finished monthly shipment.</p></article>';
+    root.ProductUI.mountGrid(document.getElementById('month-charms'), charms, { metal: 'gold' });
+  }
+
   function renderSweetNote(el) {
     if (!el) return;
     el.innerHTML = 'Two standard charms on their own are <strong>' + money(root.Pricing.standardPairCents()) +
-      '</strong>. Your Monthly Dose of Happy is <strong>' + root.Pricing.formatKey('clubMonthly') +
+      '</strong>. Fiorvelle Monthly Collection is <strong>' + root.Pricing.formatKey('clubMonthly') +
       '</strong> a month, and it also includes the card, the sticker, and the pouch. It is the sweetest way to collect. ' +
       root.Util.esc(root.CS.priceNotes.metal);
   }
@@ -54,14 +86,21 @@
   function home() {
     var snap = document.getElementById('snap');
     if (snap) {
-      var ids = ['heart-little', 'daisy', 'coffee-cup', 'plane', 'north-star'];
-      snap.innerHTML = '<div class="snap-caption"><span>Pick a metal</span><span>Add a charm</span><span>Make it yours</span></div><div class="snap-row">' +
+      var ids = [null, 'heart-little', null, 'choose-heart', 'plane', null, 'north-star'];
+      snap.innerHTML = '<div class="snap-caption"><span>Plain links</span><span>Replace a few</span><span>Same length</span></div><div class="snap-row">' +
         ids.map(function (id, i) {
-          var charm = root.Catalog.byId(id);
-          return '<div class="snap-link"><div class="snap-charm" style="--i:' + i + '"><span class="charm-frame">' +
-            root.CharmArt.render(charm, 'gold') + '</span></div></div>';
+          var art = id ? root.CharmArt.render(root.Catalog.byId(id), 'gold') : root.CharmArt.renderEmpty('gold');
+          return '<div class="snap-link"><div class="snap-charm" style="--i:' + i + '"><span class="charm-frame">' + art + '</span></div></div>';
         }).join('') + '</div>';
     }
+    renderCollections(document.getElementById('collection-grid'));
+    var includes = document.getElementById('club-includes');
+    if (includes) {
+      includes.innerHTML = root.CS.club.includes.map(function (item) {
+        return '<li>' + root.Util.esc(item) + '</li>';
+      }).join('');
+    }
+    renderMonthPreview(document.getElementById('month-preview'));
     renderPriceMenu(document.getElementById('price-menu'), document.getElementById('build-examples'));
     renderSweetNote(document.getElementById('monthly-sweet'));
     root.ProductUI.mountGrid(
@@ -76,6 +115,7 @@
 
   function shop() {
     var mode = document.body.getAttribute('data-shop') || 'all';
+    var mood = new URLSearchParams(location.search).get('mood') || '';
     var metal = mode === 'silver' ? 'silver' : 'gold';
     var lead = document.getElementById('shop-lead');
     if (lead) {
@@ -97,6 +137,8 @@
         if (mode === 'best' && !charm.isBestSeller) return false;
         if (mode === 'fresh' && !charm.isNew) return false;
         if (mode === 'teacher' && charm.tags.indexOf('teacher') === -1 && charm.category !== 'teachers') return false;
+        if (mood === 'love' && charm.tags.indexOf('love') === -1 && charm.tags.indexOf('heart') === -1) return false;
+        if (mood === 'little' && charm.category !== 'reminders' && charm.tags.indexOf('flower') === -1 && charm.tags.indexOf('fruit') === -1) return false;
         if (category && charm.category !== category) return false;
         if (tier && charm.tier !== tier) return false;
         return true;
@@ -372,7 +414,7 @@
       e.preventDefault();
       var name = (document.getElementById('code-name').value || '').trim();
       var base = name.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4);
-      if (base.length < 3) base = 'MOOD';
+      if (base.length < 3) base = 'FIOR';
       var code = base + '-' + Math.floor(1000 + Math.random() * 9000);
       root.Vault.setReferral({ code: code, name: name, demo: true, at: new Date().toISOString() });
       out.textContent = 'Demo code ' + code + '. Share the Mood Bar with it in the note. Nothing is tracked on a server.';
@@ -420,16 +462,19 @@
         }).join('');
       }
       var sub = root.Cart.subtotalCents(cart);
+      var approved = root.CS.shipping.thresholdApproved === true;
       var threshold = root.Pricing.cents(root.CS.shipping.freeThreshold);
-      var ratio = threshold ? Math.min(1, sub / threshold) : 0;
-      var ship = sub >= threshold
-        ? 'This order meets the complimentary US shipping threshold. The final shipping cost is confirmed at checkout.'
-        : 'Add ' + money(threshold - sub) + ' to reach complimentary US shipping. Shipping is confirmed at checkout. No delivery date is quoted here.';
+      var ratio = approved && threshold ? Math.min(1, sub / threshold) : 0;
+      var ship = approved
+        ? (sub >= threshold
+          ? 'This order meets the complimentary US shipping threshold. The final shipping cost is confirmed at checkout.'
+          : 'Add ' + money(Math.max(0, threshold - sub)) + ' to reach complimentary US shipping. Shipping is confirmed at checkout. No delivery date is quoted here.')
+        : 'Shipping is calculated at secure checkout. A complimentary-shipping offer has not been approved. No delivery date is quoted here.';
       var hasTool = cart.lines.some(function (line) { return line.type === 'tool'; });
       var hasClub = cart.lines.some(function (line) { return line.type === 'club'; });
       var hasBracelet = cart.lines.some(function (line) { return line.type === 'configured-bracelet' || line.type === 'bundle'; });
       summary.innerHTML =
-        '<div class="progress" aria-hidden="true"><span style="width:' + (ratio * 100) + '%"></span></div>' +
+        (approved ? '<div class="progress" aria-hidden="true"><span style="width:' + (ratio * 100) + '%"></span></div>' : '') +
         '<p class="note">' + ship + '</p>' +
         '<p class="note">' + root.Util.esc(root.CS.shipping.policy) + '</p>' +
         '<div class="total-row"><span>Subtotal</span><span>' + money(sub) + '</span></div>' +

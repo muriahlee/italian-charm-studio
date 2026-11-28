@@ -1,6 +1,8 @@
-# Your Brand
+# Fiorvelle
 
-A static storefront prototype for a positivity jewelry house of Italian 9mm modular links. The name is a placeholder. Change `brand.name` in `js/config.js` when it is final. The working tagline is `Little Things. Big Meaning.`
+Approved name. The official tagline is not finalized, and the homepage headline is a placeholder, not a slogan. This site is a preview and is not open for orders.
+
+A static storefront for Italian 9mm modular links. Decorative links replace plain links. Prices live in `js/config.js`. Fiorvelle Monthly Collection is $24.99 a month, provisional, plus applicable sales tax. The tagline is Collect your happy.
 
 HTML, CSS, and vanilla JavaScript. No build step. GitHub Pages can serve it from the repository root, including a project site such as `/italian-charm-studio/`.
 
@@ -63,7 +65,7 @@ Defaults in `CS.sizing`: pitch `9.5` mm, comfort `10` mm. A 6.5 inch wrist is `(
 | `teacher.html` | For teachers |
 | `bestsellers.html` | Best Sellers |
 | `new.html` | New Arrivals |
-| `club.html` | Your Monthly Dose of Happy |
+| `club.html` | Fiorvelle Monthly Collection |
 | `happy-card.html` | The Happy Card |
 | `gifts.html` | Spread the Happy |
 | `dashboard.html` | Your collection (demo dashboard) |
@@ -186,7 +188,7 @@ When you launch, prefer a small backend that holds the Storefront token, creates
 | Shipping copy | Threshold and “calculated at checkout” | Your real policy, still without fake dates |
 | Returns | “Terms will be published” | The policy you will honor |
 | Materials | 316L and nickel-release testing are described as the plan, not a finished certificate | Publish the actual test |
-| Monthly Dose | Demo join at $24.99, prepaid totals = monthly × months, domestic shipping included, no delivery date | Shopify selling plan |
+| Fiorvelle Monthly Collection | Demo join at $24.99, prepaid totals = monthly × months, domestic shipping included, no delivery date | Shopify selling plan |
 | Mood Vault | This browser | Accounts |
 | Stylist | On-device catalog scoring | Optional server endpoint, key stays server-side |
 | Mood Society rates | Example percentages, marked as such | A real agreement |

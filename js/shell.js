@@ -36,38 +36,35 @@
       count = root.Cart ? root.Cart.count(cart) : 0;
     } catch (e) { count = 0; }
     var edits = root.CS.edits.map(link).join('');
-    var primary = '<a class="nav-account" href="' + page('dashboard').href + '">' + root.Util.esc(page('dashboard').label) + '</a>' +
-      root.CS.nav.map(function (key) {
-      if (key === 'shop') {
-        return link('shop') +
-          '<div class="nav-drop"><button type="button" aria-expanded="false" aria-controls="edit-menu">Edits</button>' +
+    var primary = root.CS.nav.map(function (key) {
+      if (key === 'collections') {
+        return '<div class="nav-drop"><button type="button" aria-expanded="false" aria-controls="edit-menu">Collections</button>' +
           '<div id="edit-menu" class="edit-menu" hidden>' + edits + '</div></div>';
       }
       return link(key);
     }).join('');
-    var season = root.CS.giftSeason && root.CS.giftSeason.message
-      ? '<p>' + root.Util.esc(root.CS.giftSeason.message) + '</p>' : '';
+    var announce = (root.CS.giftSeason && root.CS.giftSeason.message) || root.CS.priceNotes.preview;
     return '' +
       '<a class="skip-link" href="#main">Skip to content</a>' +
       '<header class="site-header">' +
         '<div class="utility">' +
-          (root.CS.features.showPrototypeFlag ? '<span class="prototype-pill">Prototype</span>' : '') +
-          '<p>' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
-          season +
+          (root.CS.features.showPrototypeFlag ? '<span class="prototype-pill">Preview</span>' : '') +
+          '<p>' + root.Util.esc(announce) + '</p>' +
         '</div>' +
         '<div class="mast">' +
           '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>' +
           '<a class="wordmark" href="' + page('home').href + '">' +
             '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
-            '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' +
-            (brand.taglineStatus === 'working' ? '<span class="working-flag">' + root.Util.esc(brand.taglineNote) + '</span>' : '') +
+            (brand.tagline ? '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' : '') +
           '</a>' +
           '<span class="mast-tools">' +
             '<a class="account-link" href="' + page('dashboard').href + '">' + root.Util.esc(page('dashboard').label) + '</a>' +
             '<a class="bag" href="' + page('cart').href + '">Bag <span class="cart-count" data-cart-count>' + count + '</span></a>' +
           '</span>' +
         '</div>' +
-        '<nav id="site-nav" class="site-nav" aria-label="Primary" data-open="false">' + primary + '</nav>' +
+        '<nav id="site-nav" class="site-nav" aria-label="Primary" data-open="false">' + primary +
+          '<a class="nav-account" href="' + page('dashboard').href + '">' + root.Util.esc(page('dashboard').label) + '</a>' +
+        '</nav>' +
       '</header>' +
       '<div id="live" class="sr-only" aria-live="polite"></div>';
   }
@@ -83,10 +80,9 @@
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
             '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
-            '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' +
-            (brand.taglineStatus === 'working' ? '<span class="working-flag">' + root.Util.esc(brand.taglineNote) + '</span>' : '') +
+            (brand.tagline ? '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' : '') +
+            '<p class="fine">' + root.Util.esc(root.CS.priceNotes.preview) + '</p>' +
             '<p class="fine">' + root.Util.esc(brand.promise) + '</p>' +
-            '<p class="fine">' + root.Util.esc(root.CS.priceNotes.metal) + '</p>' +
           '</div>' +
           '<nav class="footer-links" aria-label="Footer">' + links + '</nav>' +
           '<div>' +
@@ -255,11 +251,29 @@
     if (foot) foot.innerHTML = footer();
     var key = document.body.getAttribute('data-title') || document.body.getAttribute('data-page');
     var label = page(key) && page(key).label;
-    document.title = !label || key === 'home' ? root.CS.brand.name : root.CS.brand.name + ' — ' + label;
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta && !meta.getAttribute('content')) {
-      meta.setAttribute('content', root.CS.brand.hero + ' ' + root.CS.brand.lines.story);
+    var title = key === 'home'
+      ? root.CS.brand.name + ' — ' + root.CS.brand.tagline
+      : root.CS.brand.name + ' — ' + (label || root.CS.brand.tagline);
+    document.title = title;
+    var description = root.CS.brand.name + '. ' + root.CS.brand.tagline + ' Italian modular charm bracelets. Preview, not open for orders.';
+    setMeta('name', 'description', description);
+    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:description', description);
+    setMeta('property', 'og:type', 'website');
+    setMeta('name', 'twitter:card', 'summary');
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', description);
+  }
+
+  function setMeta(attr, key, content) {
+    var selector = 'meta[' + attr + '="' + key + '"]';
+    var meta = document.querySelector(selector);
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute(attr, key);
+      document.head.appendChild(meta);
     }
+    meta.setAttribute('content', content);
   }
 
   function reviews(el) {

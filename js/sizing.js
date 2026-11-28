@@ -25,11 +25,11 @@
   function formulaText() {
     var s = root.CS.sizing;
     return (
-      'Link count is the wrist in millimetres, plus ' +
+      'Sizing estimate, not a supplier-certified measurement: wrist in millimetres, plus ' +
       s.comfortMm +
       'mm of comfort, divided by ' +
       s.linkPitchMm +
-      'mm per link, then rounded. A 6.5 inch wrist comes to 18 links.'
+      'mm per link, then rounded. A 6.5 inch wrist comes to 18 links. Confirm final link geometry with the supplier before launch.'
     );
   }
 
