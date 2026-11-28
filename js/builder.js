@@ -174,7 +174,7 @@
     var prompt = document.getElementById('story-prompt');
     var count = placedIds().length;
     if (prompt) {
-      prompt.textContent = count ? (state.links.some(function (id) { return !id; }) ? 'Your size stays the same. Swap any plain link.' : root.CS.brand.lines.charm) : 'Replace a plain link with a reminder.';
+      prompt.textContent = count ? (state.links.some(function (id) { return !id; }) ? 'Your size stays the same. Swap any plain link.' : root.CS.brand.lines.charm) : 'Replace a link to build your story.';
     }
     renderInspector();
     renderRecs();
