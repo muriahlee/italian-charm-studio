@@ -14,11 +14,12 @@
   gap: 0.75rem;
   flex-wrap: wrap;
   min-height: 2rem;
-  padding: 0.35rem 1rem;
-  background: var(--rose);
-  color: var(--espresso);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  padding: 0.45rem 1rem;
+  background: transparent;
+  color: var(--rose-ink);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-align: center;
 }
@@ -26,11 +27,12 @@
 .utility p { margin: 0; }
 
 .prototype-pill {
-  border: 1px solid var(--espresso);
+  border: 1px solid var(--rose);
+  color: var(--rose-ink);
   padding: 0.1rem 0.45rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   font-size: 0.62rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .mast {
@@ -48,7 +50,21 @@
   text-align: center;
   text-decoration: none;
   display: grid;
-  gap: 0.2rem;
+  justify-items: center;
+  min-width: 0;
+}
+
+.wordmark-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 46px;
+  max-width: 100%;
+}
+
+.wordmark-img-footer {
+  max-height: 36px;
+  margin-bottom: 0.85rem;
 }
 
 .wordmark-name {
@@ -239,18 +255,19 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 48px;
-  padding: 0.75rem 1.35rem;
+  min-height: 42px;
+  padding: 0.4rem 1.15rem;
   background: var(--rose);
   color: var(--espresso);
   border: 1px solid var(--rose);
   text-decoration: none;
   font-family: var(--serif);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 400;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn:hover { background: var(--rose-deep); color: var(--espresso); }
@@ -292,14 +309,14 @@
 
 .cluster { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
 
-.page-head { padding: 1.6rem 0 0.8rem; max-width: 40rem; }
+.page-head { padding: 2.4rem 0 1rem; max-width: 40rem; }
 
 .page-head h1 {
   font-size: clamp(2.3rem, 5vw, 3.6rem);
   margin-bottom: 0.6rem;
 }
 
-.section { padding: 2.4rem 0; }
+.section { padding: 3.6rem 0; }
 
 .section h2 {
   font-size: clamp(2.2rem, 4vw, 3.4rem);
@@ -339,25 +356,26 @@
 }
 
 .card {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 0.75rem 0.75rem 1rem;
+  background: transparent;
+  border: 0;
+  padding: 0 0 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
   min-width: 0;
 }
 
-.card:hover { border-color: var(--rose); }
-
 .card-media {
   display: block;
   width: 100%;
-  padding: 0;
+  padding: 0.4rem 0 0.2rem;
   border: 0;
-  background: linear-gradient(180deg, rgba(226, 209, 181, 0.35), transparent 70%);
+  background: transparent;
   cursor: pointer;
+  transition: opacity 0.3s ease;
 }
+
+.card-media:hover { opacity: 0.82; }
 
 .charm-frame {
   display: block;
@@ -473,9 +491,10 @@
 .checks label { display: flex; gap: 0.4rem; align-items: center; min-height: 44px; }
 
 .panel {
-  border: 1px solid var(--line);
-  background: rgba(255, 252, 247, 0.55);
-  padding: 1.25rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  padding: 1.25rem 0;
 }
 
 .panel + .panel { margin-top: 1rem; }
@@ -668,6 +687,7 @@ dialog::backdrop { background: rgba(51, 45, 37, 0.46); }
   .account-link { display: none; }
   .nav-account { display: flex; }
   .mast { grid-template-columns: auto 1fr auto; }
+  .wordmark-img { max-height: 32px; }
   .wordmark-name { letter-spacing: 0.12em; font-size: 1.05rem; }
   .wordmark-tag { letter-spacing: 0.16em; font-size: 0.95rem; }
   .site-nav {
@@ -711,7 +731,8 @@ dialog::backdrop { background: rgba(51, 45, 37, 0.46); }
     border-top: 1px solid var(--line);
     backdrop-filter: blur(10px);
   }
-  .page-sticky .btn { flex: 1; }
+  .page-sticky { justify-content: center; }
+  .page-sticky .btn { flex: 0 0 auto; min-width: 14rem; }
   body.has-sticky { padding-bottom: 5.4rem; }
   .cart-line { grid-template-columns: 1fr auto; }
 }

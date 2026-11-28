@@ -3,7 +3,9 @@
  *
  * The name is not final. Change brand.name (one line) when the owner chooses it.
  * brand.tagline is a working line. brand.taglineStatus marks it as such in the UI.
- * There is no logo file. The wordmark is the name, set in type.
+ * The header uses assets/brand/fiorvelle_wordmark.png. The homepage hero
+ * also shows assets/brand/fiorvelle_logo_full.png. Mood photographs in
+ * assets/mood/ are concept imagery, not inventory.
  *
  * Edit a price here. Metal tone is not a price.
  * One starterBracelet price covers gold tone and silver tone.
@@ -26,7 +28,7 @@
       /** Homepage headline. The approved tagline, not a placeholder. */
       hero: 'Collect your happy.',
       heroNote: '',
-      heroSupport: 'Create a bracelet that tells your story. From little things that make you smile to moments you’ll never forget, make every link mean something.',
+      heroSupport: 'A bracelet made of the moments you want to keep.',
       lines: {
         story: 'Italian charms are interchangeable links. They form the bracelet itself.',
         charm: 'A little charm for a feeling you want close.',

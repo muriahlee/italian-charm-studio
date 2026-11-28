@@ -20,36 +20,70 @@
   <div id="site-header"></div>
   <main id="main">
 
-    <section class="hero split">
-      <div>
+    <section class="hero">
+      <div class="hero-copy">
+        <img class="hero-logo" src="assets/brand/fiorvelle_logo_full.png" width="990" height="616" alt="">
         <h1 data-copy="brand.hero">Collect your happy.</h1>
-        <p class="lede" data-copy="brand.heroSupport"></p>
-        <p class="note" data-copy="brand.lines.story"></p>
+        <p class="lede" data-copy="brand.heroSupport">A bracelet made of the moments you want to keep.</p>
+        <a class="btn" href="./builder.html">Begin your bracelet</a>
+        <p class="hero-quiet"><a href="./club.html">The Monthly Collection</a></p>
+      </div>
+      <figure class="hero-figure">
+        <img src="assets/mood/hero-wrist.jpg" width="864" height="1152" alt="">
+        <figcaption>Mood imagery. Not a Fiorvelle piece.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section story" aria-labelledby="story-title">
+      <figure class="story-figure">
+        <img src="assets/mood/memory-hands.jpg" width="1152" height="864" alt="">
+        <figcaption>Mood imagery. Not a Fiorvelle piece.</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">A collection of days</p>
+        <h2 id="story-title">Kept close, one link at a time</h2>
+        <p>Each link can stand for a person, a habit, or a day you do not want to forget. The bracelet is the story. You compose it, and you keep composing it.</p>
+        <p class="note" data-copy="brand.lines.story">Italian charms are interchangeable links. They form the bracelet itself.</p>
+        <p class="note">This is jewelry you compose. It is not a treatment, and it does not promise a result.</p>
+        <p class="hero-quiet"><a data-page-link="about" href="./about.html"></a></p>
+      </div>
+    </section>
+
+    <section class="section membership" aria-labelledby="club-title">
+      <div>
+        <p class="eyebrow">Membership</p>
+        <h2 id="club-title">Fiorvelle Monthly Collection</h2>
+        <p class="lede">Two charms, chosen around a feeling. A numbered positivity card. A sticker to keep. A membership, not an extra at the end of a shop.</p>
+        <p class="club-price"><span data-price="clubMonthly"></span> <span class="menu-suffix">/ month</span></p>
+        <p class="note" data-copy="priceNotes.club"></p>
+        <ul id="club-includes" class="quiet-list"></ul>
         <div class="cluster hero-actions">
-          <a class="btn" href="./builder.html">Build your bracelet</a>
-          <a class="btn secondary" href="./club.html">Explore Fiorvelle Monthly Collection</a>
+          <a class="btn" href="./club.html">Enter the collection</a>
+          <a class="text-btn" href="./gifts.html">Give a membership</a>
         </div>
       </div>
-      <div>
-        <div id="snap" class="snap"></div>
-        <p class="concept-label">Concept. Not a product photograph.</p>
-      </div>
+      <figure class="member-figure">
+        <img src="assets/mood/membership-still.jpg" width="1152" height="864" alt="">
+        <figcaption>Mood imagery. Not the monthly shipment.</figcaption>
+      </figure>
+    </section>
+    <div id="month-preview" class="month-quiet"></div>
+
+    <section class="section" aria-labelledby="collections-title">
+      <p class="eyebrow">The edits</p>
+      <h2 id="collections-title">Ways to begin</h2>
+      <div id="collection-grid" class="collection-grid"></div>
     </section>
 
     <section class="section" aria-labelledby="how-title">
-      <p class="eyebrow">How it works</p>
-      <h2 id="how-title">Three steps</h2>
+      <p class="eyebrow">In the atelier</p>
+      <h2 id="how-title">Three quiet steps</h2>
       <div class="steps">
-        <article class="step"><span>01</span><h3>Choose your bracelet</h3><p>Pick a gold tone or silver tone and a wrist size. The links are the bracelet.</p></article>
-        <article class="step"><span>02</span><h3>Choose the charms</h3><p>Replace plain links with decorative ones. They are not hung on a separate chain.</p></article>
-        <article class="step"><span>03</span><h3>Wear your story</h3><p>Keep the size. Change a link later with the tool, whenever you want another chapter.</p></article>
+        <article class="step"><span>01</span><h3>Choose the bracelet</h3><p>A gold tone or a silver tone, and a wrist size. The links are the bracelet.</p></article>
+        <article class="step"><span>02</span><h3>Choose the links</h3><p>Replace a plain link with one that holds a memory. Nothing hangs from a separate chain.</p></article>
+        <article class="step"><span>03</span><h3>Keep composing</h3><p>The length stays. A later link can mark another day, whenever you want one.</p></article>
       </div>
-    </section>
-
-    <section class="section" aria-labelledby="collections-title">
-      <p class="eyebrow">Shop by collection</p>
-      <h2 id="collections-title">Six ways in</h2>
-      <div id="collection-grid" class="collection-grid"></div>
+      <p class="hero-quiet"><a class="btn" href="./builder.html">Open the bracelet atelier</a></p>
     </section>
 
     <section class="section menu-board" aria-labelledby="price-title">
@@ -71,57 +105,12 @@
       <p style="margin-top:1rem"><a data-page-link="best" href="./bestsellers.html"></a></p>
     </section>
 
-    <section class="section" aria-labelledby="edits-title">
-      <h2 id="edits-title">Three ways in</h2>
-      <div class="edit-cards">
-        <a class="edit-card" data-page-link="gold" href="./gold.html"></a>
-        <a class="edit-card rose" data-page-link="silver" href="./silver.html"></a>
-        <a class="edit-card ink" data-page-link="teacher" href="./teacher.html"></a>
-      </div>
-    </section>
-
-    <section class="section split" aria-labelledby="gift-title">
-      <div>
-        <p class="eyebrow" data-copy="pages.gifts.label"></p>
-        <h2 id="gift-title">Give a month, or a year of them</h2>
-        <p id="bundle-savings" class="lede"></p>
-        <div class="cluster" style="margin-top:1rem">
-          <a class="btn" data-page-link="gifts" href="./gifts.html"></a>
-          <a class="btn secondary" data-page-link="builder" href="./builder.html"></a>
-        </div>
-      </div>
-      <div class="panel">
-        <p data-copy="brand.lines.charm"></p>
-        <p class="note">Birthdays, holidays, teachers, friends, mothers and daughters. Gift months are the monthly price times the number of months. A referral program is coming soon. It is not open.</p>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="club-title">
-      <h2 id="club-title">Fiorvelle Monthly Collection</h2>
-      <p class="lede">A little motivation. A little encouragement. Two meaningful charms to remind you of the beautiful things in life.</p>
-      <p class="club-price"><span data-price="clubMonthly"></span> <span style="font-family:var(--sans);font-size:1rem">/ month</span></p>
-      <p class="note" data-copy="priceNotes.club"></p>
-      <ul id="club-includes"></ul>
-      <div id="month-preview"></div>
-      <div class="cluster" style="margin-top:1rem">
-        <a class="btn" href="./club.html">Join Fiorvelle Monthly Collection</a>
-        <a class="btn secondary" href="./gifts.html">Gift a membership</a>
-      </div>
-    </section>
-
     <section class="section" aria-labelledby="reviews-heading">
       <h2 id="reviews-heading">Reviews</h2>
       <div id="reviews-root"></div>
     </section>
 
     <div id="trust-root" data-trust-slot></div>
-
-    <section class="section prose" aria-labelledby="story-title">
-      <h2 id="story-title">What the jewelry is for</h2>
-      <p data-copy="brand.promise"></p>
-      <p>A link can stand for a person, a habit, or a day you do not want to forget. This is not a treatment and it does not promise a result. It is jewelry you compose, and keep composing.</p>
-      <p><a data-page-link="about" href="./about.html"></a></p>
-    </section>
 
   </main>
   <div id="site-footer"><p>Collect your happy.</p></div>

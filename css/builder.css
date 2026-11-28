@@ -9,9 +9,10 @@
 .builder-side { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
 
 .stage-card, .palette-card, .price-card {
-  border: 1px solid var(--line);
-  background: rgba(255, 252, 247, 0.66);
-  padding: 1rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  padding: 1.15rem 0 0.4rem;
 }
 
 .stage-toolbar, .inline-actions {
