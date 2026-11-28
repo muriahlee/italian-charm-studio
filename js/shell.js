@@ -251,11 +251,9 @@
     if (foot) foot.innerHTML = footer();
     var key = document.body.getAttribute('data-title') || document.body.getAttribute('data-page');
     var label = page(key) && page(key).label;
-    var title = key === 'home'
-      ? root.CS.brand.name + ' — ' + root.CS.brand.tagline
-      : root.CS.brand.name + ' — ' + (label || root.CS.brand.tagline);
+    var title = root.CS.brand.name + ' | ' + root.CS.brand.tagline;
     document.title = title;
-    var description = root.CS.brand.name + '. ' + root.CS.brand.tagline + ' Italian modular charm bracelets. Preview, not open for orders.';
+    var description = root.CS.brand.name + '. ' + root.CS.brand.tagline + ' Preview, not open for orders.';
     setMeta('name', 'description', description);
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
