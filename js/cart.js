@@ -106,8 +106,8 @@
       var months = opts.months || 1;
       var cents = root.Pricing.clubPrepaidCents(months);
       var name = months > 1
-        ? 'Fiorvelle Monthly Collection gift, ' + months + ' months'
-        : 'Fiorvelle Monthly Collection';
+        ? 'Fiorvelle Monthly Collection, ' + months + ' months'
+        : 'Fiorvelle Monthly Collection, first month';
       return root.Commerce.current().addLine({
         type: 'club',
         sku: months > 1 ? 'CLUB-' + months + 'MO' : 'CLUB-MO',
@@ -121,7 +121,7 @@
           demo: true,
         },
       }).then(function (cart) {
-        if (root.Util) root.Util.announce(name + ' added to the cart. No payment is taken in this prototype.');
+        if (root.Util) root.Util.announce(name + ' added to the cart. 3-month minimum. No payment is taken in this prototype.');
         return cart;
       });
     },

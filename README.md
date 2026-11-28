@@ -2,7 +2,7 @@
 
 Approved name. The official tagline is not finalized, and the homepage headline is a placeholder, not a slogan. This site is a preview and is not open for orders.
 
-A static storefront for Italian 9mm modular links. Decorative links replace plain links. Prices live in `js/config.js`. Fiorvelle Monthly Collection is $24.99 a month, provisional, plus applicable sales tax. The tagline is Collect your happy.
+A static storefront for Italian 9mm modular links. Decorative links replace plain links. Prices live in `js/config.js`. Fiorvelle Monthly Collection is $49.99 the first month, then $24.99 every month, with a 3-month minimum. The tagline is Collect your happy.
 
 HTML, CSS, and vanilla JavaScript. No build step. GitHub Pages can serve it from the repository root, including a project site such as `/italian-charm-studio/`.
 
@@ -38,7 +38,8 @@ Every retail number lives in `CS.prices` inside `js/config.js`. Do not put price
 | `dangle` | $17.99 dangling charm |
 | `plainLink` | $5.99 additional plain link |
 | `tool` | $6.99 charm-changing tool |
-| `clubMonthly` | $24.99, domestic shipping included |
+| `firstMonth` | $49.99 first month, starter bracelet in its presentation box plus 2 charms |
+| `clubMonthly` | $24.99 every month after the first |
 | `giftBox` | $6.99 prototype add-on |
 
 Metal is a finish. There is no separate gold or silver price. Charm `priceKey` matches `tier`, and the builder, bag, edits, club, and FAQ all read the config. The five-charm comparison (set price versus the same pieces bought separately) is calculated from `CS.bundle.charmIds`.
@@ -188,7 +189,7 @@ When you launch, prefer a small backend that holds the Storefront token, creates
 | Shipping copy | Threshold and “calculated at checkout” | Your real policy, still without fake dates |
 | Returns | “Terms will be published” | The policy you will honor |
 | Materials | 316L and nickel-release testing are described as the plan, not a finished certificate | Publish the actual test |
-| Fiorvelle Monthly Collection | Demo join at $24.99, prepaid totals = monthly × months, domestic shipping included, no delivery date | Shopify selling plan |
+| Fiorvelle Monthly Collection | Demo join at $49.99 first month, then $24.99, 3-month minimum, no delivery date | Shopify selling plan |
 | Mood Vault | This browser | Accounts |
 | Stylist | On-device catalog scoring | Optional server endpoint, key stays server-side |
 | Mood Society rates | Example percentages, marked as such | A real agreement |

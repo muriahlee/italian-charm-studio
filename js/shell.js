@@ -208,7 +208,7 @@
     var key = mode === 'club' ? 'club' : mode === 'cart' ? 'cart' : 'builder';
     var item = page(key);
     var href = mode === 'cart' ? '#checkout' : item.href;
-    var label = mode === 'cart' ? 'Review bag' : item.label;
+    var label = mode === 'cart' ? 'Review bag' : mode === 'club' ? 'Join the collection' : item.label;
     bar.innerHTML = '<a class="btn" href="' + href + '">' + root.Util.esc(label) + '</a>';
     document.body.appendChild(bar);
     document.body.classList.add('has-sticky');

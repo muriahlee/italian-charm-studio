@@ -23,10 +23,10 @@
     <header class="page-head membership-head">
       <p class="eyebrow">Membership</p>
       <h1 data-copy="pages.club.label">Fiorvelle Monthly Collection</h1>
-      <p class="lede">Each month: two themed Italian charm links, a numbered collectible positivity card, an affirmation sticker, and a reusable pouch. Domestic shipping is included. Gold tone and silver tone are the same price. Skip or cancel from your collection. This prototype does not promise a delivery date.</p>
-      <p class="club-price" id="club-price"></p>
-      <p class="note">per month · <span data-copy="priceNotes.metal"></span></p>
-      <p id="club-sweet" class="lede" style="margin-top:1rem"></p>
+      <p class="lede">First month <span data-price="firstMonth">$49.99</span> includes the starter bracelet in its presentation box plus 2 charms. Then <span data-price="clubMonthly">$24.99</span> every month after.</p>
+      <p class="club-price"><span data-price="firstMonth">$49.99</span> <span class="menu-suffix">first month</span></p>
+      <p class="note">Then <span data-price="clubMonthly">$24.99</span> every month. Plus applicable sales tax. <span data-copy="priceNotes.metal"></span></p>
+      <p class="terms-note">3-month minimum. This preview does not take payment and does not promise a delivery date.</p>
       <figure class="member-figure page-member">
         <img src="assets/mood/membership-still.jpg" width="1152" height="864" alt="">
         <figcaption>Mood imagery. Not the monthly shipment.</figcaption>
@@ -35,7 +35,10 @@
     <section class="section split">
       <div>
         <h2>What arrives</h2>
-        <ul id="club-benefits"></ul>
+        <h3 class="shipment-label">The first month</h3>
+        <ul id="club-first" class="quiet-list"></ul>
+        <h3 class="shipment-label">Every month after</h3>
+        <ul id="club-later" class="quiet-list"></ul>
         <p class="note" data-copy="brand.lines.versions"></p>
       </div>
       <div class="panel" id="membership"></div>
@@ -90,7 +93,8 @@
             <button type="button" data-quiz="metal" data-value="gold" aria-pressed="true">Gold</button>
             <button type="button" data-quiz="metal" data-value="silver">Silver</button>
           </div>
-          <div class="cluster" style="margin-top:0.8rem"><button type="button" class="btn secondary" data-prev>Back</button><button type="button" class="btn" id="join-demo">Join the demo</button></div>
+          <p class="terms-note">3-month minimum. First month $49.99, then $24.99 every month. No payment is taken here, and no delivery date is promised.</p>
+          <div class="cluster" style="margin-top:0.8rem"><button type="button" class="btn secondary" data-prev>Back</button><button type="button" class="btn" id="join-demo">Join the collection</button></div>
         </div>
       </form>
     </section>

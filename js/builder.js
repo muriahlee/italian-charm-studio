@@ -225,9 +225,9 @@
     if (finish) finish.textContent = (state.metal === 'silver' ? 'Silver tone' : 'Gold tone') + ' · ' + state.links.length + ' links · ' + state.wrist + ' in';
     var bundle = document.getElementById('bundle-note');
     if (bundle) {
-      bundle.innerHTML = 'Two standard charms on their own are ' + root.Pricing.formatCents(root.Pricing.standardPairCents()) +
-        '. Fiorvelle Monthly Collection is ' + root.Pricing.formatKey('clubMonthly') +
-        ' a month, and it also includes the card, the sticker, and the pouch.';
+      bundle.innerHTML = 'The first month of Fiorvelle Monthly Collection is ' + root.Pricing.formatKey('firstMonth') +
+        ' and includes the starter bracelet in its presentation box plus 2 charms. Then ' +
+        root.Pricing.formatKey('clubMonthly') + ' every month. 3-month minimum.';
     }
   }
 
@@ -599,7 +599,7 @@
               '<button type="button" class="btn secondary" id="share-design">Copy link</button>' +
             '</div>' +
             '<p id="share-status" class="note" role="status"></p>' +
-            '<div class="panel" style="margin-top:0.8rem"><p id="bundle-note"></p><a class="btn secondary" href="' + root.CS.pages.club.href + '" style="margin-top:0.6rem">See the month</a></div>' +
+            '<div class="panel" style="margin-top:0.8rem"><p id="bundle-note"></p><a class="btn" href="' + root.CS.pages.club.href + '#join" style="margin-top:0.6rem">Join the collection</a></div>' +
             '<div id="after-add" class="after-add" hidden></div>' +
           '</section>' +
         '</div>' +
@@ -636,7 +636,7 @@
       panel.innerHTML =
         '<div class="panel" role="status">' +
           '<p class="serif" style="font-size:1.6rem">It is in the bag.</p>' +
-          '<p>The tool opens a link when you want to replace one at home. The month sends two themed links, a card, a sticker, and a pouch.</p>' +
+          '<p>The tool opens a link when you want to replace one at home. The collection’s first month is the starter bracelet in its presentation box plus 2 charms. Then two charms, a card, and a sticker each month.</p>' +
           '<div class="cluster">' +
             '<a class="btn" href="' + root.CS.pages.cart.href + '">View bag</a>' +
             '<button type="button" class="btn secondary" id="upsell-tool">Add the tool</button>' +
