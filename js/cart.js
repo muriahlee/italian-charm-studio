@@ -106,8 +106,8 @@
       var months = opts.months || 1;
       var cents = root.Pricing.clubPrepaidCents(months);
       var name = months > 1
-        ? 'Monthly Dose gift, ' + months + ' months'
-        : 'Your Monthly Dose of Happy';
+        ? 'Fiorvelle Monthly Collection gift, ' + months + ' months'
+        : 'Fiorvelle Monthly Collection';
       return root.Commerce.current().addLine({
         type: 'club',
         sku: months > 1 ? 'CLUB-' + months + 'MO' : 'CLUB-MO',

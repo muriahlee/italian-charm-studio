@@ -226,7 +226,7 @@
     var bundle = document.getElementById('bundle-note');
     if (bundle) {
       bundle.innerHTML = 'Two standard charms on their own are ' + root.Pricing.formatCents(root.Pricing.standardPairCents()) +
-        '. Your Monthly Dose of Happy is ' + root.Pricing.formatKey('clubMonthly') +
+        '. Fiorvelle Monthly Collection is ' + root.Pricing.formatKey('clubMonthly') +
         ' a month, and it also includes the card, the sticker, and the pouch.';
     }
   }

@@ -28,7 +28,7 @@
         ['dangle', 'Dangling charm', 'dangle', 'A link with a little drop.'],
         ['link', 'Additional plain link', 'plainLink', 'One extra plain link, for a repair or a resize.'],
         ['tool', 'Charm-changing tool', 'tool', 'Opens a link so you can slide another in.'],
-        ['month', 'Your Monthly Dose of Happy', 'clubMonthly', 'Two charms, the card, the sticker, and the pouch. Domestic shipping included.'],
+        ['month', 'Fiorvelle Monthly Collection', 'clubMonthly', 'Two charms, a numbered positivity card, and a sticker. Domestic shipping included.'],
       ];
       menu.innerHTML = rows.map(function (row) {
         var suffix = row[2] === 'clubMonthly' ? '<span class="menu-suffix"> / month</span>' : '';
@@ -78,7 +78,7 @@
   function renderSweetNote(el) {
     if (!el) return;
     el.innerHTML = 'Two standard charms on their own are <strong>' + money(root.Pricing.standardPairCents()) +
-      '</strong>. Your Monthly Dose of Happy is <strong>' + root.Pricing.formatKey('clubMonthly') +
+      '</strong>. Fiorvelle Monthly Collection is <strong>' + root.Pricing.formatKey('clubMonthly') +
       '</strong> a month, and it also includes the card, the sticker, and the pouch. It is the sweetest way to collect. ' +
       root.Util.esc(root.CS.priceNotes.metal);
   }

@@ -19,13 +19,13 @@
     brand: {
       /** Approved wordmark. Fiorvelle replaces the provisional MOOD & CO. name. */
       name: 'Fiorvelle',
-      /** Official tagline is not finalized. Leave this empty. */
-      tagline: '',
-      taglineStatus: 'unfinalized',
+      /** Approved tagline. */
+      tagline: 'Collect your happy.',
+      taglineStatus: 'approved',
       promise: 'Jewelry for individuality, memories, personal growth, and everyday happiness.',
-      /** Neutral placeholder headline. Not a slogan and not a final tagline. */
-      hero: 'Italian charm bracelets.',
-      heroNote: 'Placeholder headline. Not a final tagline.',
+      /** Homepage headline. The approved tagline, not a placeholder. */
+      hero: 'Collect your happy.',
+      heroNote: '',
       heroSupport: 'Create a bracelet that tells your story. From little things that make you smile to moments you’ll never forget, make every link mean something.',
       lines: {
         story: 'Italian charms are interchangeable links. They form the bracelet itself.',
@@ -53,7 +53,7 @@
       fresh: { href: './new.html', label: 'New Arrivals' },
       gifts: { href: './gifts.html', label: 'Gifts' },
       giftedit: { href: './gifts.html', label: 'The Gift Edit' },
-      club: { href: './club.html', label: 'Monthly Dose of Happy' },
+      club: { href: './club.html', label: 'Fiorvelle Monthly Collection' },
       card: { href: './happy-card.html', label: 'The Happy Card' },
       dashboard: { href: './dashboard.html', label: 'Account' },
       vault: { href: './vault.html', label: 'Account' },

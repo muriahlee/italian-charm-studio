@@ -74,10 +74,11 @@ function assert(cond, msg) {
 }
 
 assert(CS.brand.name === 'Fiorvelle', 'brand name');
-assert(CS.brand.tagline === '', 'tagline not finalized');
-assert(CS.brand.taglineStatus === 'unfinalized', 'tagline status');
-assert(CS.brand.hero === 'Italian charm bracelets.', 'hero');
+assert(CS.brand.tagline === 'Collect your happy.', 'tagline');
+assert(CS.brand.taglineStatus === 'approved', 'tagline status');
+assert(CS.brand.hero === 'Collect your happy.', 'hero');
 assert(CS.brand.hero.indexOf('Wear who you are') === -1, 'retired headline');
+assert(CS.brand.hero.indexOf('Italian charm bracelets') === -1, 'placeholder headline removed');
 assert(CS.prices.starterBracelet === 24.99, 'starter price');
 assert(CS.prices.standard === 12.99, 'standard');
 assert(CS.prices.premium === 15.99, 'premium crystal');
@@ -87,8 +88,9 @@ assert(CS.prices.tool === 6.99, 'tool');
 assert(!CS.prices.gold && !CS.prices.silver, 'no metal prices');
 assert(CS.pages.builder.label === 'Build Your Bracelet', 'builder label');
 assert(CS.pages.shop.label === 'Shop Charms', 'shop label');
-assert(CS.pages.club.label === 'Monthly Dose of Happy', 'club label');
+assert(CS.pages.club.label === 'Fiorvelle Monthly Collection', 'club label');
 assert(CS.pages.club.label.indexOf('Charm Club') === -1, 'no Charm Club trademark');
+assert(CS.pages.club.label.indexOf('Monthly Dose of Happy') === -1, 'old subscription name removed');
 assert(CS.pages.card.label === 'The Happy Card', 'card label');
 assert(CS.pages.gifts.label === 'Gifts', 'gift label');
 assert(CS.shipping.thresholdApproved === false, 'shipping offer not approved');
@@ -192,7 +194,9 @@ const reviews = JSON.parse(fs.readFileSync(path.join(root, 'data/reviews.json'),
 assert(Array.isArray(reviews.items) && reviews.items.length === 0, 'reviews empty');
 
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-assert(!html.includes('Charm Studio') && !html.includes('MOOD & CO.') && !html.includes('Wear who you are') && !html.includes('Charm Club'), 'retired names removed from home');
+assert(!html.includes('Charm Studio') && !html.includes('MOOD & CO.') && !html.includes('Wear who you are') && !html.includes('Charm Club') && !html.includes('Monthly Dose of Happy') && !html.includes('Italian charm bracelets.'), 'retired names removed from home');
+assert(html.includes('Collect your happy.') || html.includes('brand.hero'), 'tagline wired on home');
+assert(html.includes('Fiorvelle Monthly Collection'), 'subscription name on home');
 assert(context.MonthlyThemes.length === 12, 'twelve themes');
 assert(context.MonthlyThemes[0].title === 'Beautiful Beginnings', 'january');
 assert(context.MonthlyThemes[11].title === 'Believe in Yourself', 'december');

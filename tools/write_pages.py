@@ -124,7 +124,7 @@ HOME = r"""
       </div>
       <div class="panel">
         <p data-copy="brand.lines.charm"></p>
-        <p class="note">Write a gift message at the Mood Bar. Add the gift box if you want the ritual of a lid. Or give months of the Monthly Dose of Happy — three, six, or twelve — priced from the monthly figure.</p>
+        <p class="note">Write a gift message at the Mood Bar. Add the gift box if you want the ritual of a lid. Or give months of the Fiorvelle Monthly Collection — three, six, or twelve — priced from the monthly figure.</p>
       </div>
     </section>
 
@@ -217,7 +217,7 @@ pages.append(("gifts.html", "gifts", "gifts", "builder", r"""
       </article>
     </section>
     <section class="section">
-      <h2>Monthly Dose of Happy, given as months</h2>
+      <h2>Fiorvelle Monthly Collection, given as months</h2>
       <p class="note">Prepaid length times the monthly price. No extra discount is invented here.</p>
       <div id="prepaid" class="edit-cards"></div>
     </section>
@@ -319,7 +319,7 @@ pages.append(("vault.html", "vault", "vault", "builder", r"""
       </section>
       <section class="section">
         <h2>Monthly edits</h2>
-        <p class="note">Sample themes for the Monthly Dose of Happy. Not a shipment history.</p>
+        <p class="note">Sample themes for the Fiorvelle Monthly Collection. Not a shipment history.</p>
         <div id="months" class="two"></div>
         <p style="margin-top:1rem"><a class="btn" data-page-link="club" href="./club.html"></a></p>
       </section>
@@ -430,7 +430,7 @@ pages.append(("faq.html", "faq", "faq", "builder", r"""
         <p>Yes. Choose “I will assemble it myself” on the Mood Bar and the assembly tool is suggested. Studio assembly is included in the bracelet.</p>
       </details>
       <details>
-        <summary>What is the Monthly Dose of Happy?</summary>
+        <summary>What is the Fiorvelle Monthly Collection?</summary>
         <p>A monthly edit of five charms at the price in the configuration, with a gold or silver preference at that same price. You can skip or cancel. Gift memberships for 3, 6, and 12 months are the monthly price times the number of months. Joining on this site is a demo.</p>
       </details>
       <details>

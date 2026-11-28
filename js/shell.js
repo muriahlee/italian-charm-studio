@@ -80,6 +80,7 @@
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
             '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
+            (brand.tagline ? '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' : '') +
             '<p class="fine">' + root.Util.esc(root.CS.priceNotes.preview) + '</p>' +
             '<p class="fine">' + root.Util.esc(brand.promise) + '</p>' +
           '</div>' +
@@ -250,9 +251,11 @@
     if (foot) foot.innerHTML = footer();
     var key = document.body.getAttribute('data-title') || document.body.getAttribute('data-page');
     var label = page(key) && page(key).label;
-    var title = !label || key === 'home' ? root.CS.brand.name : root.CS.brand.name + ' — ' + label;
+    var title = key === 'home'
+      ? root.CS.brand.name + ' — ' + root.CS.brand.tagline
+      : root.CS.brand.name + ' — ' + (label || root.CS.brand.tagline);
     document.title = title;
-    var description = root.CS.brand.name + ' preview. Italian modular charm bracelets. Not open for orders. ' + root.CS.brand.lines.story;
+    var description = root.CS.brand.name + '. ' + root.CS.brand.tagline + ' Italian modular charm bracelets. Preview, not open for orders.';
     setMeta('name', 'description', description);
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
