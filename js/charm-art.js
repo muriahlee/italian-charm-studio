@@ -87,7 +87,7 @@
     if (m === 'letter' || m === 'grade') {
       var text = m === 'grade' ? 'A+' : letter;
       var size = m === 'grade' ? 28 : 36;
-      return '<text x="32" y="50" text-anchor="middle" font-family="Bodoni Moda, Didot, Times New Roman, serif" font-size="' + size + '" fill="' + ink + '">' + root.Util.esc(text) + '</text>';
+      return '<text x="32" y="50" text-anchor="middle" font-family="Marcellus, Times New Roman, serif" font-size="' + size + '" fill="' + ink + '">' + root.Util.esc(text) + '</text>';
     }
 
     if (m === 'heart') {
@@ -230,7 +230,7 @@
     if (m === 'passport') {
       return '<rect x="18" y="18" width="28" height="40" rx="2" fill="#243656"/>' +
         '<circle cx="32" cy="36" r="8" fill="none" stroke="#e7d3b0" stroke-width="1.4"/>' +
-        '<text x="32" y="54" text-anchor="middle" font-family="Manrope, sans-serif" font-size="6" fill="#e7d3b0">PASS</text>';
+        '<text x="32" y="54" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="6" fill="#e7d3b0">PASS</text>';
     }
     if (m === 'map') {
       return fillPath('M14 24 L26 20 L38 26 L50 20 V56 L38 60 L26 54 L14 58 Z', '#e7dcc4') +
