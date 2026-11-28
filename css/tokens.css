@@ -7,7 +7,11 @@
   --ivory-deep: #f1e9db;
   --champagne: #e2d1b5;
   --gold: #b49a65;
-  --rose: #d5b2b4;
+  /* Fiorvelle Rose. Fills and bands only. White text on this rose is about 2:1. */
+  --rose: #e8a9a0;
+  /* Darker rose for text and links on cream or white (about 5.1:1 on cream, 5.7:1 on white). */
+  --rose-ink: #9a534c;
+  --rose-deep: #d99288;
   --espresso: #332d25;
   --espresso-soft: rgba(51, 45, 37, 0.72);
   --line: rgba(51, 45, 37, 0.16);

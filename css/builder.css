@@ -39,8 +39,8 @@
 
 .metal-switch button[aria-pressed="true"],
 .view-switch button[aria-pressed="true"] {
-  background: var(--espresso);
-  color: var(--ivory);
+  background: var(--rose);
+  color: var(--espresso);
 }
 
 .bracelet-wrap { margin: 0.6rem auto 0.2rem; }
@@ -79,7 +79,7 @@
 
 .link.is-selected .charm-frame,
 .link.is-drop .charm-frame {
-  outline: 2px solid var(--espresso);
+  outline: 2px solid var(--rose);
   outline-offset: 2px;
 }
 

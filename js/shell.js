@@ -263,6 +263,7 @@
     setMeta('name', 'twitter:card', 'summary');
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
+    setMeta('name', 'theme-color', '#E8A9A0');
   }
 
   function setMeta(attr, key, content) {
