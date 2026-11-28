@@ -124,7 +124,7 @@ HOME = r"""
       </div>
       <div class="panel">
         <p data-copy="brand.lines.charm"></p>
-        <p class="note">Write a gift message at the Mood Bar. Add the gift box if you want the ritual of a lid. Or give months of the Fiorvelle Monthly Collection — three, six, or twelve — priced from the monthly figure.</p>
+        <p class="note">Write a gift message at the Atelier. Add the gift box if you want the ritual of a lid. Or give months of the Fiorvelle Monthly Collection — three, six, or twelve — priced from the monthly figure.</p>
       </div>
     </section>
 
@@ -207,12 +207,12 @@ pages.append(("gifts.html", "gifts", "gifts", "builder", r"""
     <section class="section two">
       <article class="panel">
         <h2>A note in the box</h2>
-        <p>Write the gift message on the Mood Bar. It stays with the bracelet in the bag. We do not print it in this prototype.</p>
+        <p>Write the gift message on the Atelier. It stays with the bracelet in the bag. We do not print it in this prototype.</p>
         <a class="btn" data-page-link="builder" href="./builder.html"></a>
       </article>
       <article class="panel">
         <h2>Gift box</h2>
-        <p>A rigid box and a card. <strong id="gift-box-price"></strong>. Add it from the Mood Bar or ask for it with the set.</p>
+        <p>A rigid box and a card. <strong id="gift-box-price"></strong>. Add it from the Atelier or ask for it with the set.</p>
         <button type="button" class="btn secondary" id="add-box">Add the gift box</button>
       </article>
     </section>
@@ -335,7 +335,7 @@ pages.append(("ambassador.html", "society", "society", "builder", r"""
     </header>
     <section class="section prose">
       <h2>How a referral works, in this prototype</h2>
-      <p>You share a design link from the Mood Bar. A demo code can sit in the note you send with it. There is no tracking pixel and no payout in this prototype.</p>
+      <p>You share a design link from the Atelier. A demo code can sit in the note you send with it. There is no tracking pixel and no payout in this prototype.</p>
       <div id="rates"></div>
     </section>
     <section class="section two">
@@ -406,7 +406,7 @@ pages.append(("faq.html", "faq", "faq", "builder", r"""
       </details>
       <details>
         <summary>How many links do I need?</summary>
-        <p>The count is your wrist in millimetres, plus about 10mm of comfort, divided by 9.5mm per link, then rounded. A 6.5 inch wrist comes to 18 links. The Mood Bar does this when you choose a size.</p>
+        <p>The count is your wrist in millimetres, plus about 10mm of comfort, divided by 9.5mm per link, then rounded. A 6.5 inch wrist comes to 18 links. The Atelier does this when you choose a size.</p>
       </details>
       <details>
         <summary>What is the metal?</summary>
@@ -427,7 +427,7 @@ pages.append(("faq.html", "faq", "faq", "builder", r"""
       </details>
       <details>
         <summary>Can I assemble it myself?</summary>
-        <p>Yes. Choose “I will assemble it myself” on the Mood Bar and the assembly tool is suggested. Studio assembly is included in the bracelet.</p>
+        <p>Yes. Choose “I will assemble it myself” on the Atelier and the assembly tool is suggested. Studio assembly is included in the bracelet.</p>
       </details>
       <details>
         <summary>What is the Fiorvelle Monthly Collection?</summary>

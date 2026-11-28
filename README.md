@@ -91,7 +91,7 @@ css/tokens.css          palette and type
 css/base.css            document defaults
 css/components.css      header, cards, buttons, bag
 css/pages.css           home, club, vault, society
-css/builder.css         The Mood Bar
+css/builder.css         The Atelier
 js/config.js            brand, prices, policies, page labels
 js/catalog.js           charms, tiers, sample club edits
 js/charm-art.js         SVG plates (used when image is null)

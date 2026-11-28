@@ -407,7 +407,7 @@
       if (base.length < 3) base = 'FIOR';
       var code = base + '-' + Math.floor(1000 + Math.random() * 9000);
       root.Vault.setReferral({ code: code, name: name, demo: true, at: new Date().toISOString() });
-      out.textContent = 'Demo code ' + code + '. Share the Mood Bar with it in the note. Nothing is tracked on a server.';
+      out.textContent = 'Demo code ' + code + '. Share the Atelier with it in the note. Nothing is tracked on a server.';
     });
     ['group-form', 'fund-form'].forEach(function (id) {
       var form = document.getElementById(id);
