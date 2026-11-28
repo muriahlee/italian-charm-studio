@@ -16,8 +16,11 @@
   --espresso-soft: rgba(51, 45, 37, 0.72);
   --line: rgba(51, 45, 37, 0.16);
   --paper: rgba(255, 252, 247, 0.72);
-  --serif: "Bodoni Moda", "Didot", "Bodoni MT", "Times New Roman", serif;
-  --sans: "Manrope", "Gill Sans", "Trebuchet MS", sans-serif;
+  /* Marcellus: headings, wordmark, navigation, buttons. */
+  --serif: "Marcellus", "Times New Roman", serif;
+  /* Cormorant Garamond: body text and the italic tagline. */
+  --sans: "Cormorant Garamond", Georgia, serif;
+  --tag: "Cormorant Garamond", Georgia, serif;
   --max: 1120px;
   --header-h: 6.6rem;
   --space: clamp(1.15rem, 2.4vw, 1.75rem);
