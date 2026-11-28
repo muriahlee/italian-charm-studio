@@ -385,3 +385,27 @@ figcaption,
 @media (max-width: 720px) {
   .two, .vault-design { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 768px) {
+  .hero-logo,
+  .hero-figure,
+  .story-figure,
+  .member-figure,
+  .page-member,
+  .hero h1,
+  .lede {
+    margin-inline: auto;
+  }
+  .hero-copy,
+  .story,
+  .membership,
+  .month-note,
+  .collection-card,
+  .menu-card,
+  .menu-line,
+  figcaption,
+  .concept-label {
+    text-align: center;
+  }
+  .hero-figure { margin-inline: auto; }
+}
