@@ -22,16 +22,16 @@
   function renderPriceMenu(menu, examples) {
     if (menu) {
       var rows = [
-        ['bracelet', 'Plain starter bracelet', 'starterBracelet', 'The row of plain links, sized to the wrist.'],
-        ['charm', 'Standard charm', 'standard', 'A decorative link that replaces a plain one.'],
+        ['month', 'Fiorvelle Monthly Collection', 'firstMonth', 'First month includes the starter bracelet in its presentation box plus 2 charms, a numbered positivity card, and a sticker. Then ' + root.Pricing.formatKey('clubMonthly') + ' every month: 2 charms, a card, and a sticker, in a black keepsake box tied with Fiorvelle Rose ribbon. 3-month minimum.'],
+        ['bracelet', 'Plain starter bracelet', 'starterBracelet', 'Sold on its own, as a gift or an extra. The membership’s first month already includes one.'],
+        ['charm', 'Standard charm', 'standard', 'A decorative link that replaces a plain one. Available on its own.'],
         ['crystal', 'Premium crystal charm', 'premium', 'A crystal link. Same price in either tone.'],
         ['dangle', 'Dangling charm', 'dangle', 'A link with a little drop.'],
         ['link', 'Additional plain link', 'plainLink', 'One extra plain link, for a repair or a resize.'],
         ['tool', 'Charm-changing tool', 'tool', 'Opens a link so you can slide another in.'],
-        ['month', 'Fiorvelle Monthly Collection', 'clubMonthly', 'Two charms, a numbered positivity card, and a sticker. Domestic shipping included.'],
       ];
       menu.innerHTML = rows.map(function (row) {
-        var suffix = row[2] === 'clubMonthly' ? '<span class="menu-suffix"> / month</span>' : '';
+        var suffix = row[2] === 'firstMonth' ? '<span class="menu-suffix"> first month</span>' : '';
         return '<article class="menu-card"><div>' + menuIcon(row[0]) + '</div><h3>' + row[1] + '</h3><p class="menu-price">' +
           root.Pricing.formatKey(row[2]) + suffix + '</p><p class="note">' + row[3] + '</p></article>';
       }).join('');
@@ -77,20 +77,15 @@
 
   function renderSweetNote(el) {
     if (!el) return;
-    el.innerHTML = 'Two standard charms on their own are <strong>' + money(root.Pricing.standardPairCents()) +
-      '</strong>. The Monthly Collection is <strong>' + root.Pricing.formatKey('clubMonthly') +
-      '</strong> a month, and it also includes the card, the sticker, and the pouch. ' +
+    el.innerHTML = 'The first month is <strong>' + root.Pricing.formatKey('firstMonth') +
+      '</strong> and includes the starter bracelet in its presentation box plus 2 charms. Then <strong>' +
+      root.Pricing.formatKey('clubMonthly') + '</strong> every month. 3-month minimum. ' +
       root.Util.esc(root.CS.priceNotes.metal);
   }
 
   function home() {
     renderCollections(document.getElementById('collection-grid'));
-    var includes = document.getElementById('club-includes');
-    if (includes) {
-      includes.innerHTML = root.CS.club.includes.map(function (item) {
-        return '<li>' + root.Util.esc(item) + '</li>';
-      }).join('');
-    }
+    renderClubLists();
     renderMonthPreview(document.getElementById('month-preview'));
     renderPriceMenu(document.getElementById('price-menu'), document.getElementById('build-examples'));
     renderSweetNote(document.getElementById('monthly-sweet'));
@@ -193,7 +188,7 @@
     var plain = root.CS.products.plainLink;
     var tool = root.CS.products.tool;
     el.innerHTML =
-      '<article class="panel"><h2>' + root.Util.esc(starter.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(starter.priceKey) + '</p><p>' + root.Util.esc(starter.description) + '</p><p class="note">' + root.Util.esc(root.CS.priceNotes.metal) + '</p><button type="button" class="btn" data-add-product="starter" data-metal="' + finish + '">Add a starter</button></article>' +
+      '<article class="panel"><h2>' + root.Util.esc(starter.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(starter.priceKey) + '</p><p>' + root.Util.esc(starter.description) + '</p><p class="note">' + root.Util.esc(root.CS.priceNotes.metal) + '</p><button type="button" class="btn secondary" data-add-product="starter" data-metal="' + finish + '">Add a starter</button></article>' +
       '<article class="panel"><h2>' + root.Util.esc(plain.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(plain.priceKey) + '</p><p>' + root.Util.esc(plain.description) + '</p><p class="note">' + root.Util.esc(root.CS.priceNotes.plainLink) + '</p><button type="button" class="btn secondary" data-add-product="plainLink" data-metal="' + finish + '">Add a plain link</button></article>' +
       '<article class="panel"><h2>' + root.Util.esc(tool.name) + '</h2><p class="club-price">' + root.Pricing.formatKey(tool.priceKey) + '</p><p>' + root.Util.esc(tool.description) + '</p><button type="button" class="btn secondary" data-add-product="tool">Add the tool</button></article>';
     if (!el.dataset.bound) {
@@ -222,7 +217,7 @@
     if (plans) {
       plans.innerHTML = root.CS.club.prepaidMonths.map(function (months) {
         return '<article class="panel"><h3>' + months + ' months</h3><p class="club-price">' + money(root.Pricing.clubPrepaidCents(months)) + '</p>' +
-          '<p class="note">The monthly price, times ' + months + '. A gift membership, paid once in this demo.</p>' +
+          '<p class="note">First month, then every month after, for ' + months + ' months. 3-month minimum. A gift membership, paid once in this demo.</p>' +
           '<button type="button" class="btn" data-prepaid="' + months + '">Add gift membership</button></article>';
       }).join('');
       plans.addEventListener('click', function (e) {
@@ -233,16 +228,20 @@
     }
   }
 
-  function club() {
-    var price = document.getElementById('club-price');
-    if (price) price.textContent = root.Pricing.formatKey('clubMonthly');
-    renderSweetNote(document.getElementById('club-sweet'));
-    var benefits = document.getElementById('club-benefits');
-    if (benefits) {
-      benefits.innerHTML = root.CS.club.benefits.map(function (item) {
+  function renderClubLists() {
+    function fill(id, items) {
+      var el = document.getElementById(id);
+      if (!el || !items) return;
+      el.innerHTML = items.map(function (item) {
         return '<li>' + root.Util.esc(item) + '</li>';
       }).join('');
     }
+    fill('club-first', root.CS.club.firstShipment);
+    fill('club-later', root.CS.club.laterShipment);
+  }
+
+  function club() {
+    renderClubLists();
     var plans = document.getElementById('club-prepaid');
     if (plans) {
       plans.innerHTML = root.CS.club.prepaidMonths.map(function (months) {
@@ -320,7 +319,7 @@
         return;
       }
       el.innerHTML = '<p>Demo membership · ' + (sub.metal === 'silver' ? 'Silver' : 'Gold') + ' · ' + root.Util.esc(sub.status) + '.</p>' +
-        '<p class="note">Skip or cancel anytime. Here, that only updates the note on this device. No payment is taken.</p>' +
+        '<p class="note">3-month minimum. This note lives on this device only. No payment is taken, and no delivery date is promised.</p>' +
         (sub.status === 'demo' ? '<button type="button" class="btn secondary" id="cancel-demo">Cancel demo membership</button>' : '');
     }
   }
@@ -575,8 +574,8 @@
         ? '<div id="dash-owned" class="product-grid"></div>'
         : '<p class="empty-slot">No links saved yet. This demo collection starts empty.</p><button type="button" class="btn" id="dash-sample">Add sample links (demo)</button>';
       var subHtml = sub
-        ? '<p><strong>Demo membership.</strong> ' + (sub.metal === 'silver' ? 'Silver tone' : 'Gold tone') + ' · ' + root.Util.esc(sub.status) + ' · ' + root.Pricing.formatKey('clubMonthly') + ' / month.</p>' +
-          '<p class="note">Domestic shipping is included. This prototype does not promise a delivery date, and it does not bill anyone.</p>' +
+        ? '<p><strong>Demo membership.</strong> ' + (sub.metal === 'silver' ? 'Silver tone' : 'Gold tone') + ' · ' + root.Util.esc(sub.status) + ' · ' + root.Pricing.formatKey('firstMonth') + ' first month, then ' + root.Pricing.formatKey('clubMonthly') + ' every month.</p>' +
+          '<p class="note">3-month minimum. This prototype does not bill anyone, and it does not promise a delivery date.</p>' +
           '<div class="cluster"><button type="button" class="btn secondary" id="dash-tone">' + (sub.metal === 'silver' ? 'Switch to gold tone' : 'Switch to silver tone') + '</button>' +
           (sub.status === 'demo' ? '<button type="button" class="btn secondary" id="dash-skip">Skip this demo month</button><button type="button" class="btn" id="dash-cancel">Cancel demo membership</button>' : '<p class="note">Cancelled on this device.</p>') +
           '</div>'

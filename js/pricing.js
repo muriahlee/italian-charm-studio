@@ -58,8 +58,10 @@
     };
   }
 
+  /** First month, then the monthly price for each month after that. */
   function clubPrepaidCents(months) {
-    return priceCents('clubMonthly') * months;
+    var count = Math.max(1, Number(months) || 1);
+    return priceCents('firstMonth') + priceCents('clubMonthly') * (count - 1);
   }
 
   /** Plain starter plus n standard charms. Gold tone and silver tone use the same math. */

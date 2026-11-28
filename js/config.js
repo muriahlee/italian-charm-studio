@@ -68,8 +68,8 @@
       terms: { href: './subscription-terms.html', label: 'Subscription Terms' },
     },
 
-    /** Header links, in order. Edit labels above; this is only the order. */
-    nav: ['builder', 'shop', 'collections', 'club', 'gifts'],
+    /** Header links, in order. Membership is the main path. */
+    nav: ['club', 'builder', 'shop', 'collections', 'gifts'],
     /** Collection menu. Not a sales ranking. */
     edits: ['gold', 'silver', 'teacher', 'selflove', 'little', 'giftedit'],
     footerNav: ['builder', 'shop', 'club', 'card', 'gifts', 'dashboard', 'gold', 'silver', 'about', 'faq', 'privacy', 'shipping', 'returns', 'terms', 'cart'],
@@ -87,6 +87,8 @@
       dangle: 17.99,
       tool: 6.99,
       bundle: 34.99,
+      /** First month of Fiorvelle Monthly Collection. Later months use clubMonthly. */
+      firstMonth: 49.99,
       clubMonthly: 24.99,
       /** Prototype default for the gift-box add-on. Change it here before launch. */
       giftBox: 6.99,
@@ -108,7 +110,7 @@
 
     priceNotes: {
       metal: 'Gold tone and silver tone of the same design are the same price.',
-      club: 'Provisional price, plus applicable sales tax. Not finally approved.',
+      club: 'First month includes the starter bracelet in its presentation box plus 2 charms. Then the monthly price every month after. 3-month minimum. Plus applicable sales tax. Preview, not open for orders.',
       preview: 'Preview. Not open for orders.',
       plainLink: 'One extra plain link. Same price in gold tone or silver tone.',
     },
@@ -138,7 +140,7 @@
       /** Placeholder amount. Not an approved offer. */
       freeThreshold: 75,
       policy:
-        'Shipping is calculated at secure checkout. Complimentary US shipping applies once an order reaches the threshold configured for this shop. The monthly membership includes domestic shipping. This prototype does not quote or promise a delivery date.',
+        'Shipping is calculated at secure checkout. Complimentary US shipping applies once an order reaches the threshold configured for this shop. That threshold is not an approved offer. Shipping for Fiorvelle Monthly Collection is not quoted here. This prototype does not quote or promise a delivery date.',
     },
 
     /**
@@ -167,22 +169,20 @@
 
     club: {
       charmsPerShipment: 2,
+      minMonths: 3,
       prepaidMonths: [3, 6, 12],
-      includes: [
-        'Two themed Italian charm links',
-        'A numbered collectible positivity card',
-        'An affirmation sticker',
-        'A reusable pouch',
-        'Domestic shipping included',
+      firstShipment: [
+        'The starter bracelet',
+        'A champagne presentation box with a black velvet raised insert',
+        'The first two charms',
+        'A numbered positivity card',
+        'A sticker',
       ],
-      benefits: [
-        'Two themed Italian charm links each month',
-        'A numbered collectible positivity card',
-        'An affirmation sticker',
-        'A reusable pouch',
-        'Domestic shipping included',
-        'Gold tone or silver tone, at the same price',
-        'Skip or cancel from your collection page',
+      laterShipment: [
+        'Two new charms',
+        'A numbered positivity card',
+        'A sticker',
+        'A black keepsake jewelry box tied with Fiorvelle Rose ribbon',
       ],
     },
 
@@ -232,7 +232,7 @@
         name: 'Plain starter bracelet',
         priceKey: 'starterBracelet',
         type: 'bracelet',
-        description: 'A full row of plain 9mm links, sized to the wrist. Decorative links replace the plain ones. The length stays the same.',
+        description: 'A full row of plain 9mm links, sold on its own as a gift or an extra. The membership’s first month already includes a starter bracelet in its presentation box.',
         inventory: { gold: null, silver: null },
       },
       plainLink: {

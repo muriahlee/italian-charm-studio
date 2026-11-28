@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/builder.css">
   <link rel="icon" href="favicon.svg">
 </head>
-<body data-page="home" data-title="home" data-sticky="builder">
+<body data-page="home" data-title="home" data-sticky="club">
   <div id="site-header"></div>
   <main id="main">
 
@@ -25,8 +25,8 @@
         <img class="hero-logo" src="assets/brand/fiorvelle_logo_full.png" width="990" height="616" alt="">
         <h1 data-copy="brand.hero">Collect your happy.</h1>
         <p class="lede" data-copy="brand.heroSupport">A bracelet made of the moments you want to keep.</p>
-        <a class="btn" href="./builder.html">Begin your bracelet</a>
-        <p class="hero-quiet"><a href="./club.html">The Monthly Collection</a></p>
+        <a class="btn" href="./club.html#join">Join the collection</a>
+        <p class="hero-quiet"><a href="./builder.html">Build a bracelet</a></p>
       </div>
       <figure class="hero-figure">
         <img src="assets/mood/hero-wrist.jpg" width="864" height="1152" alt="">
@@ -53,14 +53,29 @@
       <div>
         <p class="eyebrow">Membership</p>
         <h2 id="club-title">Fiorvelle Monthly Collection</h2>
-        <p class="lede">Two charms, chosen around a feeling. A numbered positivity card. A sticker to keep. A membership, not an extra at the end of a shop.</p>
-        <p class="club-price"><span data-price="clubMonthly"></span> <span class="menu-suffix">/ month</span></p>
-        <p class="note" data-copy="priceNotes.club"></p>
-        <ul id="club-includes" class="quiet-list"></ul>
+        <p class="lede">First month <span data-price="firstMonth">$49.99</span> includes the starter bracelet in its presentation box plus 2 charms. Then <span data-price="clubMonthly">$24.99</span> every month after.</p>
+        <p class="club-price"><span data-price="firstMonth">$49.99</span> <span class="menu-suffix">first month</span></p>
+        <p class="note">Then <span data-price="clubMonthly">$24.99</span> every month. Plus applicable sales tax.</p>
+        <h3 class="shipment-label">The first month</h3>
+        <ul id="club-first" class="quiet-list">
+          <li>The starter bracelet</li>
+          <li>A champagne presentation box with a black velvet raised insert</li>
+          <li>The first two charms</li>
+          <li>A numbered positivity card</li>
+          <li>A sticker</li>
+        </ul>
+        <h3 class="shipment-label">Every month after</h3>
+        <ul id="club-later" class="quiet-list">
+          <li>Two new charms</li>
+          <li>A numbered positivity card</li>
+          <li>A sticker</li>
+          <li>A black keepsake jewelry box tied with Fiorvelle Rose ribbon</li>
+        </ul>
         <div class="cluster hero-actions">
-          <a class="btn" href="./club.html">Enter the collection</a>
+          <a class="btn" href="./club.html#join">Join the collection</a>
           <a class="text-btn" href="./gifts.html">Give a membership</a>
         </div>
+        <p class="terms-note">3-month minimum. First month $49.99, then $24.99 every month. This preview does not take payment and does not promise a delivery date.</p>
       </div>
       <figure class="member-figure">
         <img src="assets/mood/membership-still.jpg" width="1152" height="864" alt="">
