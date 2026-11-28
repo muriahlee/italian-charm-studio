@@ -211,3 +211,22 @@
   }
 }
 
+@media (max-width: 768px) {
+  .page-head,
+  .prompt-line,
+  .concept-label { text-align: center; }
+  .stage-toolbar,
+  .inline-actions,
+  .inspector,
+  .after-add { justify-content: center; }
+  .bracelet.is-straight { justify-content: flex-start; text-align: left; }
+  .palette-grid,
+  .palette-item,
+  .price-lines,
+  .price-lines li { text-align: left; }
+  .search,
+  .field input,
+  .field textarea,
+  .field select { text-align: left; }
+}
+
