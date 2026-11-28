@@ -54,8 +54,7 @@
         '<div class="mast">' +
           '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>' +
           '<a class="wordmark" href="' + page('home').href + '">' +
-            '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
-            (brand.tagline ? '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' : '') +
+            '<img class="wordmark-img" src="assets/brand/fiorvelle_wordmark.png" width="990" height="152" alt="Fiorvelle">' +
           '</a>' +
           '<span class="mast-tools">' +
             '<a class="account-link" href="' + page('dashboard').href + '">' + root.Util.esc(page('dashboard').label) + '</a>' +
@@ -79,7 +78,7 @@
       '<footer class="site-footer">' +
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
-            '<span class="wordmark-name">' + root.Util.esc(brand.name) + '</span>' +
+            '<img class="wordmark-img wordmark-img-footer" src="assets/brand/fiorvelle_wordmark.png" width="990" height="152" alt="Fiorvelle">' +
             (brand.tagline ? '<span class="wordmark-tag">' + root.Util.esc(brand.tagline) + '</span>' : '') +
             '<p class="fine">' + root.Util.esc(root.CS.priceNotes.preview) + '</p>' +
             '<p class="fine">' + root.Util.esc(brand.promise) + '</p>' +

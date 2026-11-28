@@ -44,24 +44,24 @@
   }
 
   var HOME_COLLECTIONS = [
-    { key: 'gold', ids: ['worth-crown', 'north-star', 'coffee-cup'] },
-    { key: 'silver', ids: ['pearl-button', 'crescent-moon', 'daisy'] },
-    { key: 'teacher', ids: ['pencil', 'apple-red', 'closed-book'] },
-    { key: 'selflove', ids: ['choose-heart', 'choose-bow', 'worth-crown'] },
-    { key: 'little', ids: ['little-daisy', 'little-cherry', 'daisy'] },
-    { key: 'giftedit', ids: ['bow-silk', 'wrapped-gift', 'heart-little'] },
+    { key: 'gold', image: 'assets/mood/gold-light.jpg', line: 'A warm tone. The same prices as silver.' },
+    { key: 'silver', image: 'assets/mood/silver-light.jpg', line: 'A cool tone. The same prices as gold.' },
+    { key: 'teacher', line: 'For the people who keep a classroom.' },
+    { key: 'selflove', line: 'Links for the days you choose yourself.' },
+    { key: 'little', line: 'Small joys, kept on the wrist.' },
+    { key: 'giftedit', line: 'A beginning you can give.' },
   ];
 
   function renderCollections(el) {
     if (!el) return;
     el.innerHTML = HOME_COLLECTIONS.map(function (item) {
       var page = root.CS.pages[item.key];
-      var arts = item.ids.map(function (id) {
-        var charm = root.Catalog.byId(id);
-        return charm ? '<span class="charm-frame">' + root.CharmArt.render(charm, item.key === 'silver' ? 'silver' : 'gold') + '</span>' : '';
-      }).join('');
-      return '<a class="collection-card" href="' + page.href + '"><div class="collection-art">' + arts + '</div><h3>' +
-        root.Util.esc(page.label) + '</h3><p class="concept-label">Concept. Not a product photograph.</p></a>';
+      var media = item.image
+        ? '<div class="collection-art"><img src="' + item.image + '" alt=""></div>'
+        : '';
+      var credit = item.image ? '<p class="concept-label">Mood imagery. Not a Fiorvelle piece.</p>' : '';
+      return '<a class="collection-card' + (item.image ? ' has-photo' : '') + '" href="' + page.href + '">' +
+        media + '<h3>' + root.Util.esc(page.label) + '</h3><p>' + root.Util.esc(item.line) + '</p>' + credit + '</a>';
     }).join('');
   }
 
@@ -70,7 +70,7 @@
     var monthIndex = new Date().getMonth();
     var theme = root.MonthlyThemes[monthIndex] || root.MonthlyThemes[0];
     var charms = theme.charmIds.map(function (id) { return root.Catalog.byId(id); }).filter(Boolean);
-    el.innerHTML = '<article class="panel"><p class="eyebrow">Upcoming theme in this prototype · ' + root.Util.esc(theme.month) + '</p><h3>' +
+    el.innerHTML = '<article class="month-note"><p class="eyebrow">This month in the prototype · ' + root.Util.esc(theme.month) + '</p><h3>' +
       root.Util.esc(theme.title) + '</h3><p>' + root.Util.esc(theme.reminder) + '</p><div class="product-grid" id="month-charms"></div><p class="concept-label">Concept illustrations. Not the finished monthly shipment.</p></article>';
     root.ProductUI.mountGrid(document.getElementById('month-charms'), charms, { metal: 'gold' });
   }
@@ -78,21 +78,12 @@
   function renderSweetNote(el) {
     if (!el) return;
     el.innerHTML = 'Two standard charms on their own are <strong>' + money(root.Pricing.standardPairCents()) +
-      '</strong>. Fiorvelle Monthly Collection is <strong>' + root.Pricing.formatKey('clubMonthly') +
-      '</strong> a month, and it also includes the card, the sticker, and the pouch. It is the sweetest way to collect. ' +
+      '</strong>. The Monthly Collection is <strong>' + root.Pricing.formatKey('clubMonthly') +
+      '</strong> a month, and it also includes the card, the sticker, and the pouch. ' +
       root.Util.esc(root.CS.priceNotes.metal);
   }
 
   function home() {
-    var snap = document.getElementById('snap');
-    if (snap) {
-      var ids = [null, 'heart-little', null, 'choose-heart', 'plane', null, 'north-star'];
-      snap.innerHTML = '<div class="snap-caption"><span>Plain links</span><span>Replace a few</span><span>Same length</span></div><div class="snap-row">' +
-        ids.map(function (id, i) {
-          var art = id ? root.CharmArt.render(root.Catalog.byId(id), 'gold') : root.CharmArt.renderEmpty('gold');
-          return '<div class="snap-link"><div class="snap-charm" style="--i:' + i + '"><span class="charm-frame">' + art + '</span></div></div>';
-        }).join('') + '</div>';
-    }
     renderCollections(document.getElementById('collection-grid'));
     var includes = document.getElementById('club-includes');
     if (includes) {
